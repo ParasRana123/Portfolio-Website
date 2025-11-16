@@ -24,7 +24,22 @@ const educationData = [
   },
 ];
 
-const EducationCard = ({ edu, index }) => {
+interface EducationItem {
+  id: number;
+  duration: string;
+  institution: string;
+  degree: string;
+  cgpa: string;
+  coursework: string;
+}
+
+interface EducationCardProps {
+  edu: EducationItem;
+  index: number;
+}
+
+
+const EducationCard = ({ edu, index }: EducationCardProps) => {
   return (
     <div className="group flex gap-6 md:gap-8 items-start relative">
       {/* Timeline line and branch */}
