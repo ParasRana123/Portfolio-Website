@@ -1,3 +1,4 @@
+"use client";
 import React, { useState, useEffect } from "react";
 import {
   FaGithub,
@@ -195,7 +196,6 @@ const GitHubHeatmap = ({ username }: { username: string }) => {
   return (
     <div className="border border-slate-800 rounded-lg p-2 flex justify-center bg-transparent">
       <div>
-
         {/* Stats Summary */}
         <div className="grid grid-cols-3 gap-4 mb-6 text-center">
           <div>
