@@ -4,6 +4,35 @@ import { useState } from "react";
 import { FaLocationArrow } from "react-icons/fa6";
 import { X, ExternalLink, Github } from "lucide-react";
 
+export interface Project {
+  id: number;
+  title: string;
+  des: string;
+  img: string;
+  iconLists: string[];
+  link: string;
+
+  fullDescription: string;
+  features?: string[];
+  technologies?: string[];
+  demoVideo?: string;
+  github?: string;
+  liveLink?: string;
+}
+
+interface PinContainerProps {
+  children: React.ReactNode;
+  title?: string;
+  href?: string;
+  onClick?: () => void;
+}
+
+interface ProjectModalProps {
+  project: Project | null;
+  onClose: () => void;
+}
+
+
 // Sample projects data - replace with your actual @/data import
 const projects = [
   {
@@ -122,7 +151,7 @@ const projects = [
 ];
 
 // PinContainer component placeholder
-const PinContainer = ({ children, title, href, onClick }) => {
+const PinContainer = ({ children, title, href, onClick }: PinContainerProps) => {
   return (
     <div className="relative group/pin cursor-pointer" onClick={onClick}>
       <div className="relative z-50 flex flex-col items-center justify-center overflow-hidden rounded-2xl border border-white/[0.2] bg-slate-900/50 p-4 transition-all duration-500 hover:border-white/[0.4] hover:shadow-xl hover:shadow-purple-500/20">
@@ -132,7 +161,7 @@ const PinContainer = ({ children, title, href, onClick }) => {
   );
 };
 
-const ProjectModal = ({ project, onClose }) => {
+const ProjectModal = ({ project, onClose }: ProjectModalProps) => {
   if (!project) return null;
 
   return (
@@ -267,7 +296,7 @@ const ProjectModal = ({ project, onClose }) => {
 };
 
 const RecentProjects = () => {
-  const [selectedProject, setSelectedProject] = useState(null);
+  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
 
   return (
     <div className="py-20 relative overflow-hidden">
