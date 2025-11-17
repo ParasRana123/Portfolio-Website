@@ -251,11 +251,10 @@ const Hero = () => {
                   href={item.link}
                   target="_blank"
                   className="w-12 h-12 flex items-center justify-center
-                  rounded-lg bg-transparent 
-                  border border-slate-700 dark:border-slate-600
-                  text-white/80 dark:text-white/70
-                  hover:text-white hover:border-purple-400
-                  hover:bg-purple-500/10 transition-all hover:scale-110 shadow-sm"
+                  rounded-lg bg-transparent border border-slate-800
+                  text-white
+                  hover:text-white hover:border-white hover:bg-purple-500/30
+                  transition-all hover:scale-110"
                 >
                   {item.icon}
                 </a>
@@ -266,7 +265,7 @@ const Hero = () => {
           {/* RIGHT — IMAGE */}
           <div className="flex-shrink-0 w-64 h-64 md:w-80 md:h-80 lg:w-96 lg:h-96 relative">
             <div className="absolute inset-0 flex items-center justify-center">
-              <div className="w-[102%] h-[102%] rounded-full spin-slow ring-pulse flex items-center justify-center">
+              <div className="w-[102%] h-[102%] rounded-full spin-slow ring-pulse flex items-center justify-center p-10">
                 <svg
                   viewBox="0 0 100 100"
                   className="w-full h-full"
