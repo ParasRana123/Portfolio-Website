@@ -212,12 +212,14 @@ const Hero = () => {
                 />
               </Link>
 
-              <MagicButton
-                title="Drop a Message"
-                icon={<FaArrowRight />}
-                position="right"
-                variant="inverse"
-              />
+              <Link href="#contact">
+                <MagicButton
+                  title="Drop a Message"
+                  icon={<FaArrowRight />}
+                  position="right"
+                  variant="inverse"
+                />
+              </Link>
             </div>
 
             {/* SOCIAL ICONS */}

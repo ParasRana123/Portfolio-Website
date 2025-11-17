@@ -6,7 +6,7 @@ import { Button } from "./ui/MovingBorders";
 
 const Experience = () => {
   return (
-    <div className="py-20 w-full relative overflow-hidden">
+    <div id="achievements" className="py-20 w-full relative overflow-hidden">
       {/* ⭐ Square Grid Background + Glow ⭐ */}
       <div
         className="absolute inset-0 z-0

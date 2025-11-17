@@ -151,29 +151,25 @@ const GitHubHeatmap = ({ username }: { username: string }) => {
     return "bg-green-400";
   };
 
-  const getMonthLabels = () => {
-    const months = [
-      "Jan",
-      "Feb",
-      "Mar",
-      "Apr",
-      "May",
-      "Jun",
-      "Jul",
-      "Aug",
-      "Sep",
-      "Oct",
-      "Nov",
-      "Dec",
-    ];
-    const labels = [];
-    const today = new Date();
+  const getMonthLabelsWithPositions = () => {
+    if (contributions.length === 0) return [];
 
-    for (let i = 11; i >= 0; i--) {
-      const date = new Date(today);
-      date.setMonth(date.getMonth() - i);
-      labels.push(months[date.getMonth()]);
-    }
+    const labels: { month: string; weekIndex: number }[] = [];
+    let currentMonth = -1;
+
+    contributions.forEach((day, index) => {
+      const date = new Date(day.date);
+      const month = date.getMonth();
+      const weekIndex = Math.floor(index / 7);
+
+      if (month !== currentMonth) {
+        currentMonth = month;
+        labels.push({
+          month: date.toLocaleDateString("en-US", { month: "short" }),
+          weekIndex: weekIndex,
+        });
+      }
+    });
 
     return labels;
   };
@@ -192,6 +188,8 @@ const GitHubHeatmap = ({ username }: { username: string }) => {
   for (let i = 0; i < contributions.length; i += 7) {
     weeks.push(contributions.slice(i, i + 7));
   }
+
+  const monthLabels = getMonthLabelsWithPositions();
 
   return (
     <div className="border border-slate-800 rounded-lg p-2 flex justify-center bg-transparent">
@@ -222,11 +220,17 @@ const GitHubHeatmap = ({ username }: { username: string }) => {
         <div className="flex justify-center">
           <div className="overflow-x-auto">
             <div className="inline-block min-w-full">
-              {/* Month labels */}
-              <div className="flex mb-2 ml-8 justify-center">
-                {getMonthLabels().map((month, i) => (
-                  <div key={i} className="text-xs text-gray-500 w-20 text-left">
-                    {month}
+              {/* Month labels - positioned exactly above their weeks */}
+              <div className="flex mb-2 ml-8 relative h-4">
+                {monthLabels.map((label, i) => (
+                  <div
+                    key={i}
+                    className="text-xs text-gray-500 absolute"
+                    style={{
+                      left: `${label.weekIndex * 16}px`,
+                    }}
+                  >
+                    {label.month}
                   </div>
                 ))}
               </div>

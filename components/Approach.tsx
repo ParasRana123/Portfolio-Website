@@ -29,7 +29,7 @@ const skills = [
 
 const Approach = () => {
   return (
-    <section className="w-full py-20 relative overflow-hidden">
+    <section id="skills" className="w-full py-20 relative overflow-hidden">
       {/* ⭐ Square Grid Background ⭐ */}
       <div
         className="absolute inset-0 z-0

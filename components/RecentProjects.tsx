@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { FaLocationArrow } from "react-icons/fa6";
+import { FaArrowUpRightFromSquare, FaGithub } from "react-icons/fa6";
 import { X, ExternalLink, Github } from "lucide-react";
 
 export interface Project {
@@ -166,7 +166,6 @@ const ProjectModal = ({ project, onClose }: ProjectModalProps) => {
 
   return (
     <div
-      id="projects"
       className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm"
       onClick={onClose}
     >
@@ -300,7 +299,7 @@ const RecentProjects = () => {
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
 
   return (
-    <div className="py-20 relative overflow-hidden">
+    <div id="projects" className="py-20 relative overflow-hidden">
       {/* ⭐ SQUARE GRID BACKGROUND (Same as Education Section) ⭐ */}
       <div
         className="absolute inset-0 z-0
@@ -341,8 +340,15 @@ const RecentProjects = () => {
                 </div>
                 <img
                   src={item.img}
-                  alt="cover"
-                  className="z-10 absolute bottom-0"
+                  alt={item.title}
+                  className="
+                    z-10 absolute bottom-0 
+                    w-full 
+                    h-full 
+                    pointer-events-none
+                    object-cover
+                    rounded-3xl
+                  "
                 />
               </div>
 
@@ -372,11 +378,27 @@ const RecentProjects = () => {
                   ))}
                 </div>
 
-                <div className="flex justify-center items-center">
-                  <p className="flex lg:text-xl md:text-xs text-sm text-purple">
-                    Check Live Site
-                  </p>
-                  <FaLocationArrow className="ms-3" color="#CBACF9" />
+                <div className="flex justify-center items-center ml-36">
+                  <div
+                    className="w-9 h-9 flex items-center justify-center
+                  rounded-lg bg-transparent 
+                  border border-slate-700 dark:border-slate-600
+                  text-white/80 dark:text-white/70
+                  hover:text-white hover:border-purple-400
+                  hover:bg-purple-500/10 transition-all hover:scale-110 shadow-sm"
+                  >
+                    <FaGithub />
+                  </div>
+                  <div
+                    className="ms-3 w-9 h-9 flex items-center justify-center
+                  rounded-lg bg-transparent 
+                  border border-slate-700 dark:border-slate-600
+                  text-white/80 dark:text-white/70
+                  hover:text-white hover:border-purple-400
+                  hover:bg-purple-500/10 transition-all hover:scale-110 shadow-sm"
+                  >
+                    <FaArrowUpRightFromSquare />
+                  </div>
                 </div>
               </div>
             </PinContainer>
