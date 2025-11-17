@@ -166,6 +166,7 @@ const ProjectModal = ({ project, onClose }: ProjectModalProps) => {
 
   return (
     <div
+      id="projects"
       className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm"
       onClick={onClose}
     >
@@ -207,7 +208,7 @@ const ProjectModal = ({ project, onClose }: ProjectModalProps) => {
                 className="flex items-center gap-2 px-4 py-2 bg-purple-600 hover:bg-purple-700 rounded-lg transition-colors text-white"
               >
                 <ExternalLink className="w-4 h-4" />
-                LIVE DEMO 
+                LIVE DEMO
               </a>
             )}
             {project.github && (

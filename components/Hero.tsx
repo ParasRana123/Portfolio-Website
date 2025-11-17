@@ -10,6 +10,7 @@ import {
 import { SiLeetcode } from "react-icons/si";
 import { MdOutlineMessage } from "react-icons/md";
 import { FaLinkedin, FaCode } from "react-icons/fa";
+import Link from "next/link";
 
 /* ------------------------ MAGIC BUTTON ------------------------ */
 
@@ -202,12 +203,14 @@ const Hero = () => {
 
             {/* BUTTONS */}
             <div className="flex flex-col md:flex-row gap-4 md:gap-6 w-full mt-3">
-              <MagicButton
-                title="Show my work"
-                icon={<FaLocationArrow />}
-                position="right"
-                variant="primary"
-              />
+              <Link href="https://github.com/ParasRana123">
+                <MagicButton
+                  title="Show my work"
+                  icon={<FaLocationArrow />}
+                  position="right"
+                  variant="primary"
+                />
+              </Link>
 
               <MagicButton
                 title="Drop a Message"
