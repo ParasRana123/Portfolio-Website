@@ -379,26 +379,37 @@ const RecentProjects = () => {
                 </div>
 
                 <div className="flex justify-center items-center ml-36">
-                  <div
+                  {/* GitHub link */}
+                  <a
+                    href={item.github}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={(e) => e.stopPropagation()}
                     className="w-9 h-9 flex items-center justify-center
-                  rounded-lg bg-transparent 
-                  border border-slate-700 dark:border-slate-600
-                  text-white/80 dark:text-white/70
-                  hover:text-white hover:border-purple-400
-                  hover:bg-purple-500/10 transition-all hover:scale-110 shadow-sm"
+      rounded-lg bg-transparent 
+      border border-slate-800 dark:border-slate-800
+      text-white/80 dark:text-white/70
+      hover:text-white hover:border-white hover:bg-purple-500/30
+      transition-all hover:scale-110 hover:shadow-[0_0_10px_rgba(255,255,255,0.3)]"
                   >
                     <FaGithub />
-                  </div>
-                  <div
+                  </a>
+
+                  {/* Live site link */}
+                  <a
+                    href={item.liveLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={(e) => e.stopPropagation()}
                     className="ms-3 w-9 h-9 flex items-center justify-center
-                  rounded-lg bg-transparent 
-                  border border-slate-700 dark:border-slate-600
-                  text-white/80 dark:text-white/70
-                  hover:text-white hover:border-purple-400
-                  hover:bg-purple-500/10 transition-all hover:scale-110 shadow-sm"
+      rounded-lg bg-transparent 
+      border border-slate-800 dark:border-slate-800
+      text-white/80 dark:text-white/70
+      hover:text-white hover:border-white hover:bg-purple-500/30
+      transition-all hover:scale-110 hover:shadow-[0_0_10px_rgba(255,255,255,0.3)]"
                   >
                     <FaArrowUpRightFromSquare />
-                  </div>
+                  </a>
                 </div>
               </div>
             </PinContainer>

@@ -251,7 +251,7 @@ const Hero = () => {
                   href={item.link}
                   target="_blank"
                   className="w-12 h-12 flex items-center justify-center
-                  rounded-lg bg-transparent border border-slate-800
+                  rounded-lg bg-transparent border border-slate-900
                   text-white
                   hover:text-white hover:border-white hover:bg-purple-500/30
                   transition-all hover:scale-110"
