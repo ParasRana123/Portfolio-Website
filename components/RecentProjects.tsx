@@ -466,6 +466,21 @@ const RecentProjects = () => {
         ))}
       </div>
 
+      <div className="relative z-10 mt-20 w-full flex justify-center border-white-200 cursor-pointer">
+        <h2
+          className="text-white tracking-wide px-6 py-3 
+          border border-white/20 
+          rounded-xl 
+         bg-black/30 
+          backdrop-blur-sm
+          shadow-lg
+          hover:text-white hover:border-white
+          hover:shadow-[0_0_10px_rgba(255,255,255,0.6)]"
+        >
+          Show <span className="text-purple-400">All Projects</span>
+        </h2>
+      </div>
+
       {/* Modal */}
       {selectedProject && (
         <ProjectModal

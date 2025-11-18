@@ -18,6 +18,10 @@ const StatsPage = dynamic(() => import("@/components/scorestreak"), {
   ssr: false,
 });
 
+const setup = dynamic(() => import("@/components/setup"), {
+  ssr: false,
+});
+
 const FloatingNav = dynamic(
   () => import("@/components/ui/FloatingNavbar").then((mod) => mod.FloatingNav),
   { ssr: false }
