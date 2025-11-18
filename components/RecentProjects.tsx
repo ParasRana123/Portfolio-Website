@@ -1,7 +1,11 @@
 "use client";
 
 import { useState } from "react";
-import { FaArrowUpRightFromSquare, FaGithub } from "react-icons/fa6";
+import {
+  FaArrowUpRightFromSquare,
+  FaGithub,
+  FaArrowRightLong,
+} from "react-icons/fa6";
 import { X, ExternalLink, Github } from "lucide-react";
 
 export interface Project {
@@ -41,6 +45,7 @@ const projects = [
     des: "An interactive real-time whiteboard that lets teams sketch, brainstorm, and collaborate seamlessly together.",
     img: "/p1.svg",
     iconLists: ["/re.svg", "/tail.svg", "/ts.svg", "prisma.png"],
+    status: "Building",
     link: "https://example.com",
     // Modal data
     fullDescription:
@@ -71,6 +76,7 @@ const projects = [
     img: "/p2.png",
     iconLists: ["/re.svg", "/tail.svg", "/ts.svg", "/ws.png"],
     link: "https://example.com",
+    status: "All Systems Operational",
     fullDescription:
       "A social music platform that lets users create playlists, save their favorite songs, and share them with friends.Users can connect with others, explore each other's playlists, and discover new music through social interactions.",
     features: [
@@ -97,6 +103,7 @@ const projects = [
     img: "/boult.png",
     iconLists: ["/re.svg", "/tail.svg", "/ts.svg", "/gemini.png"],
     link: "https://example.com",
+    status: "All Systems Operational",
     fullDescription:
       "An AI-powered website builder that transforms simple text prompts into full-stack web apps in under 5 seconds using the LLAMA model.",
     features: [
@@ -123,6 +130,7 @@ const projects = [
     img: "/nova.png",
     iconLists: ["/py.png", "/gemini.png"],
     link: "https://example.com",
+    status: "All Systems Operational",
     fullDescription:
       "An AI-powered personal assistant with voice control, app management, system controls, Google Calendar integration, image analysis, real-time translation, chatbot, search capabilities, music control, and productivity automation. Experience hands-free digital interaction with natural language understanding and personalized assistance.",
     features: [
@@ -239,15 +247,10 @@ const ProjectModal = ({ project, onClose }: ProjectModalProps) => {
               <h3 className="text-xl font-semibold text-purple-400 mb-3">
                 KEY FEATURES
               </h3>
-              <ul className="space-y-2">
+
+              <ul className="list-disc list-inside space-y-2 text-gray-300">
                 {project.features.map((feature, index) => (
-                  <li
-                    key={index}
-                    className="flex items-start gap-3 text-gray-300"
-                  >
-                    <div className="w-1.5 h-1.5 bg-purple-400 rounded-full mt-2 flex-shrink-0" />
-                    <span>{feature}</span>
-                  </li>
+                  <li key={index}>{feature}</li>
                 ))}
               </ul>
             </div>
@@ -332,65 +335,39 @@ const RecentProjects = () => {
               onClick={() => setSelectedProject(item)}
             >
               <div className="relative flex items-center justify-center sm:w-96 w-[80vw] overflow-hidden h-[20vh] lg:h-[30vh] mb-10">
-                <div
-                  className="relative w-full h-full overflow-hidden lg:rounded-3xl"
-                  style={{ backgroundColor: "#13162D" }}
-                >
-                  <img src="/bg.png" alt="bgimg" />
-                </div>
                 <img
                   src={item.img}
                   alt={item.title}
                   className="
-                    z-10 absolute bottom-0 
-                    w-full 
-                    h-full 
-                    pointer-events-none
-                    object-cover
-                    rounded-3xl
-                  "
+        z-10 absolute bottom-0 
+        w-full 
+        h-full 
+        pointer-events-none
+        object-cover
+        rounded-3xl
+      "
                 />
               </div>
 
-              <h1 className="font-bold lg:text-2xl md:text-xl text-base line-clamp-1">
-                {item.title}
-              </h1>
+              {/* ⭐ TITLE + ICONS ⬇⬇⬇ */}
+              <div className="flex items-center justify-between w-full">
+                <h1 className="font-bold lg:text-2xl md:text-xl text-base line-clamp-1">
+                  {item.title}
+                </h1>
 
-              <p
-                className="lg:text-xl lg:font-normal font-light text-sm line-clamp-2"
-                style={{ color: "#BEC1DD", margin: "1vh 0" }}
-              >
-                {item.des}
-              </p>
-
-              <div className="flex items-center justify-between mt-7 mb-3">
                 <div className="flex items-center">
-                  {item.iconLists.map((icon, index) => (
-                    <div
-                      key={index}
-                      className="border border-white/[.2] rounded-full bg-black lg:w-10 lg:h-10 w-8 h-8 flex justify-center items-center"
-                      style={{
-                        transform: `translateX(-${5 * index + 2}px)`,
-                      }}
-                    >
-                      <img src={icon} alt="icon" className="p-2" />
-                    </div>
-                  ))}
-                </div>
-
-                <div className="flex justify-center items-center ml-36">
                   {/* GitHub link */}
                   <a
                     href={item.github}
                     target="_blank"
                     rel="noopener noreferrer"
                     onClick={(e) => e.stopPropagation()}
-                    className="w-9 h-9 flex items-center justify-center
-      rounded-lg bg-transparent 
-      border border-slate-800 dark:border-slate-800
-      text-white/80 dark:text-white/70
-      hover:text-white hover:border-white hover:bg-purple-500/30
-      transition-all hover:scale-110 hover:shadow-[0_0_10px_rgba(255,255,255,0.3)]"
+                    className="w-8 h-8 flex items-center justify-center
+          rounded-lg bg-transparent 
+          border border-slate-800 dark:border-slate-800
+          text-white/80 dark:text-white/70
+          hover:text-white hover:border-white hover:bg-purple-500/30
+          transition-all hover:scale-110 hover:shadow-[0_0_10px_rgba(255,255,255,0.3)]"
                   >
                     <FaGithub />
                   </a>
@@ -401,16 +378,88 @@ const RecentProjects = () => {
                     target="_blank"
                     rel="noopener noreferrer"
                     onClick={(e) => e.stopPropagation()}
-                    className="ms-3 w-9 h-9 flex items-center justify-center
-      rounded-lg bg-transparent 
-      border border-slate-800 dark:border-slate-800
-      text-white/80 dark:text-white/70
-      hover:text-white hover:border-white hover:bg-purple-500/30
-      transition-all hover:scale-110 hover:shadow-[0_0_10px_rgba(255,255,255,0.3)]"
+                    className="ms-2 w-8 h-8 flex items-center justify-center
+          rounded-lg bg-transparent 
+          border border-slate-800 dark:border-slate-800
+          text-white/80 dark:text-white/70
+          hover:text-white hover:border-white hover:bg-purple-500/30
+          transition-all hover:scale-110 hover:shadow-[0_0_10px_rgba(255,255,255,0.3)]"
                   >
                     <FaArrowUpRightFromSquare />
                   </a>
                 </div>
+              </div>
+
+              <p
+                className="lg:text-xl lg:font-normal font-light text-sm line-clamp-2"
+                style={{ color: "#BEC1DD", margin: "1vh 0" }}
+              >
+                {item.des}
+              </p>
+
+              <p
+                className="mt-4 w-full text-left tracking-wide text-sm lg:text-xl font-light line-clamp-2"
+                style={{ color: "#BEC1DD" }}
+              >
+                Technologies
+              </p>
+
+              <div className="flex items-center justify-start mt-3 mb-3">
+                <div className="flex items-center -ml-48">
+                  {item.iconLists.map((icon, index) => (
+                    <div
+                      key={index}
+                      className="border border-white/[.2] rounded-full bg-black lg:w-10 lg:h-10 w-8 h-8 flex justify-start"
+                      style={{
+                        transform: `translateX(-${5 * index + 2}px)`,
+                      }}
+                    >
+                      <img src={icon} alt="icon" className="p-2" />
+                    </div>
+                  ))}
+                </div>
+              </div>
+              <div className="mt-2 w-full flex items-center justify-between">
+                {/* STATUS BADGE */}
+                <span
+                  className={`
+      inline-flex items-center gap-2
+      px-3 py-1 
+      rounded-full 
+      text-xs font-medium tracking-wide
+      border
+      ${
+        item.status === "All Systems Operational"
+          ? "bg-green-600/20 text-green-400 border-green-500/30"
+          : "bg-red-600/20 text-red-400 border-red-500/30"
+      }
+    `}
+                >
+                  {/* Dot */}
+                  <span
+                    className={`
+        w-2 h-2 rounded-full
+        ${
+          item.status === "All Systems Operational"
+            ? "bg-green-400"
+            : "bg-red-400"
+        }
+      `}
+                  ></span>
+                  {item.status}
+                </span>
+
+                {/* VIEW DETAILS BUTTON */}
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation(); // prevent card click
+                    setSelectedProject(item);
+                  }}
+                  className="flex items-center gap-1 text-xs font-medium text-slate-300 hover:text-purple-300 transition-colors"
+                >
+                  View Details
+                  <FaArrowRightLong className="w-3 h-3" />
+                </button>
               </div>
             </PinContainer>
           </div>
