@@ -294,7 +294,7 @@ const Hero = () => {
             <div className="relative w-full h-full rounded-full overflow-hidden border-4 border-purple-500/30 shadow-2xl shadow-purple-500/20">
               <div className="absolute inset-0 bg-gradient-to-br from-purple-500/20 to-blue-500/20"></div>
               <img
-                src="/paras.png"
+                src="/paras.jpg"
                 alt="Paras - Full Stack Developer"
                 className="w-full h-full object-cover"
               />

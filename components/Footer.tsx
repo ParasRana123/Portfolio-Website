@@ -28,8 +28,13 @@ const Footer = () => {
         <a href="mailto:contact@jsmastery.pro">
           <MagicButton
             title="Let's get in touch"
-            icon={<FaLocationArrow />}
-            position="right"
+            // icon={<FaLocationArrow />}
+            icon = {
+              <div className="w-8 h-8 rounded-full overflow-hidden border border-white">
+                <img src="/paras.jpg" alt="" className="w-full h-full object-cover"/>
+              </div>
+            }
+            position="left"
           />
         </a>
       </div>
