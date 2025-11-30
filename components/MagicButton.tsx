@@ -32,10 +32,12 @@ const MagicButton = ({
         />
       )}
 
-      {/* Inner section */}
+      {/* Inner button */}
       <span
-        className={`inline-flex h-full w-full cursor-pointer items-center justify-center 
+        className={`
+          relative inline-flex h-full w-full cursor-pointer items-center justify-center
           rounded-lg px-7 text-sm font-medium gap-2 backdrop-blur-3xl
+          group transition-all duration-300
           ${
             isInverse
               ? "bg-white text-slate-900 border border-slate-300"
@@ -43,9 +45,46 @@ const MagicButton = ({
           }
         `}
       >
-        {position === "left" && icon}
-        {title}
-        {position === "right" && icon}
+        {/* Default (Visible before hover) */}
+        <div className="flex items-center gap-2 transition-all duration-300 group-hover:opacity-0">
+          {position === "left" && icon}
+          {title}
+          {position === "right" && icon}
+        </div>
+
+        {/* Hover Animation Content */}
+        <div
+          className="absolute inset-0 flex items-center justify-center gap-3 
+          opacity-0 group-hover:opacity-100 transition-all duration-300"
+        >
+          {/* Your image */}
+          <div className="w-8 h-8 rounded-full overflow-hidden border border-white">
+            <img
+              src="/paras.jpg"
+              alt="logo"
+              className="w-full h-full object-cover"
+            />
+          </div>
+
+          {/* Plus sign */}
+          <span
+            className={`text-xl font-bold ${
+              isInverse ? "text-slate-900" : "text-white"
+            }`}
+          >
+            +
+          </span>
+
+          {/* YOU logo circular */}
+          <div className="w-8 h-8 rounded-full overflow-hidden border border-white bg-purple-600 flex items-center justify-center">
+            <span className="text-white text-xs font-semibold">You</span>
+          </div>
+
+          {/* Title */}
+          <span className={isInverse ? "text-slate-900" : "text-white"}>
+            {title}
+          </span>
+        </div>
       </span>
     </button>
   );
