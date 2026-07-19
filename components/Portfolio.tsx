@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Header from "./Header";
 import Navbar from "./Navbar";
 import Introduction from "./Introduction";
@@ -10,6 +10,12 @@ import WritingSection from "./WritingSection";
 export default function Portfolio() {
   const [dark, setDark] = useState(false);
   const [active, setActive] = useState("Home");
+
+  useEffect(() => {
+    document.documentElement.style.colorScheme = dark
+      ? "dark"
+      : "light";
+  }, [dark]);
 
   const vars = dark
     ? {
@@ -32,9 +38,10 @@ export default function Portfolio() {
       };
 
   return (
-    <div className="dp-root" style={vars}>
+    <div className="dp-root" style={vars as React.CSSProperties}>
       <div className="dp-shell">
         <Header />
+
         <Navbar
           dark={dark}
           setDark={setDark}
@@ -50,13 +57,29 @@ export default function Portfolio() {
 
         <WhereSection />
 
-        <hr className="dp-hr-dotted" />
+        <hr
+          className="dp-hr-dotted"
+          style={{ margin: "26px 0 0" }}
+        />
 
-        <WritingSection />
+        <div style={{ padding: "22px 0 4px" }}>
+          <WritingSection />
+        </div>
 
-        <hr className="dp-hr-dotted" />
+        <hr
+          className="dp-hr-dotted"
+          style={{ margin: "0 0 22px" }}
+        />
 
-        <p className="dp-footer">
+        <p
+          className="dp-mono"
+          style={{
+            fontSize: 11,
+            color: "var(--muted)",
+            letterSpacing: "0.04em",
+            margin: 0,
+          }}
+        >
           © {new Date().getFullYear()} PARAS RANA
         </p>
       </div>

@@ -1,0 +1,363 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap');
+
+.dp-root {
+  background: var(--bg);
+  color: var(--ink);
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  transition: background 0.3s ease, color 0.3s ease;
+  font-family: 'Inter', sans-serif;
+}
+
+.dp-shell {
+  width: 100%;
+  max-width: 640px;
+  padding: 72px 24px 56px;
+}
+
+@media (max-width: 560px) {
+  .dp-shell {
+    padding: 48px 20px 40px;
+  }
+}
+
+.dp-mono {
+  font-family: 'IBM Plex Mono', monospace;
+}
+
+.dp-display {
+  font-family: 'Space Grotesk', sans-serif;
+}
+
+.dp-avatar {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  object-fit: cover;
+  display: block;
+}
+
+.dp-link {
+  color: var(--accent);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+  cursor: pointer;
+}
+
+.dp-link:hover {
+  text-decoration-thickness: 2px;
+}
+
+.dp-hover-target {
+  text-decoration-style: dotted;
+  text-decoration-thickness: 1.5px;
+}
+
+.dp-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 18px;
+}
+
+.dp-nav-links {
+  display: flex;
+  gap: 22px;
+}
+
+.dp-nav-btn {
+  font-family: 'Inter', sans-serif;
+  font-weight: 500;
+  font-size: 13.5px;
+  background: none;
+  border: none;
+  padding: 4px 0;
+  cursor: pointer;
+  color: var(--muted);
+  position: relative;
+}
+
+.dp-nav-btn.is-active {
+  color: var(--ink);
+}
+
+.dp-nav-btn.is-active::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -2px;
+  height: 2px;
+  background: var(--accent);
+  border-radius: 2px;
+}
+
+.dp-toggle {
+  border: 1px solid var(--hairline);
+  background: var(--surface);
+  color: var(--muted);
+  border-radius: 999px;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.dp-toggle:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+.dp-hr {
+  height: 1px;
+  background: var(--hairline);
+  border: none;
+  margin: 0;
+}
+
+.dp-hr-dotted {
+  border: none;
+  border-top: 1.5px dotted var(--hairline);
+  margin: 0;
+}
+
+.dp-eyebrow {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.dp-intro {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 28px 0;
+}
+
+.dp-intro p {
+  margin: 0;
+  font-size: 16px;
+  line-height: 1.75;
+  color: var(--ink);
+}
+
+.dp-header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 22px;
+}
+
+.dp-name {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 21px;
+  font-weight: 600;
+  margin: 0;
+  letter-spacing: -0.01em;
+}
+
+.dp-subtitle {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11.5px;
+  color: var(--muted);
+  margin: 4px 0 0;
+  letter-spacing: 0.04em;
+}
+
+.dp-where-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.dp-where-icon {
+  width: 30px;
+  height: 30px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.dp-where-name {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 600;
+  font-size: 14.5px;
+  margin: 0 0 2px;
+}
+
+.dp-where-line {
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--muted);
+  margin: 0;
+}
+
+/* ---------- Writing ---------- */
+
+.dp-writing-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.dp-writing-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 13px 0;
+  text-decoration: none;
+  color: inherit;
+}
+
+.dp-writing-title {
+  font-size: 15px;
+  line-height: 1.5;
+  color: var(--ink);
+  margin: 0;
+  transition: color 0.15s ease;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.dp-writing-row:hover .dp-writing-title {
+  color: var(--accent);
+}
+
+.dp-writing-date {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11.5px;
+  color: var(--muted);
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
+/* ---------- Hover Card ---------- */
+
+.dp-hover-wrap {
+  position: relative;
+  display: inline-block;
+}
+
+.dp-hovercard {
+  position: absolute;
+  left: 50%;
+  bottom: calc(100% + 12px);
+  transform: translate(-50%, 6px) scale(0.96);
+  opacity: 0;
+  pointer-events: none;
+  transition:
+    opacity 0.2s ease,
+    transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: 50;
+  width: 246px;
+}
+
+.dp-hover-wrap:hover .dp-hovercard {
+  opacity: 1;
+  transform: translate(-50%, 0) scale(1);
+}
+
+.dp-hovercard-inner {
+  border-radius: 14px;
+  overflow: hidden;
+  border: 1px solid var(--hairline);
+  box-shadow: 0 16px 34px rgba(0, 0, 0, 0.2);
+}
+
+.dp-hovercard-top {
+  background: var(--surface);
+  padding: 13px 14px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-align: left;
+}
+
+.dp-hovercard-icon-box {
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.dp-hovercard-top-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.dp-hovercard-top-text strong {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 12.5px;
+  color: var(--ink);
+}
+
+.dp-hovercard-top-text span {
+  font-size: 11px;
+  line-height: 1.45;
+  color: var(--muted);
+}
+
+.dp-hovercard-bottom {
+  background: var(--cardbottom);
+  padding: 11px 14px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-align: left;
+}
+
+.dp-hovercard-avatar {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.dp-hovercard-bottom-text {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.dp-hovercard-bottom-text strong {
+  font-size: 12px;
+  color: #F5F3EA;
+}
+
+.dp-hovercard-bottom-text span {
+  font-size: 10.5px;
+  color: #A79F8C;
+}
+
+.dp-hovercard-arrow {
+  position: absolute;
+  bottom: -5px;
+  left: 50%;
+  transform: translateX(-50%) rotate(45deg);
+  width: 10px;
+  height: 10px;
+  background: var(--cardbottom);
+  border-radius: 2px;
+}
+
+.dp-card {
+  border: 1px solid var(--hairline);
+  border-radius: 10px;
+  padding: 18px 20px;
+  background: var(--surface);
+}
