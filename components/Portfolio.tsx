@@ -1,14 +1,18 @@
 "use client";
 
 import { useEffect, useState } from "react";
+
 import Header from "./Header";
 import Navbar from "./Navbar";
-import Introduction from "./Introduction";
-import WhereSection from "./WhereSection";
-import WritingSection from "./WritingSection";
+
+import Home from "./pages/Home";
+import Projects from "./pages/Projects";
+import Inspiration from "./pages/Inspiration";
+import Resume from "./pages/Resume";
 
 export default function Portfolio() {
   const [dark, setDark] = useState(false);
+
   const [active, setActive] = useState("Home");
 
   useEffect(() => {
@@ -38,7 +42,7 @@ export default function Portfolio() {
       };
 
   return (
-    <div className="dp-root" style={vars as React.CSSProperties}>
+    <div className="dp-root" style={vars}>
       <div className="dp-shell">
         <Header />
 
@@ -49,22 +53,13 @@ export default function Portfolio() {
           setActive={setActive}
         />
 
-        <hr className="dp-hr" />
+        {active === "Home" && <Home />}
 
-        <Introduction />
+        {active === "Projects" && <Projects />}
 
-        <hr className="dp-hr" />
+        {active === "Inspiration" && <Inspiration />}
 
-        <WhereSection />
-
-        <hr
-          className="dp-hr-dotted"
-          style={{ margin: "26px 0 0" }}
-        />
-
-        <div style={{ padding: "22px 0 4px" }}>
-          <WritingSection />
-        </div>
+        {active === "Resume" && <Resume />}
 
         <hr
           className="dp-hr-dotted"

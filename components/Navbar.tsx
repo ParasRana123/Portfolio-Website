@@ -1,14 +1,14 @@
 "use client";
 
 import { Moon, Sun } from "lucide-react";
-import { NAV_ITEMS } from "@/data/navItems";
 import React from "react";
+import { NAV_ITEMS } from "@/data/navItems";
 
-interface NavbarProps {
-    dark: boolean;
-    setDark: React.Dispatch<React.SetStateAction<boolean>>;
-    active: string;
-    setActive: React.Dispatch<React.SetStateAction<string>>
+export interface NavbarProps {
+  dark: boolean;
+  setDark: React.Dispatch<React.SetStateAction<boolean>>;
+  active: string;
+  setActive: React.Dispatch<React.SetStateAction<string>>;
 }
 
 export default function Navbar({
@@ -16,7 +16,7 @@ export default function Navbar({
   setDark,
   active,
   setActive,
-} : NavbarProps) {
+}: NavbarProps) {
   return (
     <nav className="dp-nav">
       <div className="dp-nav-links">
