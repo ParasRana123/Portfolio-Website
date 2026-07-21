@@ -7,7 +7,7 @@ import Navbar from "./Navbar";
 
 import Home from "./pages/Home";
 import Projects from "./pages/Projects";
-import Inspiration from "./pages/Inspiration";
+import Tools from "./pages/Tools";
 import Resume from "./pages/Resume";
 
 export default function Portfolio() {
@@ -57,7 +57,7 @@ export default function Portfolio() {
 
         {active === "Projects" && <Projects />}
 
-        {active === "Inspiration" && <Inspiration />}
+        {active === "Tools" && <Tools />}
 
         {active === "Resume" && <Resume />}
 

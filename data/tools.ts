@@ -8,46 +8,46 @@ export const tools: Tool[] = [
   {
     name: "VS Code",
     image: "/tools/vscode.jpg",
-    line: "Where ideas become code, bugs become lessons, and projects slowly become real.",
+    line: "Where every idea starts.",
   },
   {
     name: "GitHub",
     image: "/tools/github.png",
-    line: "My second brain for code — where experiments, projects, and progress live.",
+    line: "Where my code calls home.",
   },
   {
     name: "React",
     image: "/tools/react.png",
-    line: "My go-to canvas for turning complex ideas into interfaces that feel alive.",
+    line: "Building interfaces that breathe.",
   },
   {
     name: "Node.js",
     image: "/tools/nodejs.png",
-    line: "The engine behind the APIs and real-time systems that power what I build.",
+    line: "Powering the logic behind the screen.",
   },
   {
     name: "PostgreSQL",
     image: "/tools/postgresql.png",
-    line: "Where the data behind my applications finds structure, relationships, and a home.",
+    line: "Where my data finds structure.",
   },
   {
     name: "Redis",
     image: "/tools/redis.png",
-    line: "For the moments when milliseconds matter and applications need to move faster.",
+    line: "When every millisecond counts.",
   },
   {
     name: "Docker",
     image: "/tools/docker.jpeg",
-    line: "Because if it works on my machine, I want it to work everywhere else too.",
+    line: "Build once. Run anywhere.",
   },
   {
     name: "Vercel",
     image: "/tools/vercel.png",
-    line: "The bridge between something I built locally and something the world can actually use.",
+    line: "From localhost to the world.",
   },
   {
     name: "LangChain",
     image: "/tools/langchain.jpeg",
-    line: "My playground for exploring what happens when software starts reasoning with language.",
+    line: "Connecting code with intelligence.",
   },
 ];
