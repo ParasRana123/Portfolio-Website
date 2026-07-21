@@ -6,18 +6,18 @@ export interface BlogPost {
 
 export const BLOG_POSTS: BlogPost[] = [
   {
-    title: "How to freelance and make money as a Freelance Web Developer",
-    date: "24-03-2022",
-    url: "https://medium.com/@parasrana/how-to-freelance-and-make-money-as-a-freelance-web-developer",
+    title: "Redis, Pub Subs, and Message Queues",
+    date: "03-02-2026",
+    url: "https://medium.com/@parasrana579/redis-pub-subs-and-message-queues-6e0bba30a5d4",
   },
   {
-    title: "Free portfolio website template that gets you hired in 2021",
-    date: "02-08-2021",
-    url: "https://medium.com/@parasrana/free-portfolio-website-template-that-gets-you-hired-in-2021",
+    title: "Rate Limiting System Design",
+    date: "13-09-2025",
+    url: "https://medium.com/@parasrana579/rate-limiting-system-design-954636d05bc7",
   },
   {
-    title: "Ace the Javascript Interview",
-    date: "03-07-2021",
-    url: "https://medium.com/@parasrana/ace-the-javascript-interview",
+    title: "CSR vs SSR vs SSG",
+    date: "01-02-2026",
+    url: "https://medium.com/@parasrana579/csr-vs-ssr-vs-ssg-d12d0deea827",
   },
 ];

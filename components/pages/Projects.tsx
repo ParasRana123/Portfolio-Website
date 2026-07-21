@@ -1,10 +1,10 @@
 export default function Projects() {
   return (
     <div style={{ padding: "32px 0" }}>
-      <h2 className="dp-display">Projects</h2>
-
       <p className="dp-where-line">
-        Your projects will go here.
+        Ideas are easy. Building them is the fun part.
+        <br />
+        A collection of things I've built, broken, rebuilt, and shipped.
       </p>
     </div>
   );

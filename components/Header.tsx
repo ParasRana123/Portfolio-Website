@@ -1,5 +1,4 @@
-const AVATAR =
-  "https://images.unsplash.com/photo-1633332755192-727a05c4013d?w=200&h=200&fit=crop&crop=faces";
+const AVATAR = "/tools/paras.jpg";
 
 export default function Header() {
   return (
