@@ -361,3 +361,7 @@
   padding: 18px 20px;
   background: var(--surface);
 }
+
+.dp-inspiration {
+  font-family: 'Inter', sans-serif;
+}

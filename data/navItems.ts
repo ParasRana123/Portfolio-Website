@@ -1,6 +1,6 @@
 export const NAV_ITEMS = [
   "Home",
   "Projects",
-  "Inspiration",
+  "Tools",
   "Resume",
 ] as const;

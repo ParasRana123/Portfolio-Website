@@ -5,10 +5,9 @@ import WritingSection from "../WritingSection";
 export default function Home() {
   return (
     <>
-      <hr className="dp-hr" />
 
       <Introduction />
-
+      
       <hr className="dp-hr" />
 
       <WhereSection />
