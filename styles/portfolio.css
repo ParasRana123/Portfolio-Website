@@ -366,6 +366,79 @@
   font-family: 'Inter', sans-serif;
 }
 
+/* ---------- Home Page ---------- */
+
+.dp-home-page {
+  padding: 24px 0 8px;
+}
+
+/* ---------- Home Introduction ---------- */
+
+.dp-home-page .dp-intro {
+  padding: 0 0 28px;
+}
+
+.dp-home-page .dp-intro p {
+  font-family: "Inter", sans-serif;
+  font-size: 15px;
+  line-height: 1.75;
+  color: var(--ink);
+  letter-spacing: -0.01em;
+}
+
+/* ---------- Where I Am On ---------- */
+
+.dp-home-page .dp-eyebrow {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.dp-home-page .dp-where-name {
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 14.5px;
+  font-weight: 600;
+  line-height: 1.4;
+  color: var(--ink);
+  margin: 0 0 2px;
+  letter-spacing: -0.01em;
+}
+
+.dp-home-page .dp-where-line {
+  font-family: "Inter", sans-serif;
+  font-size: 14.5px;
+  line-height: 1.6;
+  color: var(--muted);
+  margin: 0;
+  letter-spacing: -0.01em;
+}
+
+/* ---------- Writing ---------- */
+
+.dp-home-writing {
+  padding: 22px 0 4px;
+}
+
+.dp-home-writing .dp-eyebrow {
+  margin-bottom: 6px;
+}
+
+.dp-home-writing .dp-writing-title {
+  font-family: "Inter", sans-serif;
+  font-size: 14.5px;
+  line-height: 1.5;
+  color: var(--ink);
+  letter-spacing: -0.01em;
+}
+
+.dp-home-writing .dp-writing-date {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 11.5px;
+  color: var(--muted);
+}
+
 /* ---------- Inspiration Page ---------- */
 
 .dp-inspiration-page {
@@ -381,7 +454,7 @@
   margin: 0;
   font-size: 15px;
   line-height: 1.75;
-  color: var(--muted);
+  color: var(--ink);
   letter-spacing: -0.01em;
 }
 

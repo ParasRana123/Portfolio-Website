@@ -4,10 +4,9 @@ import WritingSection from "../WritingSection";
 
 export default function Home() {
   return (
-    <>
-
+    <div className="dp-home-page">
       <Introduction />
-      
+
       <hr className="dp-hr" />
 
       <WhereSection />
@@ -17,9 +16,9 @@ export default function Home() {
         style={{ margin: "26px 0 0" }}
       />
 
-      <div style={{ padding: "22px 0 4px" }}>
+      <div className="dp-home-writing">
         <WritingSection />
       </div>
-    </>
+    </div>
   );
 }
