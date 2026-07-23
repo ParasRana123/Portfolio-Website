@@ -17,6 +17,9 @@ const GRADIENTS = [
 // Same icon image used for every project card — swap this path for your own asset.
 const ICON_SRC = "/tools/paras.jpg";
 
+// Same GitHub profile every card's handle links to.
+const GITHUB_PROFILE_URL = "https://github.com/ParasRana123";
+
 function PlayIcon() {
   return (
     <svg
@@ -83,6 +86,15 @@ function ProjectCard({
           <span className="dp-project-title">
             {project.title}
           </span>
+
+          <a
+            href={GITHUB_PROFILE_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="dp-project-github"
+          >
+            @ParasRana123
+          </a>
         </div>
       </div>
 
@@ -140,24 +152,45 @@ function ProjectCard({
 
       {/* Footer */}
       <div className="dp-project-footer">
-        {project.website ? (
-          <a
-            href={project.website}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="dp-project-link"
-          >
-            <span>Visit site</span>
+        <div className="dp-project-footer-links">
+          {project.website ? (
+            <a
+              href={project.website}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="dp-project-link"
+            >
+              <span>Visit site</span>
 
-            <span className="dp-project-link-arrow">
-              ↗
+              <span className="dp-project-link-arrow">
+                ↗
+              </span>
+            </a>
+          ) : (
+            <span className="dp-project-link dp-project-link--placeholder">
+              Visit site
             </span>
-          </a>
-        ) : (
-          <span className="dp-project-link dp-project-link--placeholder">
-            Visit site
-          </span>
-        )}
+          )}
+
+          {project.code ? (
+            <a
+              href={project.code}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="dp-project-link"
+            >
+              <span>View code</span>
+
+              <span className="dp-project-link-arrow">
+                ↗
+              </span>
+            </a>
+          ) : (
+            <span className="dp-project-link dp-project-link--placeholder">
+              View code
+            </span>
+          )}
+        </div>
       </div>
 
       <style jsx>{`
@@ -302,6 +335,38 @@ function ProjectCard({
           overflow-wrap: break-word;
 
           word-break: normal;
+        }
+
+        /* ========================================
+           GITHUB HANDLE
+        ======================================== */
+
+        .dp-project-github {
+          margin-top: 3px;
+
+          font-family: "Inter", sans-serif;
+
+          font-size: 12px;
+
+          line-height: 1.3;
+
+          color: var(--muted);
+
+          text-decoration: none;
+
+          display: block;
+
+          flex-shrink: 0;
+
+          width: fit-content;
+
+          transition: color 0.2s ease;
+        }
+
+        .dp-project-github:hover {
+          color: var(--accent);
+
+          text-decoration: underline;
         }
 
         /* ========================================
@@ -471,6 +536,14 @@ function ProjectCard({
           padding-top: 16px;
 
           flex-shrink: 0;
+        }
+
+        .dp-project-footer-links {
+          display: flex;
+
+          align-items: center;
+
+          gap: 22px;
         }
 
         .dp-project-link {
