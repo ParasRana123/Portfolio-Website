@@ -14,6 +14,9 @@ const GRADIENTS = [
   "linear-gradient(135deg, #f8b400 0%, #de5246 55%, #955ba5 100%)",
 ];
 
+// Same icon image used for every project card — swap this path for your own asset.
+const ICON_SRC = "/tools/paras.jpg";
+
 function PlayIcon() {
   return (
     <svg
@@ -69,16 +72,16 @@ function ProjectCard({
           className="dp-project-avatar"
           style={{ background: gradient }}
         >
-          {project.title.charAt(0)}
+          <img
+            src={ICON_SRC}
+            alt=""
+            className="dp-project-avatar-img"
+          />
         </div>
 
         <div className="dp-project-heading">
           <span className="dp-project-title">
             {project.title}
-          </span>
-
-          <span className="dp-project-handle">
-            personal project
           </span>
         </div>
       </div>
@@ -94,20 +97,6 @@ function ProjectCard({
       <div
         className="dp-project-media"
         style={{ background: gradient }}
-        onClick={togglePlay}
-        role="button"
-        tabIndex={0}
-        aria-label={
-          isPlaying
-            ? `Pause ${project.title} video`
-            : `Play ${project.title} video`
-        }
-        onKeyDown={(event) => {
-          if (event.key === "Enter" || event.key === " ") {
-            event.preventDefault();
-            togglePlay();
-          }
-        }}
       >
         <div className="dp-project-frame">
           <video
@@ -118,13 +107,29 @@ function ProjectCard({
             loop
             muted
             preload="metadata"
+            controls
             onPlay={() => setIsPlaying(true)}
             onPause={() => setIsPlaying(false)}
             onEnded={() => setIsPlaying(false)}
           />
 
           {!isPlaying && (
-            <div className="dp-project-play-overlay">
+            <div
+              className="dp-project-play-overlay"
+              onClick={togglePlay}
+              role="button"
+              tabIndex={0}
+              aria-label={`Play ${project.title} video`}
+              onKeyDown={(event) => {
+                if (
+                  event.key === "Enter" ||
+                  event.key === " "
+                ) {
+                  event.preventDefault();
+                  togglePlay();
+                }
+              }}
+            >
               <span className="dp-project-play-button">
                 <PlayIcon />
               </span>
@@ -164,16 +169,12 @@ function ProjectCard({
           display: flex;
           flex-direction: column;
 
-          /*
-            Fixed dimensions.
-
-            Every project card will have exactly
-            the same width and height on desktop.
-          */
-
           width: 100%;
-          max-width: 560px;
+          min-width: 0;
+          max-width: 620px;
           height: 650px;
+
+          box-sizing: border-box;
 
           padding: 28px;
 
@@ -191,15 +192,7 @@ function ProjectCard({
             transform 0.25s ease,
             border-color 0.25s ease;
 
-          /*
-            No scrolling.
-
-            Content is allowed to naturally wrap.
-          */
-
           overflow: hidden;
-
-          min-width: 0;
         }
 
         .dp-project-card:hover {
@@ -218,20 +211,13 @@ function ProjectCard({
 
         .dp-project-header {
           display: flex;
-          align-items: flex-start;
+          align-items: center;
 
           gap: 13px;
 
           margin-bottom: 16px;
 
           min-width: 0;
-
-          /*
-            Header does not shrink.
-
-            The title has enough room for
-            maximum two lines.
-          */
 
           flex-shrink: 0;
         }
@@ -252,18 +238,20 @@ function ProjectCard({
           align-items: center;
           justify-content: center;
 
-          color: #ffffff;
-
-          font-weight: 600;
-          font-size: 16px;
-
-          text-transform: uppercase;
+          overflow: hidden;
 
           box-shadow:
-            inset 0 0 0 1px
-              rgba(255, 255, 255, 0.2),
-            0 3px 8px
-              rgba(0, 0, 0, 0.12);
+            inset 0 0 0 1px rgba(255, 255, 255, 0.2),
+            0 3px 8px rgba(0, 0, 0, 0.12);
+        }
+
+        .dp-project-avatar-img {
+          width: 100%;
+          height: 100%;
+
+          object-fit: cover;
+
+          display: block;
         }
 
         /* ========================================
@@ -280,18 +268,6 @@ function ProjectCard({
           flex: 1;
 
           line-height: 1.3;
-
-          /*
-            Fixed height for the title area.
-
-            This allows:
-            - Short titles -> 1 line
-            - Longer titles -> up to 2 lines
-
-            Every card still has the same layout.
-          */
-
-          height: 48px;
         }
 
         /* ========================================
@@ -313,15 +289,6 @@ function ProjectCard({
 
           letter-spacing: -0.01em;
 
-          /*
-            Maximum 2 lines.
-
-            No ellipsis.
-
-            The title itself is never truncated
-            with "..." or text-overflow.
-          */
-
           white-space: normal;
 
           overflow: hidden;
@@ -338,43 +305,10 @@ function ProjectCard({
         }
 
         /* ========================================
-           PROJECT TYPE
-        ======================================== */
-
-        .dp-project-handle {
-          margin-top: 3px;
-
-          font-family: "Inter", sans-serif;
-
-          font-size: 12px;
-
-          line-height: 1.3;
-
-          color: var(--muted);
-
-          display: block;
-
-          flex-shrink: 0;
-        }
-
-        /* ========================================
            DESCRIPTION
         ======================================== */
 
         .dp-project-description {
-          /*
-            Fixed description area.
-
-            This gives every card the same amount
-            of vertical space before the video.
-
-            No scrolling.
-            No ellipsis.
-
-            The full description is allowed to
-            wrap naturally.
-          */
-
           min-height: 112px;
 
           margin: 0 0 20px 0;
@@ -413,18 +347,11 @@ function ProjectCard({
 
           padding: 12px;
 
-          cursor: pointer;
-
           outline: none;
 
           transition:
             transform 0.25s ease,
             box-shadow 0.25s ease;
-
-          /*
-            Video takes the available space
-            remaining inside the fixed card.
-          */
 
           flex: 1;
 
@@ -437,12 +364,6 @@ function ProjectCard({
           transform: scale(1.005);
         }
 
-        .dp-project-media:focus-visible {
-          box-shadow:
-            0 0 0 3px
-              rgba(29, 122, 224, 0.2);
-        }
-
         /* ========================================
            VIDEO FRAME
         ======================================== */
@@ -451,7 +372,6 @@ function ProjectCard({
           position: relative;
 
           width: 100%;
-
           height: 100%;
 
           min-height: 0;
@@ -463,17 +383,14 @@ function ProjectCard({
           background: #0b0b0d;
 
           box-shadow:
-            0 5px 14px
-              rgba(0, 0, 0, 0.12),
-            0 1px 3px
-              rgba(0, 0, 0, 0.15);
+            0 5px 14px rgba(0, 0, 0, 0.12),
+            0 1px 3px rgba(0, 0, 0, 0.15);
         }
 
         .dp-project-video {
           display: block;
 
           width: 100%;
-
           height: 100%;
 
           object-fit: cover;
@@ -493,40 +410,28 @@ function ProjectCard({
           display: flex;
 
           align-items: center;
-
           justify-content: center;
 
-          background:
-            rgba(0, 0, 0, 0.12);
+          background: rgba(0, 0, 0, 0.12);
 
-          pointer-events: none;
+          transition: background 0.2s ease;
 
-          transition:
-            background 0.2s ease;
-        }
-
-        .dp-project-media:hover
-          .dp-project-play-overlay {
-          background:
-            rgba(0, 0, 0, 0.18);
+          cursor: pointer;
         }
 
         .dp-project-play-button {
           width: 54px;
-
           height: 54px;
 
           border-radius: 50%;
 
-          background:
-            rgba(45, 45, 45, 0.62);
+          background: rgba(45, 45, 45, 0.62);
 
           color: #ffffff;
 
           display: flex;
 
           align-items: center;
-
           justify-content: center;
 
           padding-left: 2px;
@@ -534,22 +439,26 @@ function ProjectCard({
           backdrop-filter: blur(5px);
 
           box-shadow:
-            0 4px 12px
-              rgba(0, 0, 0, 0.2),
-            inset 0 0 0 1px
-              rgba(255, 255, 255, 0.15);
+            0 4px 12px rgba(0, 0, 0, 0.2),
+            inset 0 0 0 1px rgba(255, 255, 255, 0.15);
 
           transition:
             transform 0.2s ease,
             background 0.2s ease;
         }
 
-        .dp-project-media:hover
+        .dp-project-play-overlay:hover
           .dp-project-play-button {
           transform: scale(1.08);
 
-          background:
-            rgba(30, 30, 30, 0.78);
+          background: rgba(30, 30, 30, 0.78);
+        }
+
+        .dp-project-play-overlay:focus-visible
+          .dp-project-play-button {
+          outline: 2px solid var(--accent);
+
+          outline-offset: 4px;
         }
 
         /* ========================================
@@ -599,8 +508,7 @@ function ProjectCard({
 
           line-height: 1;
 
-          transition:
-            transform 0.2s ease;
+          transition: transform 0.2s ease;
 
           flex-shrink: 0;
         }
@@ -615,226 +523,7 @@ function ProjectCard({
 
         .dp-project-link:hover
           .dp-project-link-arrow {
-          transform:
-            translate(2px, -2px);
-        }
-
-        /* ========================================
-           PROJECTS SECTION
-        ======================================== */
-
-        .dp-projects-section {
-          padding: 32px 0 40px;
-        }
-
-        .dp-projects-container {
-          width: 100%;
-
-          max-width: 1200px;
-
-          margin: 0 auto;
-        }
-
-        .dp-projects-intro {
-          margin: 0 0 36px 0;
-
-          font-family: "Inter", sans-serif;
-
-          font-size: 15px;
-
-          line-height: 1.7;
-
-          color: var(--muted);
-        }
-
-        /* ========================================
-           PROJECT GRID
-        ======================================== */
-
-        .dp-projects-grid {
-          display: grid;
-
-          /*
-            Fixed card width.
-
-            Cards will be at least 500px wide
-            and will not become excessively wide.
-          */
-
-          grid-template-columns:
-            repeat(2, minmax(500px, 560px));
-
-          gap: 32px;
-
-          align-items: stretch;
-
-          justify-content: center;
-        }
-
-        /* ========================================
-           LARGE DESKTOP
-        ======================================== */
-
-        @media (min-width: 1400px) {
-          .dp-projects-container {
-            max-width: 1200px;
-          }
-
-          .dp-projects-grid {
-            grid-template-columns:
-              repeat(2, 560px);
-
-            gap: 32px;
-          }
-        }
-
-        /* ========================================
-           TABLET
-        ======================================== */
-
-        @media (max-width: 1100px) {
-          .dp-projects-grid {
-            grid-template-columns:
-              repeat(2, minmax(0, 1fr));
-
-            gap: 24px;
-          }
-
-          .dp-project-card {
-            height: 640px;
-          }
-        }
-
-        /* ========================================
-           SMALL TABLET
-        ======================================== */
-
-        @media (max-width: 850px) {
-          .dp-projects-grid {
-            grid-template-columns: 1fr;
-
-            max-width: 560px;
-
-            margin: 0 auto;
-          }
-
-          .dp-project-card {
-            width: 100%;
-
-            max-width: 560px;
-
-            height: 640px;
-          }
-        }
-
-        /* ========================================
-           MOBILE
-        ======================================== */
-
-        @media (max-width: 640px) {
-          .dp-projects-section {
-            padding: 28px 0 32px;
-          }
-
-          .dp-projects-container {
-            width: 100%;
-          }
-
-          .dp-projects-grid {
-            gap: 22px;
-
-            width: 100%;
-
-            max-width: 100%;
-          }
-
-          .dp-project-card {
-            width: 100%;
-
-            max-width: 100%;
-
-            height: 590px;
-
-            padding: 20px;
-
-            border-radius: 20px;
-          }
-
-          .dp-project-header {
-            gap: 11px;
-
-            margin-bottom: 14px;
-          }
-
-          .dp-project-avatar {
-            width: 42px;
-
-            height: 42px;
-
-            font-size: 15px;
-          }
-
-          .dp-project-heading {
-            height: 42px;
-          }
-
-          .dp-project-title {
-            font-size: 15px;
-
-            line-height: 1.35;
-          }
-
-          .dp-project-handle {
-            font-size: 11.5px;
-          }
-
-          .dp-project-description {
-            min-height: 100px;
-
-            margin-bottom: 16px;
-          }
-
-          .dp-project-description-text {
-            font-size: 13.5px;
-
-            line-height: 1.55;
-          }
-
-          .dp-project-media {
-            padding: 9px;
-
-            border-radius: 15px;
-          }
-
-          .dp-project-frame {
-            border-radius: 11px;
-          }
-
-          .dp-project-play-button {
-            width: 48px;
-
-            height: 48px;
-          }
-        }
-
-        /* ========================================
-           VERY SMALL MOBILE
-        ======================================== */
-
-        @media (max-width: 420px) {
-          .dp-project-card {
-            height: 570px;
-
-            padding: 18px;
-          }
-
-          .dp-project-description {
-            min-height: 94px;
-          }
-
-          .dp-project-description-text {
-            font-size: 13px;
-          }
+          transform: translate(2px, -2px);
         }
       `}</style>
     </article>
@@ -862,6 +551,231 @@ export default function Projects() {
           ))}
         </div>
       </div>
+
+      <style jsx>{`
+        /* ========================================
+           PROJECTS SECTION
+        ======================================== */
+
+        .dp-projects-section {
+          width: 125%;
+
+          margin-top: 20px;
+
+          padding: 0 0 120px;
+
+          box-sizing: border-box;
+        }
+
+        .dp-projects-container {
+          width: 100%;
+
+          max-width: 1200px;
+
+          margin: 0 auto;
+
+          box-sizing: border-box;
+        }
+
+        .dp-projects-intro {
+          margin: 0 0 40px;
+
+          font-family: "Inter", sans-serif;
+
+          font-size: 15px;
+
+          line-height: 1.7;
+
+          color: var(--muted);
+        }
+
+        /* ========================================
+           PROJECT GRID
+        ======================================== */
+
+        .dp-projects-grid {
+          display: grid;
+
+          grid-template-columns: repeat(
+            2,
+            minmax(0, 1fr)
+          );
+
+          gap: 96px 80px;
+
+          width: 100%;
+
+          align-items: stretch;
+        }
+
+        .dp-projects-grid > :global(.dp-project-card) {
+          width: 100%;
+          max-width: none;
+        }
+
+        /* ========================================
+           LARGE DESKTOP
+        ======================================== */
+
+        @media (min-width: 1400px) {
+          .dp-projects-section {
+            margin-top: 30px;
+
+            padding-bottom: 140px;
+          }
+
+          .dp-projects-intro {
+            margin-bottom: 48px;
+          }
+
+          .dp-projects-grid {
+            gap: 104px 80px;
+          }
+        }
+
+        /* ========================================
+           TABLET
+        ======================================== */
+
+        @media (max-width: 1100px) {
+          .dp-projects-section {
+            margin-top: 25px;
+
+            padding-bottom: 100px;
+          }
+
+          .dp-projects-container {
+            padding: 0 24px;
+          }
+
+          .dp-projects-intro {
+            margin-bottom: 36px;
+          }
+
+          .dp-projects-grid {
+            grid-template-columns: repeat(
+              2,
+              minmax(0, 1fr)
+            );
+
+            gap: 64px 48px;
+          }
+
+          .dp-projects-grid > :global(.dp-project-card) {
+            height: 640px;
+          }
+        }
+
+        /* ========================================
+           SMALL TABLET
+        ======================================== */
+
+        @media (max-width: 850px) {
+          .dp-projects-section {
+            margin-top: 15px;
+
+            padding-bottom: 80px;
+          }
+
+          .dp-projects-container {
+            padding: 0 20px;
+          }
+
+          .dp-projects-intro {
+            margin-bottom: 32px;
+          }
+
+          .dp-projects-grid {
+            grid-template-columns: 1fr;
+
+            width: 100%;
+
+            gap: 56px;
+
+            max-width: 620px;
+
+            margin: 0 auto;
+          }
+
+          .dp-projects-grid > :global(.dp-project-card) {
+            width: 100%;
+
+            max-width: 620px;
+
+            height: 640px;
+          }
+        }
+
+        /* ========================================
+           MOBILE
+        ======================================== */
+
+        @media (max-width: 640px) {
+          .dp-projects-section {
+            margin-top: 30px;
+
+            padding-bottom: 64px;
+          }
+
+          .dp-projects-container {
+            width: 100%;
+
+            padding: 0 16px;
+          }
+
+          .dp-projects-intro {
+            margin-bottom: 28px;
+
+            font-size: 14px;
+          }
+
+          .dp-projects-grid {
+            width: 100%;
+
+            max-width: 100%;
+
+            gap: 44px;
+          }
+
+          .dp-projects-grid > :global(.dp-project-card) {
+            width: 100%;
+
+            max-width: 100%;
+
+            height: 590px;
+
+            padding: 20px;
+
+            border-radius: 20px;
+          }
+        }
+
+        /* ========================================
+           VERY SMALL MOBILE
+        ======================================== */
+
+        @media (max-width: 420px) {
+          .dp-projects-section {
+            margin-top: 10px;
+
+            padding-bottom: 56px;
+          }
+
+          .dp-projects-container {
+            padding: 0 12px;
+          }
+
+          .dp-projects-grid {
+            gap: 36px;
+          }
+
+          .dp-projects-grid > :global(.dp-project-card) {
+            height: 570px;
+
+            padding: 18px;
+          }
+        }
+      `}</style>
     </section>
   );
 }
