@@ -652,14 +652,13 @@ export default function Projects() {
 
         .dp-projects-intro {
           margin: 0 0 40px;
+          color: var(--ink);
 
           font-family: "Inter", sans-serif;
 
           font-size: 15px;
 
           line-height: 1.7;
-
-          color: var(--muted);
         }
 
         /* ========================================

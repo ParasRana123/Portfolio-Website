@@ -9,6 +9,7 @@ import Home from "./pages/Home";
 import Projects from "./pages/Projects";
 import Tools from "./pages/Tools";
 import Resume from "./pages/Resume";
+import Achievements from "./pages/Achievements";
 
 export default function Portfolio() {
   const [dark, setDark] = useState(false);
@@ -61,6 +62,7 @@ export default function Portfolio() {
 
         {active === "Resume" && <Resume />}
 
+        {active == "Achievements" && <Achievements />}
         <hr
           className="dp-hr-dotted"
           style={{ margin: "0 0 22px" }}

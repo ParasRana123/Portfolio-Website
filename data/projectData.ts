@@ -31,7 +31,7 @@ export const PROJECTS_DATA: projectCard[] = [
     {
         title: "Celebrity Face Lookalike",
         description: "A web application that detects faces from user-uploaded images and matches them with celebrity faces using deep learning techniques.",
-        video: "/tools/videos/celeb.mp4",
+        video: "/tools/videos/celeb_match_record.mp4",
         website: "",
         code: "https://github.com/ParasRana123/CelebFacelookalike",
     },

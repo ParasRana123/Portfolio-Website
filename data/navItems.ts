@@ -3,4 +3,5 @@ export const NAV_ITEMS = [
   "Projects",
   "Tools",
   "Resume",
+  "Achievements"
 ] as const;
