@@ -45,7 +45,7 @@ export const PROJECTS_DATA: projectCard[] = [
     {
         title: "Realtime Peer Chatapp",
         description: "An anonymous peer-to-peer video & audio chat application that mimics Omegle’s core functionality. Built using WebSockets for signaling and WebRTC for real-time media communication.",
-        video: "",
+        video: "/tools/videos/omegle_record.mp4",
         website: "",
         code: "https://github.com/ParasRana123/omegle"
     }

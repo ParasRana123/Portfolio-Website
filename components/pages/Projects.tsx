@@ -623,6 +623,19 @@ export default function Projects() {
             />
           ))}
         </div>
+
+        {/* See More Button */}
+        <div className="dp-projects-see-more">
+          <a
+            href="/projects"
+            className="dp-projects-see-more-button"
+          >
+            <span>See More</span>
+            <span className="dp-projects-see-more-arrow">
+              ↗
+            </span>
+          </a>
+        </div>
       </div>
 
       <style jsx>{`
@@ -686,6 +699,79 @@ export default function Projects() {
         }
 
         /* ========================================
+           SEE MORE
+        ======================================== */
+
+        .dp-projects-see-more {
+          display: flex;
+
+          justify-content: center;
+          align-items: center;
+
+          width: 100%;
+
+          margin-top: 72px;
+        }
+
+        .dp-projects-see-more-button {
+          display: inline-flex;
+
+          align-items: center;
+          justify-content: center;
+
+          gap: 8px;
+
+          padding: 12px 22px;
+
+          border: 1px solid var(--accent);
+
+          border-radius: 999px;
+
+          background: transparent;
+
+          color: var(--accent);
+
+          font-family: "Inter", sans-serif;
+
+          font-size: 14px;
+
+          font-weight: 550;
+
+          line-height: 1;
+
+          text-decoration: none;
+
+          transition:
+            background 0.2s ease,
+            color 0.2s ease,
+            gap 0.2s ease,
+            transform 0.2s ease;
+        }
+
+        .dp-projects-see-more-arrow {
+          font-size: 16px;
+
+          line-height: 1;
+
+          transition: transform 0.2s ease;
+        }
+
+        .dp-projects-see-more-button:hover {
+          background: var(--accent);
+
+          color: var(--surface);
+
+          gap: 10px;
+
+          transform: translateY(-2px);
+        }
+
+        .dp-projects-see-more-button:hover
+          .dp-projects-see-more-arrow {
+          transform: translate(2px, -2px);
+        }
+
+        /* ========================================
            LARGE DESKTOP
         ======================================== */
 
@@ -703,6 +789,25 @@ export default function Projects() {
           .dp-projects-grid {
             gap: 104px 80px;
           }
+
+          .dp-projects-see-more {
+            margin-top: 80px;
+          }
+        }
+
+        /* ========================================
+           DESKTOP / LAPTOP RESPONSIVE
+        ======================================== */
+
+        @media (max-width: 1399px) {
+          .dp-projects-section {
+            width: 100%;
+          }
+
+          .dp-projects-container {
+            width: 100%;
+            max-width: 1200px;
+          }
         }
 
         /* ========================================
@@ -711,12 +816,16 @@ export default function Projects() {
 
         @media (max-width: 1100px) {
           .dp-projects-section {
+            width: 100%;
+
             margin-top: 25px;
 
             padding-bottom: 100px;
           }
 
           .dp-projects-container {
+            width: 100%;
+
             padding: 0 24px;
           }
 
@@ -734,7 +843,13 @@ export default function Projects() {
           }
 
           .dp-projects-grid > :global(.dp-project-card) {
+            width: 100%;
+
             height: 640px;
+          }
+
+          .dp-projects-see-more {
+            margin-top: 64px;
           }
         }
 
@@ -744,12 +859,16 @@ export default function Projects() {
 
         @media (max-width: 850px) {
           .dp-projects-section {
+            width: 100%;
+
             margin-top: 15px;
 
             padding-bottom: 80px;
           }
 
           .dp-projects-container {
+            width: 100%;
+
             padding: 0 20px;
           }
 
@@ -776,6 +895,10 @@ export default function Projects() {
 
             height: 640px;
           }
+
+          .dp-projects-see-more {
+            margin-top: 56px;
+          }
         }
 
         /* ========================================
@@ -784,6 +907,8 @@ export default function Projects() {
 
         @media (max-width: 640px) {
           .dp-projects-section {
+            width: 100%;
+
             margin-top: 30px;
 
             padding-bottom: 64px;
@@ -820,6 +945,16 @@ export default function Projects() {
 
             border-radius: 20px;
           }
+
+          .dp-projects-see-more {
+            margin-top: 44px;
+          }
+
+          .dp-projects-see-more-button {
+            font-size: 13.5px;
+
+            padding: 11px 20px;
+          }
         }
 
         /* ========================================
@@ -828,23 +963,94 @@ export default function Projects() {
 
         @media (max-width: 420px) {
           .dp-projects-section {
+            width: 100%;
+
             margin-top: 10px;
 
             padding-bottom: 56px;
           }
 
           .dp-projects-container {
+            width: 100%;
+
             padding: 0 12px;
           }
 
           .dp-projects-grid {
+            width: 100%;
+
             gap: 36px;
           }
 
           .dp-projects-grid > :global(.dp-project-card) {
+            width: 100%;
+
+            max-width: 100%;
+
             height: 570px;
 
             padding: 18px;
+          }
+
+          .dp-projects-see-more {
+            margin-top: 36px;
+          }
+        }
+
+        /* ========================================
+           EXTRA SMALL DEVICES
+        ======================================== */
+
+        @media (max-width: 360px) {
+          .dp-projects-container {
+            padding: 0 10px;
+          }
+
+          .dp-projects-grid {
+            gap: 30px;
+          }
+
+          .dp-projects-grid > :global(.dp-project-card) {
+            height: 550px;
+
+            padding: 16px;
+
+            border-radius: 18px;
+          }
+
+          .dp-project-header {
+            gap: 10px;
+          }
+
+          .dp-project-avatar {
+            width: 44px;
+            height: 44px;
+          }
+
+          .dp-project-title {
+            font-size: 15px;
+          }
+
+          .dp-project-description-text {
+            font-size: 13px;
+          }
+
+          .dp-project-footer-links {
+            gap: 16px;
+          }
+
+          .dp-project-link {
+            font-size: 13px;
+          }
+
+          .dp-projects-see-more {
+            margin-top: 30px;
+          }
+
+          .dp-projects-see-more-button {
+            font-size: 13px;
+
+            padding: 10px 18px;
           }
         }
       `}</style>
