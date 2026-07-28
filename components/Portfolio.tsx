@@ -10,6 +10,7 @@ import Projects from "./pages/Projects";
 import Tools from "./pages/Tools";
 import Resume from "./pages/Resume";
 import Achievements from "./pages/Achievements";
+import Contact from "./pages/Contact";
 
 export default function Portfolio() {
   const [dark, setDark] = useState(false);
@@ -60,7 +61,7 @@ export default function Portfolio() {
 
         {active === "Tools" && <Tools />}
 
-        {active === "Resume" && <Resume />}
+        {active === "Contact" && <Contact />}
 
         {active == "Achievements" && <Achievements />}
         <hr

@@ -1,10 +1,10 @@
-export default function Resume() {
+export default function Contact() {
   return (
     <div style={{ padding: "32px 0" }}>
-      <h2 className="dp-display">Resume</h2>
+      <h2 className="dp-display">Contact</h2>
 
       <p className="dp-where-line">
-        Resume content goes here.
+        Contact Info goes here.
       </p>
     </div>
   );

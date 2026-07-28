@@ -1,35 +1,6 @@
+import { ACHIEVEMENTS_DATA } from "@/data/achievementsData";
+
 export default function Achievements() {
-  const achievements = [
-    {
-      number: "01",
-      title: "Competitive Programming",
-      points: [
-        "Ranked 125th globally among 41,000+ participants in CodeChef Starters 227.",
-        "Achieved Global Rank 283 and All India Rank 67 among 35,000+ participants in LeetCode Biweekly Contest 180.",
-      ],
-      highlight: "Top Global Ranks",
-    },
-    {
-      number: "02",
-      title: "Coding Profiles",
-      points: [
-        "Reached Guardian tier on LeetCode with a 2100+ rating.",
-        "Achieved 3-Star on CodeChef with a 1700+ rating.",
-        "Earned 3-Star C++ and 4-Star DSA badges on HackerRank.",
-        "Solved 1200+ problems across competitive programming platforms.",
-      ],
-      highlight: "1200+ Problems Solved",
-    },
-    {
-      number: "03",
-      title: "National Hackathon Finalist",
-      points: [
-        "Selected as a National Hackathon Finalist at a competition hosted by IIT Guwahati.",
-        "Competed against teams from top engineering institutions across India.",
-      ],
-      highlight: "IIT Guwahati",
-    },
-  ];
 
   return (
     <section className="dp-achievements-section">
@@ -44,7 +15,7 @@ export default function Achievements() {
 
         {/* Achievement Cards */}
         <div className="dp-achievements-grid">
-          {achievements.map((achievement) => (
+          {ACHIEVEMENTS_DATA.map((achievement) => (
             <article
               key={achievement.number}
               className="dp-achievement-card"
@@ -64,9 +35,13 @@ export default function Achievements() {
                   {achievement.title}
                 </h3>
 
-                <div className="dp-achievement-highlight">
-                  {achievement.highlight}
-                </div>
+             <div className="dp-achievement-highlights">
+                {achievement.highlights.map((item, index) => (
+              <div key={index} className="dp-achievement-highlight">
+                  {item}
+              </div>
+              ))}
+              </div>
 
                 <ul className="dp-achievement-points">
                   {achievement.points.map((point, index) => (
@@ -86,6 +61,12 @@ export default function Achievements() {
         /* ========================================
            ACHIEVEMENTS SECTION
         ======================================== */
+
+        .dp-achievement-highlights {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
 
         .dp-achievements-section {
           width: 100%;
@@ -154,7 +135,7 @@ export default function Achievements() {
 
           line-height: 1.7;
 
-          color: var(--muted);
+          color: var(--ink);
         }
 
         /* ========================================
