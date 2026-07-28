@@ -648,7 +648,6 @@ export default function Projects() {
 
           margin-top: 20px;
 
-          padding: 0 0 120px;
 
           box-sizing: border-box;
         }

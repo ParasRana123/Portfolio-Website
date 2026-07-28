@@ -71,7 +71,7 @@ export default function Achievements() {
         .dp-achievements-section {
           width: 100%;
 
-          padding: 32px 0 40px;
+          
         }
 
         .dp-achievements-container {
