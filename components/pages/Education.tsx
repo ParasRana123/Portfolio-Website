@@ -4,18 +4,7 @@ export default function Education() {
   return (
     <section className="dp-education-section">
       <div className="dp-education-container">
-
-        {/* Section Header */}
         <div className="dp-education-intro">
-
-          <p className="dp-education-eyebrow">
-            Academic Journey
-          </p>
-
-          <h2 className="dp-education-title">
-            Education
-          </h2>
-
           <p className="dp-education-subtitle">
             My academic background and learning journey that built my
             foundation in computer science, software development, and
@@ -23,7 +12,6 @@ export default function Education() {
           </p>
 
         </div>
-
 
         {/* Education Cards */}
         <div className="dp-education-list">
@@ -162,8 +150,6 @@ export default function Education() {
         .dp-education-section {
 
           width:100%;
-
-          padding:32px 0 40px;
 
         }
 
