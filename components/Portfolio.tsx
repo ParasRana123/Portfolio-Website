@@ -3,10 +3,10 @@
 import { useEffect, useRef, useState } from "react";
 import Header from "./Header";
 import Navbar from "./Navbar";
+import Footer from "./Footer";
 import Home from "./pages/Home";
 import Projects from "./pages/Projects";
 import Tools from "./pages/Tools";
-import Resume from "./pages/Resume";
 import Achievements from "./pages/Achievements";
 import Education from "./pages/Education";
 
@@ -144,22 +144,13 @@ export default function Portfolio() {
         {active === "Education" && <Education />}
 
         {active == "Achievements" && <Achievements />}
+
         <hr
           className="dp-hr-dotted"
           style={{ margin: "0 0 22px" }}
         />
 
-        <p
-          className="dp-mono"
-          style={{
-            fontSize: 11,
-            color: "var(--muted)",
-            letterSpacing: "0.04em",
-            margin: 0,
-          }}
-        >
-          © {new Date().getFullYear()} PARAS RANA
-        </p>
+        <Footer active={active} setActive={setActive} />
       </div>
     </div>
   );
