@@ -627,10 +627,12 @@ export default function Projects() {
         {/* See More Button */}
         <div className="dp-projects-see-more">
           <a
-            href="/projects"
+            href="https://github.com/ParasRana123/"
+            target="_blank"
+            rel="noopener noreferrer"
             className="dp-projects-see-more-button"
           >
-            <span>See More</span>
+            <span>View More on Github</span>
             <span className="dp-projects-see-more-arrow">
               ↗
             </span>
