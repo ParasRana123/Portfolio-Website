@@ -1,462 +1,232 @@
-import { ACHIEVEMENTS_DATA } from "@/data/achievementsData";
+import { RATINGS_DATA, TOTAL_PROBLEMS_SOLVED } from "@/data/ratingsData";
 
-export default function Achievements() {
-
+export default function Ratings() {
   return (
-    <section className="dp-achievements-section">
-      <div className="dp-achievements-container">
-        {/* Section Header */}
-        <div className="dp-achievements-intro">
-          <p className="dp-achievements-subtitle">
-            A few milestones from my journey in competitive programming,
-            problem solving, and hackathons.
-          </p>
-        </div>
-
-        {/* Achievement Cards */}
-        <div className="dp-achievements-grid">
-          {ACHIEVEMENTS_DATA.map((achievement) => (
+    <section className="dp-ratings-section">
+      <div className="dp-ratings-container">
+        {/* Rating Cards */}
+        <div className="dp-ratings-grid">
+          {RATINGS_DATA.map((item) => (
             <article
-              key={achievement.number}
-              className="dp-achievement-card"
+              key={item.id}
+              className="dp-rating-card"
+              style={{ "--card-accent": item.accent }}
             >
               {/* Top Row */}
-              <div className="dp-achievement-top">
-                <span className="dp-achievement-number">
-                  {achievement.number}
-                </span>
-
-                <span className="dp-achievement-line" />
+              <div className="dp-rating-top">
+                <span className="dp-rating-platform">{item.platform}</span>
+                <span className="dp-rating-badge">{item.badge}</span>
               </div>
 
-              {/* Content */}
-              <div className="dp-achievement-content">
-                <h3 className="dp-achievement-title">
-                  {achievement.title}
-                </h3>
+              {/* Rating Number */}
+              <div className="dp-rating-number">{item.rating}</div>
 
-             <div className="dp-achievement-highlights">
-                {achievement.highlights.map((item, index) => (
-              <div key={index} className="dp-achievement-highlight">
-                  {item}
-              </div>
-              ))}
-              </div>
+              {/* Subtitle */}
+              <div className="dp-rating-subtitle">{item.subtitle}</div>
 
-                <ul className="dp-achievement-points">
-                  {achievement.points.map((point, index) => (
-                    <li key={index}>{point}</li>
-                  ))}
-                </ul>
-              </div>
+              {/* Profile Link */}
+              <a
+                href={item.profileUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="dp-rating-link"
+              >
+                View Profile →
+              </a>
 
-              {/* Bottom Accent */}
-              <div className="dp-achievement-accent" />
+              {/* Progress Bar */}
+              <div className="dp-rating-bar-track">
+                <div
+                  className="dp-rating-bar-fill"
+                  style={{ width: `${item.progress}%` }}
+                />
+              </div>
             </article>
           ))}
+        </div>
+
+        {/* Total Problems Solved */}
+        <div className="dp-total-solved">
+          <span className="dp-total-label">total_problems_solved</span>
+          <span className="dp-total-chevron">&gt;</span>
+          <span className="dp-total-value">{TOTAL_PROBLEMS_SOLVED}</span>
         </div>
       </div>
 
       <style jsx>{`
         /* ========================================
-           ACHIEVEMENTS SECTION
+           RATINGS SECTION
         ======================================== */
 
-        .dp-achievement-highlights {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 6px;
+        .dp-ratings-section {
+          width: 100%;
         }
 
-        .dp-achievements-section {
+        .dp-ratings-container {
           width: 100%;
-
-          
-        }
-
-        .dp-achievements-container {
-          width: 100%;
-
-          max-width: 1200px;
-
+          max-width: 700px;
           margin: 0 auto;
         }
 
         /* ========================================
-           SECTION INTRO
+           RATINGS GRID
         ======================================== */
 
-        .dp-achievements-intro {
-          margin: 0 0 52px 0;
-        }
-
-        .dp-achievements-eyebrow {
-          margin: 0 0 10px 0;
-
-          font-family: "Inter", sans-serif;
-
-          font-size: 12px;
-
-          font-weight: 600;
-
-          line-height: 1.4;
-
-          letter-spacing: 0.18em;
-
-          text-transform: uppercase;
-
-          color: var(--accent);
-        }
-
-        .dp-achievements-title {
-          margin: 0;
-
-          font-family: "Space Grotesk", sans-serif;
-
-          font-size: 42px;
-
-          font-weight: 600;
-
-          line-height: 1.15;
-
-          letter-spacing: -0.035em;
-
-          color: var(--ink);
-        }
-
-        .dp-achievements-subtitle {
-          max-width: 650px;
-
-          margin: 16px 0 0 0;
-
-          font-family: "Inter", sans-serif;
-
-          font-size: 15px;
-
-          line-height: 1.7;
-
-          color: var(--ink);
-        }
-
-        /* ========================================
-           ACHIEVEMENT GRID
-        ======================================== */
-
-        .dp-achievements-grid {
+        .dp-ratings-grid {
           display: grid;
-
           grid-template-columns: 1fr;
-
-          gap: 32px;
-
+          gap: 20px;
           width: 100%;
         }
 
         /* ========================================
-           ACHIEVEMENT CARD
+           RATING CARD
         ======================================== */
 
-        .dp-achievement-card {
+        .dp-rating-card {
           position: relative;
-
           display: flex;
-
           flex-direction: column;
-
-          width: 100%;
-
           min-width: 0;
-
-          padding: 32px;
-
-          overflow: hidden;
-
-          border-radius: 22px;
-
-          border: 1px solid var(--hairline);
-
-          background: var(--surface);
-
-          box-shadow:
-            0 2px 5px rgba(0, 0, 0, 0.025),
-            0 8px 24px rgba(0, 0, 0, 0.035);
-
+          padding: 24px;
+          border-radius: 16px;
+          border: 1px solid var(--hairline, rgba(255, 255, 255, 0.08));
+          background: var(--surface, rgba(255, 255, 255, 0.02));
           transition:
             transform 0.25s ease,
-            box-shadow 0.25s ease,
-            border-color 0.25s ease;
+            border-color 0.25s ease,
+            box-shadow 0.25s ease;
         }
 
-        .dp-achievement-card::before {
-          content: "";
-
-          position: absolute;
-
-          top: -80px;
-
-          right: -80px;
-
-          width: 180px;
-
-          height: 180px;
-
-          border-radius: 50%;
-
-          background: var(--accent);
-
-          opacity: 0.035;
-
-          filter: blur(40px);
-
-          pointer-events: none;
-
-          transition:
-            opacity 0.3s ease,
-            transform 0.3s ease;
-        }
-
-        .dp-achievement-card:hover {
+        .dp-rating-card:hover {
           transform: translateY(-4px);
-
-          border-color: var(--accent);
-
-          box-shadow:
-            0 4px 10px rgba(0, 0, 0, 0.04),
-            0 14px 34px rgba(0, 0, 0, 0.08);
-        }
-
-        .dp-achievement-card:hover::before {
-          opacity: 0.08;
-
-          transform: scale(1.15);
+          border-color: color-mix(in srgb, var(--card-accent) 40%, transparent);
+          box-shadow: 0 12px 28px rgba(0, 0, 0, 0.25);
         }
 
         /* ========================================
            TOP ROW
         ======================================== */
 
-        .dp-achievement-top {
-          position: relative;
-
+        .dp-rating-top {
           display: flex;
-
           align-items: center;
-
-          gap: 18px;
-
-          margin-bottom: 32px;
+          justify-content: space-between;
+          margin-bottom: 18px;
         }
 
-        .dp-achievement-number {
-          flex-shrink: 0;
-
-          font-family: "Space Grotesk", sans-serif;
-
+        .dp-rating-platform {
+          font-family: "Space Mono", "Courier New", monospace;
           font-size: 13px;
-
           font-weight: 600;
-
-          line-height: 1;
-
-          letter-spacing: 0.12em;
-
-          color: var(--muted);
+          letter-spacing: 0.08em;
+          color: var(--muted, #8a8f98);
         }
 
-        .dp-achievement-line {
-          width: 54px;
-
-          height: 1px;
-
-          background:
-            linear-gradient(
-              to right,
-              var(--accent),
-              transparent
-            );
-
-          opacity: 0.5;
-        }
-
-        /* ========================================
-           CONTENT
-        ======================================== */
-
-        .dp-achievement-content {
-          position: relative;
-
-          display: flex;
-
-          flex-direction: column;
-        }
-
-        .dp-achievement-title {
-          margin: 0;
-
-          font-family: "Space Grotesk", sans-serif;
-
-          font-size: 22px;
-
-          font-weight: 600;
-
-          line-height: 1.3;
-
-          letter-spacing: -0.02em;
-
-          color: var(--ink);
-
-          transition:
-            color 0.25s ease;
-        }
-
-        .dp-achievement-card:hover
-          .dp-achievement-title {
-          color: var(--accent);
-        }
-
-        /* ========================================
-           HIGHLIGHT
-        ======================================== */
-
-        .dp-achievement-highlight {
-          align-self: flex-start;
-
-          margin-top: 16px;
-
-          padding: 6px 11px;
-
+        .dp-rating-badge {
+          padding: 4px 10px;
           border-radius: 999px;
-
-          border: 1px solid var(--hairline);
-
-          background: color-mix(
-            in srgb,
-            var(--accent) 7%,
-            transparent
-          );
-
+          border: 1px solid color-mix(in srgb, var(--card-accent) 45%, transparent);
+          background: color-mix(in srgb, var(--card-accent) 12%, transparent);
           font-family: "Inter", sans-serif;
-
           font-size: 11px;
-
           font-weight: 600;
-
-          line-height: 1.4;
-
-          color: var(--accent);
-
+          color: var(--card-accent);
           white-space: nowrap;
         }
 
         /* ========================================
-           POINTS
+           RATING NUMBER
         ======================================== */
 
-        .dp-achievement-points {
-          display: flex;
-
-          flex-direction: column;
-
-          gap: 10px;
-
-          margin: 22px 0 0 0;
-
-          padding: 0 0 0 20px;
-
-          font-family: "Inter", sans-serif;
-
-          font-size: 14px;
-
-          line-height: 1.7;
-
-          color: var(--muted);
-
-          list-style-type: disc;
-
-          list-style-position: outside;
-        }
-
-        .dp-achievement-points li {
-          display: list-item;
-
-          padding-left: 4px;
-        }
-
-        .dp-achievement-points li::marker {
-          color: var(--accent);
-
-          font-size: 0.8em;
+        .dp-rating-number {
+          font-family: "Space Mono", "Courier New", monospace;
+          font-size: 42px;
+          font-weight: 700;
+          line-height: 1.1;
+          color: var(--card-accent);
+          margin-bottom: 14px;
         }
 
         /* ========================================
-           BOTTOM ACCENT
+           SUBTITLE
         ======================================== */
 
-        .dp-achievement-accent {
-          position: absolute;
-
-          bottom: 0;
-
-          left: 0;
-
-          width: 0;
-
-          height: 2px;
-
-          background:
-            linear-gradient(
-              to right,
-              var(--accent),
-              transparent
-            );
-
-          transition:
-            width 0.35s ease;
+        .dp-rating-subtitle {
+          font-family: "Space Mono", "Courier New", monospace;
+          font-size: 13px;
+          line-height: 1.5;
+          color: var(--muted, #8a8f98);
+          margin-bottom: 14px;
         }
 
-        .dp-achievement-card:hover
-          .dp-achievement-accent {
+        /* ========================================
+           PROFILE LINK
+        ======================================== */
+
+        .dp-rating-link {
+          font-family: "Space Mono", "Courier New", monospace;
+          font-size: 13px;
+          color: var(--muted, #8a8f98);
+          text-decoration: none;
+          margin-bottom: 14px;
+          transition: color 0.2s ease;
+        }
+
+        .dp-rating-link:hover {
+          color: var(--card-accent);
+        }
+
+        /* ========================================
+           PROGRESS BAR
+        ======================================== */
+
+        .dp-rating-bar-track {
           width: 100%;
+          height: 4px;
+          border-radius: 999px;
+          background: rgba(255, 255, 255, 0.08);
+          overflow: hidden;
+        }
+
+        .dp-rating-bar-fill {
+          height: 100%;
+          border-radius: 999px;
+          background: var(--card-accent);
         }
 
         /* ========================================
-           LARGE DESKTOP
+           TOTAL SOLVED
         ======================================== */
 
-        @media (min-width: 1400px) {
-          .dp-achievements-container {
-            max-width: 1200px;
-          }
-
-          .dp-achievements-grid {
-            gap: 40px;
-          }
-
-          .dp-achievement-card {
-            padding: 36px;
-          }
+        .dp-total-solved {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 10px;
+          width: fit-content;
+          margin: 48px auto 0;
+          padding: 14px 28px;
+          border-radius: 12px;
+          border: 1px solid var(--hairline, rgba(255, 255, 255, 0.08));
+          background: var(--surface, rgba(255, 255, 255, 0.02));
+          font-family: "Space Mono", "Courier New", monospace;
         }
 
-        /* ========================================
-           TABLET
-        ======================================== */
+        .dp-total-label {
+          font-size: 14px;
+          color: var(--muted, #8a8f98);
+        }
 
-        @media (max-width: 1100px) {
-          .dp-achievements-grid {
-            gap: 28px;
-          }
+        .dp-total-chevron {
+          font-size: 14px;
+          color: var(--muted, #8a8f98);
+        }
 
-          .dp-achievement-card {
-            padding: 28px;
-          }
-
-          .dp-achievement-title {
-            font-size: 21px;
-          }
-
-          .dp-achievement-points {
-            font-size: 13.5px;
-          }
+        .dp-total-value {
+          font-size: 16px;
+          font-weight: 700;
+          color: #22d3ee;
         }
 
         /* ========================================
@@ -464,86 +234,13 @@ export default function Achievements() {
         ======================================== */
 
         @media (max-width: 640px) {
-          .dp-achievements-section {
-            padding: 28px 0 32px;
+          .dp-rating-number {
+            font-size: 36px;
           }
 
-          .dp-achievements-intro {
-            margin-bottom: 40px;
-          }
-
-          .dp-achievements-title {
-            font-size: 34px;
-          }
-
-          .dp-achievements-subtitle {
-            margin-top: 14px;
-
-            font-size: 13.5px;
-
-            line-height: 1.65;
-          }
-
-          .dp-achievements-grid {
-            width: 100%;
-
-            gap: 22px;
-          }
-
-          .dp-achievement-card {
-            padding: 22px;
-
-            border-radius: 20px;
-          }
-
-          .dp-achievement-top {
-            margin-bottom: 28px;
-          }
-
-          .dp-achievement-title {
-            font-size: 19px;
-          }
-
-          .dp-achievement-highlight {
-            font-size: 10.5px;
-          }
-
-          .dp-achievement-points {
-            gap: 9px;
-
-            margin-top: 18px;
-
-            padding-left: 18px;
-
-            font-size: 13px;
-
-            line-height: 1.65;
-
-            list-style-type: disc;
-
-            list-style-position: outside;
-          }
-        }
-
-        /* ========================================
-           VERY SMALL MOBILE
-        ======================================== */
-
-        @media (max-width: 420px) {
-          .dp-achievements-title {
-            font-size: 31px;
-          }
-
-          .dp-achievement-card {
-            padding: 20px;
-          }
-
-          .dp-achievement-title {
-            font-size: 18px;
-          }
-
-          .dp-achievement-points {
-            font-size: 13px;
+          .dp-total-solved {
+            flex-wrap: wrap;
+            padding: 12px 20px;
           }
         }
       `}</style>
