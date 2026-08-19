@@ -6,6 +6,7 @@ import {
   ProjectCard as ProjectCardType,
 } from "@/data/projectData";
 import { AiOutlineGithub } from "react-icons/ai";
+import { FiExternalLink } from "react-icons/fi";
 
 const GRADIENTS = [
   "linear-gradient(135deg, #f6b93b 0%, #e1650f 45%, #6c5ce7 100%)",
@@ -153,7 +154,7 @@ function ProjectCard({
       {/* Footer */}
       <div className="dp-project-footer">
         <div className="dp-project-footer-links">
-          {project.website ? (
+          {/* {project.website ? (
             <a
               href={project.website}
               target="_blank"
@@ -170,7 +171,7 @@ function ProjectCard({
             <span className="dp-project-link dp-project-link--placeholder">
               Visit site
             </span>
-          )}
+          )} */}
 
           {project.code ? (
             <a
@@ -180,10 +181,7 @@ function ProjectCard({
               className="dp-project-link"
             >
               <span>View code</span>
-
-              <span className="dp-project-link-arrow">
-                ↗
-              </span>
+              <FiExternalLink />
             </a>
           ) : (
             <span className="dp-project-link dp-project-link--placeholder">
@@ -534,6 +532,7 @@ function ProjectCard({
           margin-top: auto;
 
           padding-top: 16px;
+          margin-left: 22px;
 
           flex-shrink: 0;
         }

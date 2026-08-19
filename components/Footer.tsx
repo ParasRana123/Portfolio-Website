@@ -1,164 +1,309 @@
 "use client";
 
+import { FiMail, FiExternalLink } from "react-icons/fi";
+import { FaGithub, FaLinkedin } from "react-icons/fa";
+
 type FooterProps = {
-  active: string;
-  setActive: (page: string) => void;
+  active?: string;
+  setActive?: (page: string) => void;
 };
 
-const navLinks = ["Home", "Projects", "Tools", "Education", "Achievements"];
-
-const socialLinks = [
-  { label: "GitHub", href: "https://github.com/" },
-  { label: "LinkedIn", href: "https://linkedin.com/" },
-  { label: "Email", href: "mailto:hello@example.com" },
+const CONTACT_LINKS = [
+  {
+    label: "parasrana579@gmail.com",
+    href: "mailto:parasrana579@gmail.com",
+    icon: FiMail,
+  },
+  {
+    label: "LinkedIn",
+    href: "https://www.linkedin.com/in/paras-rana-696b7731b/",
+    icon: FaLinkedin,
+  },
+  {
+    label: "GitHub",
+    href: "https://github.com/ParasRana123",
+    icon: FaGithub,
+  },
+  {
+    label: "LeetCode",
+    href: "https://leetcode.com/u/paras579/",
+    icon: FiExternalLink,
+  },
+  {
+    label: "Codechef",
+    href: "https://www.codechef.com/users/paras579",
+    icon: FiExternalLink,
+  },
 ];
 
-export default function Footer({ active, setActive }: FooterProps) {
+export default function Footer(_props: FooterProps) {
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   return (
-    <footer style={{ paddingBottom: 4 }}>
-      <style>{`
-        @keyframes dp-pulse {
-          0% { box-shadow: 0 0 0 0 var(--accent); opacity: 1; }
-          70% { box-shadow: 0 0 0 6px transparent; opacity: 0.4; }
-          100% { box-shadow: 0 0 0 0 transparent; opacity: 1; }
+    <footer className="dp-footer">
+      <div className="dp-footer-container">
+        {/* Eyebrow */}
+        {/* <p className="dp-footer-eyebrow dp-mono">// contact</p> */}
+
+        {/* Heading */}
+        <h2 className="dp-footer-heading">
+          Let&apos;s{" "}
+          <span className="dp-footer-heading-accent">Connect</span>
+        </h2>
+
+        {/* Subtitle */}
+        <p className="dp-footer-subtitle">
+          Open to internships, collaborations, and competitive
+          programming discussions.
+        </p>
+
+        {/* Contact Links */}
+        <div className="dp-footer-links">
+          {CONTACT_LINKS.map((link) => {
+            const Icon = link.icon;
+
+            return (
+              <a
+                key={link.label}
+                href={link.href}
+                target={link.href.startsWith("http") ? "_blank" : undefined}
+                rel={
+                  link.href.startsWith("http")
+                    ? "noopener noreferrer"
+                    : undefined
+                }
+                className="dp-footer-link"
+              >
+                <Icon size={13} className="dp-footer-link-icon" />
+                <span className="dp-mono">{link.label}</span>
+              </a>
+            );
+          })}
+        </div>
+
+        {/* Bottom Bar */}
+        {/* <div className="dp-footer-bottom">
+          <p className="dp-mono dp-footer-copyright">
+            © {new Date().getFullYear()} PARAS RANA
+          </p>
+
+          <button
+            onClick={scrollToTop}
+            className="dp-mono dp-footer-top-btn"
+          >
+            ↑ Top
+          </button>
+        </div> */}
+      </div>
+
+      <style jsx>{`
+        /* ========================================
+           FOOTER SECTION
+        ======================================== */
+
+        .dp-footer {
+          width: 100%;
+          padding: 40px 0 16px;
+        }
+
+        .dp-footer-container {
+          width: 100%;
+          max-width: 1100px;
+          margin: 0 auto;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          text-align: center;
+        }
+
+        /* ========================================
+           EYEBROW
+        ======================================== */
+
+        .dp-footer-eyebrow {
+          margin: 0 0 8px 0;
+          font-size: 10px;
+          font-weight: 600;
+          letter-spacing: 0.16em;
+          text-transform: uppercase;
+          color: var(--accent);
+        }
+
+        /* ========================================
+           HEADING
+        ======================================== */
+
+        .dp-footer-heading {
+          margin: 0;
+          font-family: "Space Grotesk", sans-serif;
+          font-size: 32px;
+          font-weight: 600;
+          letter-spacing: -0.03em;
+          line-height: 1.1;
+          color: var(--ink);
+        }
+
+        .dp-footer-heading-accent {
+          background: linear-gradient(
+            120deg,
+            var(--accent) 0%,
+            #7dd3fc 50%,
+            #c084fc 100%
+          );
+          -webkit-background-clip: text;
+          background-clip: text;
+          color: transparent;
+        }
+
+        /* ========================================
+           SUBTITLE
+        ======================================== */
+
+        .dp-footer-subtitle {
+          max-width: 420px;
+          margin: 10px 0 0 0;
+          font-family: "Inter", sans-serif;
+          font-size: 13px;
+          line-height: 1.5;
+          color: var(--muted);
+        }
+
+        /* ========================================
+           CONTACT LINKS
+        ======================================== */
+
+        .dp-footer-links {
+          display: flex;
+          flex-wrap: wrap;
+          align-items: center;
+          justify-content: center;
+          gap: 8px;
+          margin-top: 22px;
+        }
+
+        .dp-footer-link {
+          display: inline-flex;
+          align-items: center;
+          gap: 6px;
+          padding: 7px 12px;
+          border-radius: 999px;
+          border: 1px solid var(--hairline);
+          background: var(--surface);
+          font-size: 11px;
+          color: var(--ink);
+          text-decoration: none;
+          transition:
+            border-color 0.2s ease,
+            transform 0.2s ease,
+            color 0.2s ease;
+        }
+
+        .dp-footer-link-icon {
+          color: var(--accent);
+          flex-shrink: 0;
+        }
+
+        .dp-footer-link:hover {
+          border-color: var(--accent);
+          color: var(--accent);
+          transform: translateY(-1px);
+        }
+
+        /* ========================================
+           BOTTOM BAR
+        ======================================== */
+
+        .dp-footer-bottom {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          width: 100%;
+          margin-top: 30px;
+          padding-top: 12px;
+          border-top: 1px solid var(--hairline);
+        }
+
+        .dp-footer-copyright {
+          margin: 0;
+          font-size: 9px;
+          letter-spacing: 0.04em;
+          color: var(--muted);
+        }
+
+        .dp-footer-top-btn {
+          background: none;
+          border: none;
+          padding: 0;
+          font-size: 9px;
+          letter-spacing: 0.04em;
+          color: var(--muted);
+          cursor: pointer;
+          transition: color 0.2s ease;
+        }
+
+        .dp-footer-top-btn:hover {
+          color: var(--accent);
+        }
+
+        /* ========================================
+           MOBILE
+        ======================================== */
+
+        @media (max-width: 640px) {
+          .dp-footer {
+            padding: 32px 0 14px;
+          }
+
+          .dp-footer-heading {
+            font-size: 27px;
+          }
+
+          .dp-footer-subtitle {
+            max-width: 340px;
+            font-size: 12px;
+          }
+
+          .dp-footer-links {
+            gap: 7px;
+            margin-top: 18px;
+          }
+
+          .dp-footer-link {
+            padding: 6px 10px;
+            font-size: 10.5px;
+          }
+
+          .dp-footer-bottom {
+            margin-top: 24px;
+            padding-top: 10px;
+          }
+        }
+
+        /* ========================================
+           VERY SMALL SCREENS
+        ======================================== */
+
+        @media (max-width: 400px) {
+          .dp-footer-heading {
+            font-size: 25px;
+          }
+
+          .dp-footer-subtitle {
+            font-size: 11.5px;
+          }
+
+          .dp-footer-link {
+            padding: 6px 9px;
+            font-size: 10px;
+          }
+
+          .dp-footer-links {
+            max-width: 320px;
+          }
         }
       `}</style>
-
-      {/* Line 1 — identity + unique "status" touch */}
-      <div
-        style={{
-          display: "flex",
-          alignItems: "center",
-          gap: 8,
-          marginBottom: 6,
-        }}
-      >
-        <span
-          style={{
-            width: 6,
-            height: 6,
-            borderRadius: "50%",
-            background: "var(--accent)",
-            animation: "dp-pulse 1.8s ease-out infinite",
-            flexShrink: 0,
-          }}
-        />
-        <p
-          className="dp-mono"
-          style={{
-            fontSize: 11.5,
-            color: "var(--muted)",
-            letterSpacing: "0.04em",
-            margin: 0,
-          }}
-        >
-          Available for freelance & full-time roles
-        </p>
-      </div>
-
-      {/* Line 2 — quick nav + connect, inline */}
-      <div
-        style={{
-          display: "flex",
-          flexWrap: "wrap",
-          alignItems: "center",
-          gap: 6,
-          marginBottom: 6,
-          fontSize: 11.5,
-        }}
-      >
-        {navLinks.map((link, i) => (
-          <span key={link} style={{ display: "flex", alignItems: "center", gap: 6 }}>
-            <button
-              onClick={() => setActive(link)}
-              className="dp-mono"
-              style={{
-                background: "none",
-                border: "none",
-                padding: 0,
-                cursor: "pointer",
-                color: active === link ? "var(--accent)" : "var(--muted)",
-              }}
-            >
-              {link}
-            </button>
-            <span style={{ color: "var(--hairline)" }}>·</span>
-          </span>
-        ))}
-        {socialLinks.map((s, i) => (
-          <span key={s.label} style={{ display: "flex", alignItems: "center", gap: 6 }}>
-            
-            <a
-              href={s.href}
-              target={s.href.startsWith("http") ? "_blank" : undefined}
-              rel={s.href.startsWith("http") ? "noopener noreferrer" : undefined}
-              className="dp-mono"
-              style={{
-                color: "var(--muted)",
-                textDecoration: "none",
-              }}
-              onMouseEnter={(e) => {
-                (e.currentTarget as HTMLAnchorElement).style.color = "var(--accent)";
-              }}
-              onMouseLeave={(e) => {
-                (e.currentTarget as HTMLAnchorElement).style.color = "var(--muted)";
-              }}
-            >
-              {s.label}
-            </a>
-            {i < socialLinks.length - 1 && (
-              <span style={{ color: "var(--hairline)" }}>·</span>
-            )}
-          </span>
-        ))}
-      </div>
-
-      {/* Line 3 — copyright + back to top */}
-      <div
-        style={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-between",
-        }}
-      >
-        <p
-          className="dp-mono"
-          style={{
-            fontSize: 11,
-            color: "var(--muted)",
-            letterSpacing: "0.04em",
-            margin: 0,
-          }}
-        >
-          © {new Date().getFullYear()} PARAS RANA
-        </p>
-
-        <button
-          onClick={scrollToTop}
-          className="dp-mono"
-          style={{
-            background: "none",
-            border: "none",
-            padding: 0,
-            fontSize: 11,
-            letterSpacing: "0.04em",
-            color: "var(--muted)",
-            cursor: "pointer",
-          }}
-          onMouseEnter={(e) => {
-            (e.currentTarget as HTMLButtonElement).style.color = "var(--accent)";
-          }}
-          onMouseLeave={(e) => {
-            (e.currentTarget as HTMLButtonElement).style.color = "var(--muted)";
-          }}
-        >
-          ↑ Top
-        </button>
-      </div>
     </footer>
   );
 }
