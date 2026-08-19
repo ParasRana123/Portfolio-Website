@@ -5,6 +5,7 @@ import {
   PROJECTS_DATA,
   ProjectCard as ProjectCardType,
 } from "@/data/projectData";
+import { AiOutlineGithub } from "react-icons/ai";
 
 const GRADIENTS = [
   "linear-gradient(135deg, #f6b93b 0%, #e1650f 45%, #6c5ce7 100%)",
@@ -108,7 +109,6 @@ function ProjectCard({
       {/* Video */}
       <div
         className="dp-project-media"
-        style={{ background: gradient }}
       >
         <div className="dp-project-frame">
           <video
@@ -632,10 +632,8 @@ export default function Projects() {
             rel="noopener noreferrer"
             className="dp-projects-see-more-button"
           >
+            <AiOutlineGithub size={22} />
             <span>View More on Github</span>
-            <span className="dp-projects-see-more-arrow">
-              ↗
-            </span>
           </a>
         </div>
       </div>
@@ -726,7 +724,7 @@ export default function Projects() {
 
           border: 1px solid var(--accent);
 
-          border-radius: 999px;
+          border-radius: 30px;
 
           background: transparent;
 
