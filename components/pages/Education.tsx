@@ -76,11 +76,6 @@ export default function Education() {
                     <span>
                       📍 India
                     </span>
-
-                    <span className="dp-external">
-                      ↗
-                    </span>
-
                   </div>
 
 

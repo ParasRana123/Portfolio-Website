@@ -25,7 +25,7 @@ export const RATINGS_DATA: RatingPlatform[] = [
     platform: "CODECHEF",
     badge: "4 Star",
     rating: "1811",
-    subtitle: "AIR 3489",
+    subtitle: "Global #4037",
     profileUrl: "https://www.codechef.com/users/paras579",
     accent: "#f5a623",
     progress: 36,

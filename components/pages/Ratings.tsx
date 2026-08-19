@@ -46,7 +46,7 @@ export default function Ratings() {
         </div>
 
         {/* Total Problems Solved */}
-        <div className="dp-total-solved">
+        <div className="dp-total-solved" style={{ "margin-top" : "20px", "margin-bottom" : "15px" }}>
           <span className="dp-total-label">total_problems_solved</span>
           <span className="dp-total-chevron">&gt;</span>
           <span className="dp-total-value">{TOTAL_PROBLEMS_SOLVED}</span>

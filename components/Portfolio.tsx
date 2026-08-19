@@ -7,7 +7,7 @@ import Footer from "./Footer";
 import Home from "./pages/Home";
 import Projects from "./pages/Projects";
 import Tools from "./pages/Tools";
-import Achievements from "./pages/Achievements";
+import Ratings from "./pages/Ratings";
 import Education from "./pages/Education";
 
 export default function Portfolio() {
@@ -143,7 +143,7 @@ export default function Portfolio() {
 
         {active === "Education" && <Education />}
 
-        {active == "Achievements" && <Achievements />}
+        {active === "Ratings" && <Ratings />}
 
         <hr
           className="dp-hr-dotted"
