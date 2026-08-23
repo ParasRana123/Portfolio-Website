@@ -8,6 +8,8 @@ export default function Home() {
     <div className="dp-home-page">
       <Introduction />
 
+      <hr className="dp-hr" />
+
       <SpotifyRecentTracks />
 
       <hr className="dp-hr" />
