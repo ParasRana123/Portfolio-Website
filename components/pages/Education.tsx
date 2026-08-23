@@ -1,4 +1,5 @@
 import { EDUCATION_DATA } from "@/data/educationData";
+import { CalendarDays, MapPin } from "lucide-react";
 
 export default function Education() {
   return (
@@ -69,12 +70,14 @@ export default function Education() {
 
                   <div className="dp-education-meta">
 
-                    <span>
-                      📅 {education.year}
+                    <span className="dp-education-meta-item">
+                      <CalendarDays size={14} aria-hidden="true" />
+                      {education.year}
                     </span>
 
-                    <span>
-                      📍 India
+                    <span className="dp-education-meta-item">
+                      <MapPin size={14} aria-hidden="true" />
+                      India
                     </span>
                   </div>
 
@@ -90,18 +93,22 @@ export default function Education() {
 
                   <p>
 
-                    <span className="dp-highlight">
+                    <span
+                      className={
+                        "dp-education-detail-label"
+                      }
+                    >
 
-                      {education.highlights[0].includes("CGPA")
-                        ? "CGPA:"
-                        : "Percentage:"}
+                      {education.highlights[0].split(":")[0]}:
 
                     </span>{" "}
 
                     {
                       education.highlights[0]
-                        .replace("CGPA: ", "")
-                        .replace("Percentage: ", "")
+                        .split(":")
+                        .slice(1)
+                        .join(":")
+                        .trim()
                     }
 
                   </p>
@@ -362,13 +369,16 @@ export default function Education() {
           font-family:"Space Grotesk",sans-serif;
 
 
-          font-size:20px;
+          font-size:21px;
 
 
-          font-weight:650;
+          font-weight:600;
 
 
-          letter-spacing:-.015em;
+          line-height:1.3;
+
+
+          letter-spacing:-.02em;
 
 
           color:var(--ink);
@@ -378,20 +388,23 @@ export default function Education() {
         .dp-education-degree {
 
 
-          margin:10px 0 0;
+          margin:6px 0 0;
 
 
-          font-family:"Space Grotesk",sans-serif;
-          font-size:16px;
+          font-family:"Inter",sans-serif;
+          font-size:14px;
 
 
-          font-weight:600;
+          font-weight:500;
 
 
-          letter-spacing:-.01em;
+          line-height:1.55;
 
 
-          color:var(--accent);
+          letter-spacing:-.005em;
+
+
+          color:var(--muted);
 
         }
 
@@ -420,6 +433,24 @@ export default function Education() {
 
 
           white-space:nowrap;
+
+        }
+
+        .dp-education-meta-item {
+
+          display:flex;
+
+          align-items:center;
+
+          gap:6px;
+
+        }
+
+        .dp-education-meta-item svg {
+
+          flex-shrink:0;
+
+          color:var(--muted);
 
         }
 
@@ -464,6 +495,14 @@ export default function Education() {
           font-weight:600;
 
           color:var(--accent);
+
+        }
+
+        .dp-education-detail-label {
+
+          font-weight:500;
+
+          color:var(--muted);
 
         }
         /* ========================================
@@ -546,13 +585,13 @@ export default function Education() {
 
           .dp-education-institution {
 
-            font-size:19px;
+            font-size:20px;
 
           }
 
           .dp-education-degree {
 
-            font-size:15px;
+            font-size:14px;
 
           }
 
@@ -569,7 +608,7 @@ export default function Education() {
 
           .dp-education-institution {
 
-            font-size:18px;
+            font-size:19px;
 
           }
 

@@ -14,7 +14,7 @@ export const EDUCATION_DATA = [
     institution: "Yak Public School (CBSE)",
     coursework: "",
     highlights: [
-      "Percentage: 89%",
+      "Class 12 Board Percentage: 89%",
     ],
   },
   {
@@ -23,7 +23,7 @@ export const EDUCATION_DATA = [
     institution: "Atomic Energy Central School (CBSE)",
     coursework: "",
     highlights: [
-      "Percentage: 92%",
+      "Class 10 Board Percentage: 92%",
     ],
   },
 ];
