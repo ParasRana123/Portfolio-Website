@@ -13,7 +13,7 @@
 
 .dp-shell {
   width: 100%;
-  max-width: 1120px;
+  max-width: 700px;
   padding: 72px 24px 56px;
 }
 
@@ -66,6 +66,8 @@
 .dp-nav-links {
   display: flex;
   gap: 22px;
+  flex-wrap: wrap;
+  row-gap: 10px;
 }
 
 .dp-nav-btn {
@@ -373,7 +375,12 @@
 /* ---------- Home Page ---------- */
 
 .dp-home-page {
-  max-width: 640px;
+  width: 100%;
+  max-width: none;
+}
+
+.dp-home-page > section {
+  padding: 28px 0;
 }
 
 /* ---------- Home Introduction ---------- */
@@ -423,7 +430,7 @@
   display: flex;
   flex-direction: column;
   gap: 16px;
-  padding: 18px 0 22px;
+  padding: 18px 0 0;
 }
 
 /* ---------- Writing ---------- */
@@ -453,7 +460,8 @@
 /* ---------- Inspiration Page ---------- */
 
 .dp-inspiration-page {
-  max-width: 640px;
+  width: 100%;
+  max-width: none;
 }
 
 .dp-inspiration-intro {

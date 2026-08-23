@@ -203,7 +203,7 @@ function ProjectCard({
           width: 100%;
           min-width: 0;
           max-width: none;
-          min-height: 600px;
+          min-height: 520px;
 
           box-sizing: border-box;
 
@@ -643,9 +643,13 @@ export default function Projects() {
         ======================================== */
 
         .dp-projects-section {
-          width: 100%;
+          width: min(1120px, calc(100vw - 48px));
 
           margin-top: 0;
+
+          margin-left: 50%;
+
+          transform: translateX(-50%);
 
 
           box-sizing: border-box;
@@ -662,7 +666,11 @@ export default function Projects() {
         }
 
         .dp-projects-intro {
-          margin: 0 0 28px;
+          max-width: 640px;
+
+          margin: 0 auto 32px;
+
+          text-align: center;
           color: var(--ink);
 
           font-family: "Inter", sans-serif;
@@ -679,12 +687,9 @@ export default function Projects() {
         .dp-projects-grid {
           display: grid;
 
-          grid-template-columns: repeat(
-            2,
-            minmax(0, 1fr)
-          );
+          grid-template-columns: repeat(3, minmax(0, 1fr));
 
-          gap: 32px;
+          gap: 24px;
 
           width: 100%;
 
@@ -783,7 +788,7 @@ export default function Projects() {
           }
 
           .dp-projects-grid {
-            gap: 32px;
+            gap: 24px;
           }
 
           .dp-projects-see-more {
@@ -797,7 +802,7 @@ export default function Projects() {
 
         @media (max-width: 1399px) {
           .dp-projects-section {
-            width: 100%;
+            width: min(1120px, calc(100vw - 48px));
           }
 
           .dp-projects-container {
@@ -830,18 +835,15 @@ export default function Projects() {
           }
 
           .dp-projects-grid {
-            grid-template-columns: repeat(
-              2,
-              minmax(0, 1fr)
-            );
+            grid-template-columns: repeat(2, minmax(0, 1fr));
 
-            gap: 28px;
+            gap: 24px;
           }
 
           .dp-projects-grid > :global(.dp-project-card) {
             width: 100%;
 
-            min-height: 580px;
+            min-height: 540px;
             height: auto;
           }
 
@@ -856,7 +858,7 @@ export default function Projects() {
 
         @media (max-width: 850px) {
           .dp-projects-section {
-            width: 100%;
+            width: min(720px, calc(100vw - 40px));
 
             margin-top: 0;
 
@@ -878,7 +880,7 @@ export default function Projects() {
 
             width: 100%;
 
-            gap: 28px;
+            gap: 24px;
 
             max-width: 720px;
 
@@ -890,7 +892,7 @@ export default function Projects() {
 
             max-width: 720px;
 
-            min-height: 580px;
+            min-height: 540px;
             height: auto;
           }
 
@@ -906,6 +908,10 @@ export default function Projects() {
         @media (max-width: 640px) {
           .dp-projects-section {
             width: 100%;
+
+            margin-left: 0;
+
+            transform: none;
 
             padding-bottom: 64px;
           }
