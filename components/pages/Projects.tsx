@@ -666,11 +666,11 @@ export default function Projects() {
         }
 
         .dp-projects-intro {
-          max-width: 640px;
+          max-width: 700px;
 
           margin: 0 auto 32px;
 
-          text-align: center;
+          text-align: left;
           color: var(--ink);
 
           font-family: "Inter", sans-serif;

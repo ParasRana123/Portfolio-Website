@@ -42,7 +42,7 @@ export default function Footer(_props: FooterProps) {
   };
 
   return (
-    <footer className="dp-footer">
+    <footer className="dp-footer" id="contact">
       <div className="dp-footer-container">
         {/* Eyebrow */}
         {/* <p className="dp-footer-eyebrow dp-mono">// contact</p> */}

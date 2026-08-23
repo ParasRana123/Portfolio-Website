@@ -1,20 +1,21 @@
 import GithubIcon from "@/components/icons/GithubIcon";
-import { PenLine, Code2 } from "lucide-react";
+import { Code2 } from "lucide-react";
+import { FaLinkedin } from "react-icons/fa";
 
 export const WHERE_ITEMS = [
+    {
+    icon: FaLinkedin,
+    iconBg: "#0A66C2",
+    name: "LinkedIn",
+    line: "Where I share what I’m building, learning, and occasionally overthinking.",
+    href: "https://www.linkedin.com/in/paras-rana-696b7731b/",
+  },
   {
     icon: GithubIcon,
     iconBg: "#24292E",
     name: "GitHub",
     line: "Where the commits are messier than the whiteboard sketches ever were.",
     href: "https://github.com/ParasRana123/",
-  },
-  {
-    icon: PenLine,
-    iconBg: "#242424",
-    name: "Medium",
-    line: "Where I turn debugging scars into stories other people might actually enjoy.",
-    href: "https://medium.com/@parasrana579",
   },
   {
     icon: Code2,
