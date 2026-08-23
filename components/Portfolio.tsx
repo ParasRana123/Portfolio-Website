@@ -139,7 +139,7 @@ export default function Portfolio() {
 
         {active === "Projects" && <Projects />}
 
-        {active === "Tools" && <Tools />}
+        {active === "Skills" && <Tools />}
 
         {active === "Education" && <Education />}
 

@@ -2,6 +2,6 @@ export const NAV_ITEMS = [
   "Home",
   "Projects",
   "Education",
-  "Tools",
+  "Skills",
   "Ratings",
 ] as const;
