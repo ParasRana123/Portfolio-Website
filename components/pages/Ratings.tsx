@@ -1,3 +1,4 @@
+import { CSSProperties } from "react";
 import { RATINGS_DATA, TOTAL_PROBLEMS_SOLVED } from "@/data/ratingsData";
 
 export default function Ratings() {
@@ -10,7 +11,7 @@ export default function Ratings() {
             <article
               key={item.id}
               className="dp-rating-card"
-              style={{ "--card-accent": item.accent }}
+              style={{ "--card-accent": item.accent } as CSSProperties}
             >
               {/* Top Row */}
               <div className="dp-rating-top">
@@ -46,7 +47,7 @@ export default function Ratings() {
         </div>
 
         {/* Total Problems Solved */}
-        <div className="dp-total-solved" style={{ "margin-top" : "20px", "margin-bottom" : "15px" }}>
+        <div className="dp-total-solved">
           <span className="dp-total-label">total_problems_solved</span>
           <span className="dp-total-chevron">&gt;</span>
           <span className="dp-total-value">{TOTAL_PROBLEMS_SOLVED}</span>
@@ -205,7 +206,7 @@ export default function Ratings() {
           justify-content: center;
           gap: 10px;
           width: fit-content;
-          margin: 48px auto 0;
+          margin: 28px auto 0;
           padding: 14px 28px;
           border-radius: 12px;
           border: 1px solid var(--hairline, rgba(255, 255, 255, 0.08));

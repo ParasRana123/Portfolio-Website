@@ -11,10 +11,7 @@ export default function Home() {
 
       <WhereSection />
 
-      <hr
-        className="dp-hr-dotted"
-        style={{ margin: "26px 0 0" }}
-      />
+      <hr className="dp-hr-dotted" />
 
       <div className="dp-home-writing">
         <WritingSection />

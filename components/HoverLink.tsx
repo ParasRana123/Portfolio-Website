@@ -19,10 +19,7 @@ export function LinkText({
 type Platform = "Instagram" | "LinkedIn" | "Medium";
 
 interface HoverInfo {
-  icon: React.ComponentType<{
-    size?: number;
-    color?: string;
-  }>;
+  icon: React.ElementType;
   iconBg: string;
   label: string;
   tagline: string;

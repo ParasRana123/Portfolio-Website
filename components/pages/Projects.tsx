@@ -202,14 +202,14 @@ function ProjectCard({
 
           width: 100%;
           min-width: 0;
-          max-width: 620px;
-          height: 650px;
+          max-width: none;
+          min-height: 600px;
 
           box-sizing: border-box;
 
-          padding: 28px;
+          padding: 24px;
 
-          border-radius: 22px;
+          border-radius: 18px;
           border: 1px solid var(--hairline);
 
           background: var(--surface);
@@ -532,7 +532,7 @@ function ProjectCard({
           margin-top: auto;
 
           padding-top: 16px;
-          margin-left: 22px;
+          margin-left: 12px;
 
           flex-shrink: 0;
         }
@@ -643,9 +643,9 @@ export default function Projects() {
         ======================================== */
 
         .dp-projects-section {
-          width: 125%;
+          width: 100%;
 
-          margin-top: 20px;
+          margin-top: 0;
 
 
           box-sizing: border-box;
@@ -654,7 +654,7 @@ export default function Projects() {
         .dp-projects-container {
           width: 100%;
 
-          max-width: 1200px;
+          max-width: none;
 
           margin: 0 auto;
 
@@ -662,7 +662,7 @@ export default function Projects() {
         }
 
         .dp-projects-intro {
-          margin: 0 0 40px;
+          margin: 0 0 28px;
           color: var(--ink);
 
           font-family: "Inter", sans-serif;
@@ -684,7 +684,7 @@ export default function Projects() {
             minmax(0, 1fr)
           );
 
-          gap: 96px 80px;
+          gap: 32px;
 
           width: 100%;
 
@@ -775,21 +775,19 @@ export default function Projects() {
 
         @media (min-width: 1400px) {
           .dp-projects-section {
-            margin-top: 30px;
-
-            padding-bottom: 140px;
+            padding-bottom: 64px;
           }
 
           .dp-projects-intro {
-            margin-bottom: 48px;
+            margin-bottom: 28px;
           }
 
           .dp-projects-grid {
-            gap: 104px 80px;
+            gap: 32px;
           }
 
           .dp-projects-see-more {
-            margin-top: 80px;
+            margin-top: 40px;
           }
         }
 
@@ -804,7 +802,7 @@ export default function Projects() {
 
           .dp-projects-container {
             width: 100%;
-            max-width: 1200px;
+            max-width: none;
           }
         }
 
@@ -816,19 +814,19 @@ export default function Projects() {
           .dp-projects-section {
             width: 100%;
 
-            margin-top: 25px;
+            margin-top: 0;
 
-            padding-bottom: 100px;
+            padding-bottom: 56px;
           }
 
           .dp-projects-container {
             width: 100%;
 
-            padding: 0 24px;
+            padding: 0;
           }
 
           .dp-projects-intro {
-            margin-bottom: 36px;
+            margin-bottom: 28px;
           }
 
           .dp-projects-grid {
@@ -837,17 +835,18 @@ export default function Projects() {
               minmax(0, 1fr)
             );
 
-            gap: 64px 48px;
+            gap: 28px;
           }
 
           .dp-projects-grid > :global(.dp-project-card) {
             width: 100%;
 
-            height: 640px;
+            min-height: 580px;
+            height: auto;
           }
 
           .dp-projects-see-more {
-            margin-top: 64px;
+            margin-top: 40px;
           }
         }
 
@@ -859,15 +858,15 @@ export default function Projects() {
           .dp-projects-section {
             width: 100%;
 
-            margin-top: 15px;
+            margin-top: 0;
 
-            padding-bottom: 80px;
+            padding-bottom: 48px;
           }
 
           .dp-projects-container {
             width: 100%;
 
-            padding: 0 20px;
+            padding: 0;
           }
 
           .dp-projects-intro {
@@ -879,9 +878,9 @@ export default function Projects() {
 
             width: 100%;
 
-            gap: 56px;
+            gap: 28px;
 
-            max-width: 620px;
+            max-width: 720px;
 
             margin: 0 auto;
           }
@@ -889,13 +888,14 @@ export default function Projects() {
           .dp-projects-grid > :global(.dp-project-card) {
             width: 100%;
 
-            max-width: 620px;
+            max-width: 720px;
 
-            height: 640px;
+            min-height: 580px;
+            height: auto;
           }
 
           .dp-projects-see-more {
-            margin-top: 56px;
+            margin-top: 40px;
           }
         }
 
@@ -907,15 +907,13 @@ export default function Projects() {
           .dp-projects-section {
             width: 100%;
 
-            margin-top: 30px;
-
             padding-bottom: 64px;
           }
 
           .dp-projects-container {
             width: 100%;
 
-            padding: 0 16px;
+            padding: 0;
           }
 
           .dp-projects-intro {
@@ -929,7 +927,7 @@ export default function Projects() {
 
             max-width: 100%;
 
-            gap: 44px;
+            gap: 24px;
           }
 
           .dp-projects-grid > :global(.dp-project-card) {
@@ -937,15 +935,16 @@ export default function Projects() {
 
             max-width: 100%;
 
-            height: 590px;
+            min-height: 560px;
+            height: auto;
 
             padding: 20px;
 
-            border-radius: 20px;
+            border-radius: 18px;
           }
 
           .dp-projects-see-more {
-            margin-top: 44px;
+            margin-top: 32px;
           }
 
           .dp-projects-see-more-button {
@@ -963,21 +962,19 @@ export default function Projects() {
           .dp-projects-section {
             width: 100%;
 
-            margin-top: 10px;
-
             padding-bottom: 56px;
           }
 
           .dp-projects-container {
             width: 100%;
 
-            padding: 0 12px;
+            padding: 0;
           }
 
           .dp-projects-grid {
             width: 100%;
 
-            gap: 36px;
+            gap: 20px;
           }
 
           .dp-projects-grid > :global(.dp-project-card) {
@@ -985,13 +982,14 @@ export default function Projects() {
 
             max-width: 100%;
 
-            height: 570px;
+            min-height: 540px;
+            height: auto;
 
             padding: 18px;
           }
 
           .dp-projects-see-more {
-            margin-top: 36px;
+            margin-top: 28px;
           }
         }
 
@@ -1001,15 +999,16 @@ export default function Projects() {
 
         @media (max-width: 360px) {
           .dp-projects-container {
-            padding: 0 10px;
+            padding: 0;
           }
 
           .dp-projects-grid {
-            gap: 30px;
+            gap: 20px;
           }
 
           .dp-projects-grid > :global(.dp-project-card) {
-            height: 550px;
+            min-height: 520px;
+            height: auto;
 
             padding: 16px;
 
@@ -1042,7 +1041,7 @@ export default function Projects() {
           }
 
           .dp-projects-see-more {
-            margin-top: 30px;
+            margin-top: 24px;
           }
 
           .dp-projects-see-more-button {

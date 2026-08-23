@@ -105,12 +105,12 @@ export default function Footer(_props: FooterProps) {
 
         .dp-footer {
           width: 100%;
-          padding: 40px 0 16px;
+          padding: 32px 0 16px;
         }
 
         .dp-footer-container {
           width: 100%;
-          max-width: 1100px;
+          max-width: 700px;
           margin: 0 auto;
           display: flex;
           flex-direction: column;

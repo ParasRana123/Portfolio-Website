@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { CSSProperties, useEffect, useRef, useState } from "react";
 import Header from "./Header";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
@@ -103,7 +103,7 @@ export default function Portfolio() {
     setDark(value);
   };
 
-  const vars = dark
+  const vars: CSSProperties & Record<`--${string}`, string> = dark
     ? {
         "--bg": "#16150F",
         "--surface": "#1F1D16",
@@ -145,10 +145,7 @@ export default function Portfolio() {
 
         {active === "Ratings" && <Ratings />}
 
-        <hr
-          className="dp-hr-dotted"
-          style={{ margin: "0 0 22px" }}
-        />
+        <hr className="dp-hr-dotted" />
 
         <Footer active={active} setActive={setActive} />
       </div>

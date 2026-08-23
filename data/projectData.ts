@@ -1,4 +1,4 @@
-export interface projectCard {
+export interface ProjectCard {
     title: string;
     description: string;
     video: string;
@@ -6,7 +6,7 @@ export interface projectCard {
     code: string
 }
 
-export const PROJECTS_DATA: projectCard[] = [
+export const PROJECTS_DATA: ProjectCard[] = [
     {
         title: "Collaborative Music Platform",
         description: "Real-time collaborative music listening platform with synchronized playback, group chat, shared queues, and playlist recommendations. Discover friends' playlists, save favorite songs, and enjoy seamless multi-user listening sessions.",

@@ -13,7 +13,7 @@
 
 .dp-shell {
   width: 100%;
-  max-width: 640px;
+  max-width: 1120px;
   padding: 72px 24px 56px;
 }
 
@@ -219,6 +219,10 @@
   color: inherit;
 }
 
+.dp-writing-row + .dp-writing-row {
+  border-top: 1px solid var(--hairline);
+}
+
 .dp-writing-title {
   font-size: 15px;
   line-height: 1.5;
@@ -369,7 +373,7 @@
 /* ---------- Home Page ---------- */
 
 .dp-home-page {
-  /* padding: 24px 0 8px; */
+  max-width: 640px;
 }
 
 /* ---------- Home Introduction ---------- */
@@ -415,6 +419,13 @@
   letter-spacing: -0.01em;
 }
 
+.dp-where-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 18px 0 22px;
+}
+
 /* ---------- Writing ---------- */
 
 .dp-home-writing {
@@ -442,7 +453,7 @@
 /* ---------- Inspiration Page ---------- */
 
 .dp-inspiration-page {
-  /* padding: 24px 0 8px; */
+  max-width: 640px;
 }
 
 .dp-inspiration-intro {

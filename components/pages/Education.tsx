@@ -164,7 +164,7 @@ export default function Education() {
 
         .dp-education-intro {
 
-          margin-bottom:52px;
+          margin-bottom:28px;
 
         }
 
@@ -206,7 +206,7 @@ export default function Education() {
 
           max-width:650px;
 
-          margin:16px 0 0;
+          margin:0;
 
           font-family:"Inter",sans-serif;
 
@@ -229,7 +229,7 @@ export default function Education() {
 
           flex-direction:column;
 
-          gap:28px;
+          gap:20px;
 
         }
 
@@ -244,11 +244,11 @@ export default function Education() {
 
           display:flex;
 
-          gap:24px;
+          gap:20px;
 
-          padding:28px 34px;
+          padding:24px;
 
-          border-radius:22px;
+          border-radius:18px;
 
           border:1px solid var(--hairline);
 
@@ -528,7 +528,7 @@ export default function Education() {
 
             flex-direction:column;
 
-            padding:24px;
+            padding:20px;
 
           }
 
