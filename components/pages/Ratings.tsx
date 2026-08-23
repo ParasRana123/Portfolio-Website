@@ -5,6 +5,11 @@ export default function Ratings() {
   return (
     <section className="dp-ratings-section">
       <div className="dp-ratings-container">
+        <p className="dp-ratings-intro">
+          A snapshot of my competitive programming journey, built through
+          consistent problem-solving, contests, and a drive to keep improving.
+        </p>
+
         {/* Rating Cards */}
         <div className="dp-ratings-grid">
           {RATINGS_DATA.map((item) => (
@@ -69,6 +74,15 @@ export default function Ratings() {
           margin: 0 auto;
         }
 
+        .dp-ratings-intro {
+          max-width: 650px;
+          margin: 0 0 28px;
+          font-family: "Inter", sans-serif;
+          font-size: 15px;
+          line-height: 1.7;
+          color: var(--ink);
+        }
+
         /* ========================================
            RATINGS GRID
         ======================================== */
@@ -121,7 +135,7 @@ export default function Ratings() {
           font-size: 13px;
           font-weight: 600;
           letter-spacing: 0.08em;
-          color: var(--muted, #8a8f98);
+          color: var(--ink);
         }
 
         .dp-rating-badge {

@@ -10,7 +10,13 @@ export default function WhereSection() {
           const Icon = item.icon;
 
           return (
-            <div className="dp-where-row" key={item.name}>
+            <a
+              className="dp-where-row dp-where-link"
+              href={item.href}
+              key={item.name}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               <span
                 className="dp-where-icon"
                 style={{ background: item.iconBg }}
@@ -22,7 +28,7 @@ export default function WhereSection() {
                 <p className="dp-where-name">{item.name}</p>
                 <p className="dp-where-line">{item.line}</p>
               </div>
-            </div>
+            </a>
           );
         })}
       </div>

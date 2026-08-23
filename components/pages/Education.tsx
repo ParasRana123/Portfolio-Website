@@ -214,7 +214,7 @@ export default function Education() {
 
           line-height:1.7;
 
-          color:var(--muted);
+          color:var(--ink);
 
         }
 
