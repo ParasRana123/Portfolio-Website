@@ -10,7 +10,7 @@ export default function Introduction() {
       <div className="dp-intro-actions">
         <a
           className="dp-intro-action dp-intro-action--primary"
-          href="/Paras-Rana-Resume.pdf"
+          href="https://drive.google.com/file/d/1oHGxltfftvUB5vEWj_l3zU3wF3q9byDR/view?usp=sharing"
           target="_blank"
           rel="noopener noreferrer"
         >

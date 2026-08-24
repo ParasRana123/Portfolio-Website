@@ -1,7 +1,54 @@
-import { CSSProperties } from "react";
+"use client";
+
+import { CSSProperties, useEffect, useState } from "react";
 import { RATINGS_DATA, TOTAL_PROBLEMS_SOLVED } from "@/data/ratingsData";
 
 export default function Ratings() {
+  const [displayedRatings, setDisplayedRatings] = useState<number[]>(() =>
+    RATINGS_DATA.map(() => 0)
+  );
+
+  useEffect(() => {
+    const targets = RATINGS_DATA.map((item) => Number(item.rating));
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    if (reduceMotion) {
+      setDisplayedRatings(targets);
+      return;
+    }
+
+    const duration = 1900;
+    const stagger = 180;
+    let animationFrame = 0;
+    let startedAt: number | null = null;
+
+    const animate = (timestamp: number) => {
+      startedAt ??= timestamp;
+      const elapsed = timestamp - startedAt;
+      let isComplete = true;
+
+      setDisplayedRatings(
+        targets.map((target, index) => {
+          const progress = Math.max(0, Math.min(1, (elapsed - index * stagger) / duration));
+          const easedProgress =
+            progress < 0.5
+              ? 4 * progress * progress * progress
+              : 1 - Math.pow(-2 * progress + 2, 3) / 2;
+
+          if (progress < 1) isComplete = false;
+
+          return Math.round(target * easedProgress);
+        })
+      );
+
+      if (!isComplete) animationFrame = requestAnimationFrame(animate);
+    };
+
+    animationFrame = requestAnimationFrame(animate);
+
+    return () => cancelAnimationFrame(animationFrame);
+  }, []);
+
   return (
     <section className="dp-ratings-section">
       <div className="dp-ratings-container">
@@ -12,7 +59,7 @@ export default function Ratings() {
 
         {/* Rating Cards */}
         <div className="dp-ratings-grid">
-          {RATINGS_DATA.map((item) => (
+          {RATINGS_DATA.map((item, index) => (
             <article
               key={item.id}
               className="dp-rating-card"
@@ -25,7 +72,9 @@ export default function Ratings() {
               </div>
 
               {/* Rating Number */}
-              <div className="dp-rating-number">{item.rating}</div>
+              <div className="dp-rating-number" aria-label={`${item.rating} rating`}>
+                {displayedRatings[index]}
+              </div>
 
               {/* Subtitle */}
               <div className="dp-rating-subtitle">{item.subtitle}</div>
@@ -159,6 +208,7 @@ export default function Ratings() {
           font-size: 42px;
           font-weight: 700;
           line-height: 1.1;
+          font-variant-numeric: tabular-nums;
           color: var(--card-accent);
           margin-bottom: 14px;
         }

@@ -22,11 +22,15 @@ export default function Navbar({
       <div className="dp-nav-links">
         {NAV_ITEMS.map((item) => (
           <button
+            type="button"
             key={item}
             className={`dp-nav-btn ${
               active === item ? "is-active" : ""
             }`}
-            onClick={() => setActive(item)}
+            onClick={() => {
+              setActive(item);
+              window.scrollTo({ top: 0, behavior: "smooth" });
+            }}
           >
             {item}
           </button>
