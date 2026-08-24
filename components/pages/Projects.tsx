@@ -609,7 +609,7 @@ export default function Projects() {
         <p className="dp-projects-intro">
           Ideas are easy. Building them is the fun part.
           <br />
-          A collection of things I've built, broken, rebuilt,
+          A collection of things I&apos;ve built, broken, rebuilt,
           and shipped.
         </p>
 

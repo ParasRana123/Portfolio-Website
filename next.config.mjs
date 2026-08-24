@@ -10,6 +10,9 @@ export default withSentryConfig(nextConfig, {
 silent: true,
 org: "javascript-mastery",
 project: "javascript-nextjs",
+// Source-map uploads require Sentry CLI credentials. Run them only in Vercel's
+// build environment; this keeps local production builds independent of Sentry.
+dryRun: process.env.VERCEL !== "1",
 }, {
 // For all available options, see:
 // https://docs.sentry.io/platforms/javascript/guides/nextjs/manual-setup/
