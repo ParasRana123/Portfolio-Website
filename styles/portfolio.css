@@ -190,7 +190,7 @@
   color: inherit;
 }
 
-.dp-writing-row + .dp-writing-row {
+.dp-writing-row+.dp-writing-row {
   border-top: 1px solid var(--hairline);
 }
 
@@ -348,7 +348,7 @@
   max-width: none;
 }
 
-.dp-home-page > section {
+.dp-home-page>section {
   padding: 28px 0;
 }
 
@@ -632,14 +632,25 @@
   transition: background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
 }
 
-.dp-home-achievements-list li + li {
+.dp-home-achievements-list li+li {
   border-top: 1px solid var(--hairline);
 }
 
-.dp-home-achievements-list li:nth-child(1) { animation-delay: 0.08s; }
-.dp-home-achievements-list li:nth-child(2) { animation-delay: 0.16s; }
-.dp-home-achievements-list li:nth-child(3) { animation-delay: 0.24s; }
-.dp-home-achievements-list li:nth-child(4) { animation-delay: 0.32s; }
+.dp-home-achievements-list li:nth-child(1) {
+  animation-delay: 0.08s;
+}
+
+.dp-home-achievements-list li:nth-child(2) {
+  animation-delay: 0.16s;
+}
+
+.dp-home-achievements-list li:nth-child(3) {
+  animation-delay: 0.24s;
+}
+
+.dp-home-achievements-list li:nth-child(4) {
+  animation-delay: 0.32s;
+}
 
 .dp-home-achievements-list li:hover {
   border-color: var(--accent);
@@ -719,6 +730,13 @@
   border: 1px solid var(--hairline);
   border-radius: 14px;
   background: var(--surface);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.dp-skill-group:hover {
+  border-color: var(--accent);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+  transform: translateY(-2px);
 }
 
 .dp-skill-group-title {
