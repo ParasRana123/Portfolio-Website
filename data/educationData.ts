@@ -7,6 +7,7 @@ export const EDUCATION_DATA = [
     highlights: [
       "CGPA: 7.50 / 10",
     ],
+    location: "Nagpur, India",
   },
   {
     year: "2021 — 2023",
@@ -16,6 +17,7 @@ export const EDUCATION_DATA = [
     highlights: [
       "Class 12 Board Percentage: 89%",
     ],
+    location: "Mumbai, India",
   },
   {
     year: "2009 - 2021",
@@ -25,5 +27,6 @@ export const EDUCATION_DATA = [
     highlights: [
       "Class 10 Board Percentage: 92%",
     ],
+    location: "Mumbai, India",
   },
 ];

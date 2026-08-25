@@ -1,8 +1,8 @@
 const HOME_ACHIEVEMENTS = [
-  "National Hackathon Finalist — IIT Guwahati",
-  "National Hackathon Final Round — IIITM Gwalior",
   "Global Rank 125 — CodeChef Starters 227",
   "All India Rank 67 — LeetCode Biweekly Contest 180",
+  "National Hackathon Finalist — IIT Guwahati",
+  "National Hackathon Final Round — IIITM Gwalior",
 ];
 
 export default function WhereSection() {

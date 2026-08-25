@@ -69,16 +69,16 @@ export default function Education() {
 
 
                   <div className="dp-education-meta">
-
                     <span className="dp-education-meta-item">
                       <CalendarDays size={14} aria-hidden="true" />
                       {education.year}
                     </span>
-
-                    <span className="dp-education-meta-item">
-                      <MapPin size={14} aria-hidden="true" />
-                      India
-                    </span>
+                    {education.location && (
+                      <span className="dp-education-meta-item">
+                        <MapPin size={14} aria-hidden="true" />
+                        {education.location}
+                      </span>
+                    )}
                   </div>
 
 
@@ -409,31 +409,15 @@ export default function Education() {
         }
 
         .dp-education-meta {
-
-
           display:flex;
-
-
           align-items:center;
-
-
           gap:14px;
-
-
           padding-top:4px;
-
-
           font-family:"Inter",sans-serif;
-
-
           font-size:12.5px;
-
-
           color:var(--muted);
-
-
           white-space:nowrap;
-
+          flex-shrink:0;
         }
 
         .dp-education-meta-item {
@@ -572,15 +556,15 @@ export default function Education() {
           }
 
           .dp-education-header {
-
             flex-direction:column;
-
+            gap:8px;
           }
 
           .dp-education-meta {
-
             flex-wrap:wrap;
-
+            gap:8px 14px;
+            white-space:normal;
+            padding-top:0;
           }
 
           .dp-education-institution {
