@@ -3,7 +3,8 @@ export interface ProjectCard {
     description: string;
     video: string;
     website: string | null;
-    code: string
+    code: string;
+
 }
 
 export const PROJECTS_DATA: ProjectCard[] = [
@@ -12,7 +13,28 @@ export const PROJECTS_DATA: ProjectCard[] = [
         description: "Real-time collaborative music listening platform with synchronized playback, group chat, shared queues, and playlist recommendations. Discover friends' playlists, save favorite songs, and enjoy seamless multi-user listening sessions.",
         video: "https://res.cloudinary.com/d3ukbssg/video/upload/v1787560313/musor_record.mp4",
         website: "https://musor-ten.vercel.app/",
-        code: "https://github.com/ParasRana123/musor"
+        code: "https://github.com/ParasRana123/musor",
+    },
+    {
+        title: "Realtime Peer Chatapp",
+        description: "An anonymous peer-to-peer video & audio chat application that mimics Omegle’s core functionality. Built using WebSockets for signaling and WebRTC for real-time media communication.",
+        video: "https://res.cloudinary.com/d3ukbssg/video/upload/v1787673475/omegle_record.mp4",
+        website: "https://omegle-beta.vercel.app/",
+        code: "https://github.com/ParasRana123/omegle"
+    },
+    {
+        title: "Celebrity Face Lookalike",
+        description: "A web application that detects faces from user-uploaded images and matches them with celebrity faces using deep learning techniques.",
+        video: "https://res.cloudinary.com/d3ukbssg/video/upload/v1787560254/celeb_match_record.mp4",
+        website: "https://celeb-face-sable.vercel.app/",
+        code: "https://github.com/ParasRana123/CelebFacelookalike",
+    },
+    {
+        title: "Defence Portal (SIH)",
+        description: "This was build as a part of Smart India Hackathon where we tackled a defence based problem statement and made a Defence Portal for the same.",
+        video: "https://res.cloudinary.com/d3ukbssg/video/upload/v1787560336/sih_comp_record.mp4",
+        website: "https://net-gen-x.vercel.app/",
+        code: "https://github.com/ParasRana123/sih_defence",
     },
     {
         title: "Movie Recommendation Engine",
@@ -28,25 +50,4 @@ export const PROJECTS_DATA: ProjectCard[] = [
         website: "",
         code: "https://github.com/ParasRana123/NOVA",
     },
-    {
-        title: "Celebrity Face Lookalike",
-        description: "A web application that detects faces from user-uploaded images and matches them with celebrity faces using deep learning techniques.",
-        video: "https://res.cloudinary.com/d3ukbssg/video/upload/v1787560254/celeb_match_record.mp4",
-        website: "",
-        code: "https://github.com/ParasRana123/CelebFacelookalike",
-    },
-    {
-        title: "Defence Portal (SIH)",
-        description: "This was build as a part of Smart India Hackathon where we tackled a defence based problem statement and made a Defence Portal for the same.",
-        video: "https://res.cloudinary.com/d3ukbssg/video/upload/v1787560336/sih_comp_record.mp4",
-        website: "https://net-gen-x.vercel.app/",
-        code: "https://github.com/ParasRana123/sih_defence",
-    },
-    {
-        title: "Realtime Peer Chatapp",
-        description: "An anonymous peer-to-peer video & audio chat application that mimics Omegle’s core functionality. Built using WebSockets for signaling and WebRTC for real-time media communication.",
-        video: "https://res.cloudinary.com/d3ukbssg/video/upload/v1787560376/omegle_record.mp4",
-        website: "",
-        code: "https://github.com/ParasRana123/omegle"
-    }
 ]

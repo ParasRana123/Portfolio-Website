@@ -98,6 +98,19 @@ function ProjectCard({
             @ParasRana123
           </a>
         </div>
+
+        {project.website && (
+          <a
+            href={project.website}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="dp-project-live-link"
+            title="Visit Live Website"
+            aria-label={`Visit ${project.title} live website`}
+          >
+            <FiExternalLink size={15} aria-hidden="true" />
+          </a>
+        )}
       </div>
 
       {/* Description */}
@@ -154,39 +167,16 @@ function ProjectCard({
       {/* Footer */}
       <div className="dp-project-footer">
         <div className="dp-project-footer-links">
-          {/* {project.website ? (
-            <a
-              href={project.website}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="dp-project-link"
-            >
-              <span>Visit site</span>
-
-              <span className="dp-project-link-arrow">
-                ↗
-              </span>
-            </a>
-          ) : (
-            <span className="dp-project-link dp-project-link--placeholder">
-              Visit site
-            </span>
-          )} */}
-
-          {project.code ? (
+          {project.code && (
             <a
               href={project.code}
               target="_blank"
               rel="noopener noreferrer"
               className="dp-project-link"
             >
-              <span>View code</span>
-              <FiExternalLink />
+              <span>View Code</span>
+              <FiExternalLink size={14} aria-hidden="true" />
             </a>
-          ) : (
-            <span className="dp-project-link dp-project-link--placeholder">
-              View code
-            </span>
           )}
         </div>
       </div>
@@ -368,6 +358,43 @@ function ProjectCard({
         }
 
         /* ========================================
+           LIVE LINK REDIRECT BUTTON
+        ======================================== */
+
+        .dp-project-live-link {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+
+          width: 36px;
+          height: 36px;
+
+          border-radius: 11px;
+          border: 1px solid var(--hairline);
+          background: color-mix(in srgb, var(--surface) 88%, var(--hairline));
+
+          color: var(--muted);
+
+          flex-shrink: 0;
+          text-decoration: none;
+
+          transition:
+            color 0.2s ease,
+            border-color 0.2s ease,
+            background 0.2s ease,
+            transform 0.2s ease,
+            box-shadow 0.2s ease;
+        }
+
+        .dp-project-live-link:hover {
+          color: var(--accent);
+          border-color: var(--accent);
+          background: color-mix(in srgb, var(--accent) 12%, transparent);
+          transform: translate(2px, -2px);
+          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+
+        /* ========================================
            DESCRIPTION
         ======================================== */
 
@@ -520,7 +547,6 @@ function ProjectCard({
         .dp-project-play-overlay:focus-visible
           .dp-project-play-button {
           outline: 2px solid var(--accent);
-
           outline-offset: 4px;
         }
 
@@ -530,71 +556,46 @@ function ProjectCard({
 
         .dp-project-footer {
           margin-top: auto;
-
           padding-top: 16px;
           margin-left: 12px;
-
           flex-shrink: 0;
         }
 
         .dp-project-footer-links {
           display: flex;
-
           align-items: center;
-
-          gap: 22px;
+          gap: 20px;
+          flex-wrap: wrap;
         }
 
         .dp-project-link {
           display: inline-flex;
-
           align-items: center;
-
           gap: 6px;
-
           padding: 7px 0;
-
           font-family: "Inter", sans-serif;
-
           font-size: 13.5px;
-
           font-weight: 550;
-
           color: var(--accent);
-
           text-decoration: none;
-
           transition:
             color 0.2s ease,
             gap 0.2s ease;
-
           max-width: 100%;
         }
 
-        .dp-project-link--placeholder {
-          visibility: hidden;
-        }
-
-        .dp-project-link-arrow {
-          font-size: 15px;
-
-          line-height: 1;
-
-          transition: transform 0.2s ease;
-
+        .dp-project-link :global(svg) {
           flex-shrink: 0;
+          transition: transform 0.2s ease;
         }
 
         .dp-project-link:hover {
           color: var(--accent);
-
           text-decoration: none;
-
           gap: 8px;
         }
 
-        .dp-project-link:hover
-          .dp-project-link-arrow {
+        .dp-project-link:hover :global(svg) {
           transform: translate(2px, -2px);
         }
       `}</style>
@@ -650,7 +651,6 @@ export default function Projects() {
           margin-left: 50%;
 
           transform: translateX(-50%);
-
 
           box-sizing: border-box;
         }
@@ -994,6 +994,11 @@ export default function Projects() {
             padding: 18px;
           }
 
+          .dp-project-live-link {
+            width: 34px;
+            height: 34px;
+          }
+
           .dp-projects-see-more {
             margin-top: 28px;
           }
@@ -1028,6 +1033,12 @@ export default function Projects() {
           .dp-project-avatar {
             width: 44px;
             height: 44px;
+          }
+
+          .dp-project-live-link {
+            width: 32px;
+            height: 32px;
+            border-radius: 9px;
           }
 
           .dp-project-title {
