@@ -1,7 +1,11 @@
 "use client";
 
 import { CSSProperties, useEffect, useState } from "react";
-import { RATINGS_DATA, TOTAL_PROBLEMS_SOLVED } from "@/data/ratingsData";
+import {
+  RATINGS_DATA,
+  TOTAL_PROBLEMS_SOLVED,
+  TOTAL_PROBLEMS_PROFILE_URL,
+} from "@/data/ratingsData";
 
 export default function Ratings() {
   const [animationProgress, setAnimationProgress] = useState<number[]>(() =>
@@ -142,7 +146,12 @@ export default function Ratings() {
         </div>
 
         {/* Total Problems Solved */}
-        <div className="dp-total-solved">
+        <a
+          href={TOTAL_PROBLEMS_PROFILE_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="dp-total-solved"
+        >
           <span className="dp-total-label">
             total_problems_solved
           </span>
@@ -154,7 +163,7 @@ export default function Ratings() {
           <span className="dp-total-value">
             {TOTAL_PROBLEMS_SOLVED}
           </span>
-        </div>
+        </a>
       </div>
 
       <style jsx>{`
@@ -397,6 +406,20 @@ export default function Ratings() {
             "Space Mono",
             "Courier New",
             monospace;
+
+          text-decoration: none;
+          cursor: pointer;
+
+          transition:
+            transform 0.25s ease,
+            border-color 0.25s ease,
+            box-shadow 0.25s ease;
+        }
+
+        .dp-total-solved:hover {
+          transform: translateY(-3px);
+          border-color: rgba(34, 211, 238, 0.4);
+          box-shadow: 0 10px 24px rgba(0, 0, 0, 0.25), 0 0 16px rgba(34, 211, 238, 0.15);
         }
 
         .dp-total-label {

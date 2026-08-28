@@ -43,3 +43,4 @@ export const RATINGS_DATA: RatingPlatform[] = [
 ];
 
 export const TOTAL_PROBLEMS_SOLVED = "1500+";
+export const TOTAL_PROBLEMS_PROFILE_URL = "https://codolio.com/profile/_theparas_";

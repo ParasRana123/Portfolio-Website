@@ -40,14 +40,14 @@ export const PROJECTS_DATA: ProjectCard[] = [
         title: "Movie Recommendation Engine",
         description: "This system provides personalized movie recommendations, with smart search that corrects typos and suggests matches. It helps you explore top-rated films by genre and dive into detailed cast and crew information for any movie.",
         video: "https://res.cloudinary.com/d3ukbssg/video/upload/v1787560286/movie_recom_record.mp4",
-        website: "",
+        website: "https://movierecommender-navy.vercel.app/",
         code: "https://github.com/ParasRana123/Movie_Recommender"
     },
     {
         title: "Virtual Voice Assistant (NOVA)",
         description: "NOVA is your all-in-one digital sidekick that takes control, handles your hustle, and gets things done your way.",
         video: "https://res.cloudinary.com/d3ukbssg/video/upload/v1787560321/nova_record.mp4",
-        website: "",
+        website: "https://nova-inky-iota.vercel.app/",
         code: "https://github.com/ParasRana123/NOVA",
     },
 ]
