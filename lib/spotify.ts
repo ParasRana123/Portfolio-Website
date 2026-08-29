@@ -8,7 +8,7 @@ export type SpotifyTrack = {
 
 const TOKEN_URL = "https://accounts.spotify.com/api/token";
 const RECENTLY_PLAYED_URL =
-  "https://api.spotify.com/v1/me/player/recently-played?limit=15";
+  "https://api.spotify.com/v1/me/player/recently-played?limit=50";
 
 function getSpotifyConfig() {
   const clientId = process.env.SPOTIFY_CLIENT_ID;
@@ -18,6 +18,31 @@ function getSpotifyConfig() {
   if (!clientId || !clientSecret || !refreshToken) return null;
 
   return { clientId, clientSecret, refreshToken };
+}
+
+function normalizeTrackName(name: string): string {
+  return (name || "")
+    .toLowerCase()
+    .replace(
+      /\s*[\(\[](feat\.|ft\.|with|remaster|radio edit|deluxe|bonus track|single version|album version|explicit|version orchest\w*|slowed version|acoustic|live)[^\)\]]*[\)\]]/gi,
+      ""
+    )
+    .replace(
+      /\s*-\s*(feat\.|ft\.|with|remaster|radio edit|deluxe|bonus track|single version|album version|version orchest\w*|slowed version|acoustic|live).*$/gi,
+      ""
+    )
+    .replace(/[^\p{L}\p{N}\s]/gu, "")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+function getTrackDedupeKey(track: {
+  name?: string;
+  artists?: Array<{ name: string }>;
+}): string {
+  const primaryArtist = track.artists?.[0]?.name?.toLowerCase().trim() || "";
+  const cleanTitle = normalizeTrackName(track.name || "");
+  return `${cleanTitle}:::${primaryArtist}`;
 }
 
 export async function getRecentlyPlayedTracks(): Promise<SpotifyTrack[]> {
@@ -48,24 +73,34 @@ export async function getRecentlyPlayedTracks(): Promise<SpotifyTrack[]> {
   if (!recentResponse.ok) return [];
 
   const { items = [] } = await recentResponse.json();
-  const uniqueTracks = new Map<string, SpotifyTrack>();
+  const seenIds = new Set<string>();
+  const seenKeys = new Set<string>();
+  const distinctTracks: SpotifyTrack[] = [];
 
   for (const { track } of items) {
-    if (uniqueTracks.has(track.id)) continue;
+    if (!track || !track.id || !track.name) continue;
 
-    uniqueTracks.set(track.id, {
+    const trackId = track.id;
+    const dedupeKey = getTrackDedupeKey(track);
+
+    if (seenIds.has(trackId) || seenKeys.has(dedupeKey)) continue;
+
+    seenIds.add(trackId);
+    seenKeys.add(dedupeKey);
+
+    distinctTracks.push({
       id: track.id,
       title: track.name,
       artist: track.artists
-        .map((artist: { name: string }) => artist.name)
-        .join(", "),
+        ? track.artists.map((artist: { name: string }) => artist.name).join(", ")
+        : "",
       artwork:
-        track.album.images?.[1]?.url ?? track.album.images?.[0]?.url ?? null,
-      url: track.external_urls.spotify,
+        track.album?.images?.[1]?.url ?? track.album?.images?.[0]?.url ?? null,
+      url: track.external_urls?.spotify ?? "",
     });
 
-    if (uniqueTracks.size === 3) break;
+    if (distinctTracks.length === 3) break;
   }
 
-  return Array.from(uniqueTracks.values());
+  return distinctTracks;
 }
