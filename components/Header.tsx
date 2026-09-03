@@ -8,7 +8,7 @@ export default function Header() {
       <div>
         <h1 className="dp-name">Paras Rana</h1>
         <p className="dp-subtitle">
-          CS UNDERGRAD — FULL-STACK & AI/ML — MUMBAI
+          PIXELS, PACKETS &amp; PROBABILITY DISTRIBUTIONS
         </p>
       </div>
     </div>
