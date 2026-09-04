@@ -1056,18 +1056,17 @@
   flex-direction: column;
   z-index: 9999;
   overflow: hidden;
-  animation: dp-modal-appear 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation: dp-modal-fadein 0.2s ease-out forwards;
   backdrop-filter: blur(12px);
+  touch-action: none;
 }
 
-@keyframes dp-modal-appear {
+@keyframes dp-modal-fadein {
   from {
     opacity: 0;
-    transform: translateY(12px) scale(0.96);
   }
   to {
     opacity: 1;
-    transform: translateY(0) scale(1);
   }
 }
 
@@ -1076,6 +1075,7 @@
   user-select: none !important;
   box-shadow: 0 28px 60px -8px rgba(0, 0, 0, 0.55), 0 0 0 1.5px var(--accent);
   transition: none !important;
+  will-change: transform;
 }
 
 .dp-chat-modal.is-dragging * {

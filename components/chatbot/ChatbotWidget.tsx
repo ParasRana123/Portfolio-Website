@@ -30,9 +30,10 @@ export default function ChatbotWidget() {
   const [suggestions, setSuggestions] = useState<ChatSuggestion[]>(STARTER_SUGGESTIONS);
   const [copiedIndex, setCopiedIndex] = useState<number | null>(null);
 
-  // Dragging state
+  // Freeform dragging state
   const [position, setPosition] = useState<{ x: number; y: number }>({ x: 0, y: 0 });
   const [isDragging, setIsDragging] = useState(false);
+  const isDraggingRef = useRef(false);
   const dragStartRef = useRef<{ startX: number; startY: number; initialX: number; initialY: number }>({
     startX: 0,
     startY: 0,
@@ -96,11 +97,40 @@ export default function ChatbotWidget() {
     setTimeout(() => setCopiedIndex(null), 2000);
   };
 
-  // Drag Handlers
+  // Attach global window listeners for flawless dragging without drops
+  useEffect(() => {
+    const handleGlobalPointerMove = (e: PointerEvent) => {
+      if (!isDraggingRef.current) return;
+      const deltaX = e.clientX - dragStartRef.current.startX;
+      const deltaY = e.clientY - dragStartRef.current.startY;
+      setPosition({
+        x: dragStartRef.current.initialX + deltaX,
+        y: dragStartRef.current.initialY + deltaY,
+      });
+    };
+
+    const handleGlobalPointerUp = () => {
+      if (isDraggingRef.current) {
+        isDraggingRef.current = false;
+        setIsDragging(false);
+      }
+    };
+
+    window.addEventListener("pointermove", handleGlobalPointerMove, { passive: true });
+    window.addEventListener("pointerup", handleGlobalPointerUp);
+    window.addEventListener("pointercancel", handleGlobalPointerUp);
+
+    return () => {
+      window.removeEventListener("pointermove", handleGlobalPointerMove);
+      window.removeEventListener("pointerup", handleGlobalPointerUp);
+      window.removeEventListener("pointercancel", handleGlobalPointerUp);
+    };
+  }, []);
+
   const handlePointerDown = (e: React.PointerEvent<HTMLDivElement>) => {
     const target = e.target as HTMLElement;
 
-    // Ignore interactive elements so clicking them doesn't drag the modal
+    // Do not initiate drag if user clicked an interactive control or message text
     if (
       target.closest("button") ||
       target.closest("a") ||
@@ -108,11 +138,12 @@ export default function ChatbotWidget() {
       target.closest("input") ||
       target.closest(".dp-chat-suggestion-chip") ||
       target.closest(".dp-chat-copy-btn") ||
-      target.closest(".dp-chat-body")
+      target.closest(".dp-chat-bubble")
     ) {
       return;
     }
 
+    isDraggingRef.current = true;
     setIsDragging(true);
     dragStartRef.current = {
       startX: e.clientX,
@@ -120,29 +151,6 @@ export default function ChatbotWidget() {
       initialX: position.x,
       initialY: position.y,
     };
-
-    try {
-      (e.currentTarget as HTMLElement).setPointerCapture(e.pointerId);
-    } catch {}
-  };
-
-  const handlePointerMove = (e: React.PointerEvent<HTMLDivElement>) => {
-    if (!isDragging) return;
-    const deltaX = e.clientX - dragStartRef.current.startX;
-    const deltaY = e.clientY - dragStartRef.current.startY;
-    setPosition({
-      x: dragStartRef.current.initialX + deltaX,
-      y: dragStartRef.current.initialY + deltaY,
-    });
-  };
-
-  const handlePointerUp = (e: React.PointerEvent<HTMLDivElement>) => {
-    if (isDragging) {
-      setIsDragging(false);
-      try {
-        (e.currentTarget as HTMLElement).releasePointerCapture(e.pointerId);
-      } catch {}
-    }
   };
 
   const sendMessage = async (textToSend?: string) => {
@@ -315,12 +323,8 @@ export default function ChatbotWidget() {
           className={`dp-chat-modal ${isDragging ? "is-dragging" : ""}`}
           style={{
             transform: `translate3d(${position.x}px, ${position.y}px, 0)`,
-            transition: isDragging ? "none" : undefined,
           }}
           onPointerDown={handlePointerDown}
-          onPointerMove={handlePointerMove}
-          onPointerUp={handlePointerUp}
-          onPointerCancel={handlePointerUp}
           role="dialog"
           aria-label="Paras AI Chatbot"
         >
