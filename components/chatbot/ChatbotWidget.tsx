@@ -19,7 +19,7 @@ import { ChatSuggestions } from "./ChatSuggestions";
 const INITIAL_MESSAGE: ChatMessage = {
   role: "assistant",
   content:
-    "Hi there! 👋 I'm **Paras AI**, your interactive assistant for Paras Rana's portfolio.\n\nAsk me anything about Paras's **projects**, **backend & system design expertise**, **competitive programming ratings (LeetCode Guardian 2210)**, **resume**, or **contact info**!",
+    "Hello! I am **Paras AI**, your interactive assistant for Paras Rana's portfolio.\n\nAsk me anything about Paras's **projects**, **backend & system design expertise**, **competitive programming ratings (LeetCode Guardian 2210)**, **resume**, or **contact info**.",
 };
 
 export default function ChatbotWidget() {
@@ -223,7 +223,7 @@ export default function ChatbotWidget() {
         {
           role: "assistant",
           content:
-            "⚠️ Oops, I encountered a brief issue connecting to the engine. Please try again or reach out directly to Paras at **parasrana579@gmail.com**!",
+            "I encountered a brief issue connecting to the engine. Please try again or reach out directly to Paras at **parasrana579@gmail.com**.",
         },
       ]);
     } finally {

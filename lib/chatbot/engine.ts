@@ -29,6 +29,19 @@ function getGroqKey(): string | null {
 }
 
 /**
+ * Strips all emoji pictographs, variation selectors, zero-width joiners, and fancy decorative icons
+ * to ensure all responses are sleek, text-only, and executive.
+ */
+export function cleanTextOutput(text: string): string {
+  if (!text) return "";
+  return text
+    .replace(/[\p{Extended_Pictographic}\uFE0F\u200D]/gu, "")
+    .replace(/[ \t]{2,}/g, " ")
+    .replace(/\n[ \t]+/g, "\n")
+    .trim();
+}
+
+/**
  * Intelligent local fallback responder based on verified facts and intent classification.
  */
 export function generateLocalKnowledgeReply(
@@ -55,26 +68,26 @@ export function generateLocalKnowledgeReply(
     query.includes("lofi") ||
     query.includes("lo-fi")
   ) {
-    return `### 🎧 Paras's Music Taste & Spotify Habits
+    return `### Paras's Music Taste & Spotify Habits
 
-Paras is a passionate music listener and usually has tunes playing while coding, problem-solving, and brainstorming!
+Paras is an avid music listener and usually has tracks playing while coding, problem-solving, and brainstorming.
 
 **Favorite Genres & Styles:**
-- ☕ **Lo-Fi & Chillhop**: For deep-focus coding sessions and late-night debugging.
-- 🎸 **Indie Rock & Pop**: Energetic, melodic indie tracks.
-- 🎤 **Hip-Hop & Rap**: High-energy beats for momentum and flow.
-- 🌌 **Synthwave & Electronic**: Atmospheric cyberpunk vibes for systems programming.
-- 🎵 **Desi Indie & Bollywood Melodies**: Soulful acoustic and acoustic-pop tracks.
+- **Lo-Fi & Chillhop**: For deep-focus coding sessions and late-night debugging.
+- **Indie Rock & Pop**: Energetic, melodic indie tracks.
+- **Hip-Hop & Rap**: High-energy beats for momentum and flow.
+- **Synthwave & Electronic**: Atmospheric cyberpunk vibes for systems programming.
+- **Desi Indie & Bollywood Melodies**: Soulful acoustic and acoustic-pop tracks.
 
 ---
 
-### 🟢 Live Spotify Player on Portfolio
-Paras has integrated the **Spotify Web API** right on his portfolio's homepage! You can see his **live recently played tracks** in real-time and even listen along with the embedded player on the Home tab.
+### Live Spotify Player on Portfolio
+Paras has integrated the **Spotify Web API** directly onto his portfolio homepage. You can view his **live recently played tracks** in real-time and listen along with the embedded player on the Home section.
 
 ---
 
-### 🎵 The "Musor" Connection
-His love for shared music experiences led him to architect [**Musor**](${p.projects[0].demoUrl})—a full-stack, real-time collaborative music listening platform where friends can sync audio playback, control dynamic queues, and chat while listening together! ([GitHub Repository](${p.projects[0].githubUrl}))`;
+### The Musor Connection
+His passion for shared music experiences led him to architect [**Musor**](${p.projects[0].demoUrl})—a full-stack, real-time collaborative music listening platform where users synchronize audio playback, control dynamic queues, and chat while listening together ([GitHub Repository](${p.projects[0].githubUrl})).`;
   }
 
   // 2. Hobbies, Free Time & Personal Interests
@@ -88,15 +101,15 @@ His love for shared music experiences led him to architect [**Musor**](${p.proje
     query.includes("outside of code") ||
     query.includes("outside work")
   ) {
-    return `### ✨ Paras's Hobbies & Interests
+    return `### Paras's Hobbies & Interests
 
-When he's not architecting backend systems or studying at IIIT Nagpur, here is what Paras enjoys doing:
+When he is not architecting backend systems or studying at IIIT Nagpur, here is what Paras enjoys doing:
 
-- 🎧 **Music on Spotify**: Discovering new Indie, Lo-Fi, and Hip-Hop tracks (check out the live recently played widget on the homepage!).
-- 🧩 **Algorithmic Problem Solving**: Diving into competitive programming challenges on LeetCode (**Guardian 2210**) and CodeChef (**4-Star 1811**).
-- 🚀 **Building Side Projects**: Creating real-time collaborative tools like *Musor* and WebRTC applications like his *Peer Chatapp*.
-- 📝 **Technical Writing**: Writing system design deep dives on Medium about distributed queues, Redis, and rendering patterns.
-- 🏆 **Hackathons**: Competing with fellow builders in national collegiate hackathons (Finalist at IIT Guwahati & IIITM Gwalior).`;
+- **Music on Spotify**: Discovering new Indie, Lo-Fi, and Hip-Hop tracks (viewable on the live recently played widget on the homepage).
+- **Algorithmic Problem Solving**: Diving into competitive programming challenges on LeetCode (**Guardian 2210**) and CodeChef (**4-Star 1811**).
+- **Building Side Projects**: Creating real-time collaborative applications like *Musor* and WebRTC systems like his *Peer Chatapp*.
+- **Technical Writing**: Writing system design deep dives on Medium about distributed queues, Redis, and rendering patterns.
+- **Hackathons**: Competing with fellow builders in national collegiate hackathons (Finalist at IIT Guwahati & IIITM Gwalior).`;
   }
 
   // 3. Resume / CV
@@ -106,16 +119,16 @@ When he's not architecting backend systems or studying at IIIT Nagpur, here is w
     query.includes("curriculum vitae") ||
     query.includes("pdf")
   ) {
-    return `### 📄 Paras Rana's Resume
+    return `### Paras Rana's Resume
 You can view and download Paras's official up-to-date resume directly via Google Drive:
 
-👉 [**View / Download Resume (Google Drive)**](${p.contact.resumeUrl})
+- [**View / Download Resume (Google Drive)**](${p.contact.resumeUrl})
 
 **Quick Highlights from Resume:**
-- 🎓 **Education**: B.Tech in CSE at IIIT Nagpur (2023 — 2027) · CGPA: 7.50 / 10
-- 🏆 **Competitive Coding**: LeetCode Guardian (2210) · CodeChef 4-Star (1811) · 1500+ problems solved
-- 🚀 **Top Projects**: Musor (Synced Audio), Omegle Clone (WebRTC), SIH Defence Portal, Celeb Lookalike
-- ✉️ **Contact**: [${p.contact.email}](mailto:${p.contact.email}) · [LinkedIn](${p.contact.linkedin}) · [GitHub](${p.contact.github})`;
+- **Education**: B.Tech in CSE at IIIT Nagpur (2023 — 2027) · CGPA: 7.50 / 10
+- **Competitive Coding**: LeetCode Guardian (2210) · CodeChef 4-Star (1811) · 1500+ problems solved
+- **Top Projects**: Musor (Synced Audio), Omegle Clone (WebRTC), SIH Defence Portal, Celeb Lookalike
+- **Contact**: [${p.contact.email}](mailto:${p.contact.email}) · [LinkedIn](${p.contact.linkedin}) · [GitHub](${p.contact.github})`;
   }
 
   // 4. Contact / Hiring / Email / Socials
@@ -132,17 +145,17 @@ You can view and download Paras's official up-to-date resume directly via Google
     query.includes("call") ||
     query.includes("message")
   ) {
-    return `### 📬 Contact & Hiring Information
+    return `### Contact & Hiring Information
 
-Paras is actively open to **Software Engineering (SWE) internships**, **Full-Stack / Backend Engineering** positions, and collaborative tech projects!
+Paras is actively open to **Software Engineering (SWE) internships**, **Full-Stack / Backend Engineering** positions, and collaborative tech projects.
 
 Here is how you can connect with Paras directly:
-- ✉️ **Email**: [${p.contact.email}](mailto:${p.contact.email})
-- 💼 **LinkedIn**: [linkedin.com/in/paras-rana-696b7731b](${p.contact.linkedin})
-- 🐙 **GitHub**: [github.com/ParasRana123](${p.contact.github})
-- 📄 **Resume**: [View on Google Drive](${p.contact.resumeUrl})
-- 📊 **Codolio CP Profile**: [Codolio Profile](${p.contact.codolio})
-- 📍 **Location**: Nagpur (College Campus) / Mumbai (Hometown), India`;
+- **Email**: [${p.contact.email}](mailto:${p.contact.email})
+- **LinkedIn**: [${p.contact.linkedin}](${p.contact.linkedin})
+- **GitHub**: [${p.contact.github}](${p.contact.github})
+- **Resume**: [View on Google Drive](${p.contact.resumeUrl})
+- **Codolio CP Profile**: [Codolio Profile](${p.contact.codolio})
+- **Location**: Nagpur (College Campus) / Mumbai (Hometown), India`;
   }
 
   // 5. Competitive Programming & LeetCode / Ratings
@@ -159,13 +172,13 @@ Here is how you can connect with Paras directly:
     query.includes("codolio") ||
     query.includes("dsa")
   ) {
-    return `### 🏆 Competitive Programming & Problem Solving
+    return `### Competitive Programming & Problem Solving
 Paras is an avid competitive programmer with **1500+ problems solved** across platforms:
 
-- 🔴 **LeetCode**: **Guardian** (Rating: **2210**, Global Rank #8510, 1200+ solved, 150+ day streak, AIR 67 in Biweekly Contest 180) → [LeetCode Profile](${p.contact.leetcode})
-- 🟡 **CodeChef**: **4-Star** (Rating: **1811**, Global Rank 125 in Starters 227, AIR #3586) → [CodeChef Profile](${p.contact.codechef})
-- 🟣 **Codeforces**: **Pupil** (Rating: **1250**, 100+ solved) → [Codeforces Profile](${p.contact.codeforces})
-- 📊 **Codolio Unified Profile**: [Codolio Profile](${p.contact.codolio})
+- **LeetCode**: **Guardian** (Rating: **2210**, Global Rank #8510, 1200+ solved, 150+ day streak, AIR 67 in Biweekly Contest 180) -> [LeetCode Profile](${p.contact.leetcode})
+- **CodeChef**: **4-Star** (Rating: **1811**, Global Rank 125 in Starters 227, AIR #3586) -> [CodeChef Profile](${p.contact.codechef})
+- **Codeforces**: **Pupil** (Rating: **1250**, 100+ solved) -> [Codeforces Profile](${p.contact.codeforces})
+- **Codolio Unified Profile**: [Codolio Profile](${p.contact.codolio})
 
 **Key Achievements:**
 - Global Rank 125 in CodeChef Starters 227
@@ -179,7 +192,7 @@ Paras is an avid competitive programmer with **1500+ problems solved** across pl
     (query.includes("music") && query.includes("project"))
   ) {
     const pr = p.projects[0];
-    return `### 🎵 ${pr.title}
+    return `### ${pr.title}
 ${pr.description}
 
 - **Tech Stack**: ${pr.techStack?.join(", ")}
@@ -195,7 +208,7 @@ ${pr.description}
     query.includes("video chat")
   ) {
     const pr = p.projects[1];
-    return `### 📹 ${pr.title}
+    return `### ${pr.title}
 ${pr.description}
 
 - **Tech Stack**: ${pr.techStack?.join(", ")}
@@ -210,7 +223,7 @@ ${pr.description}
     query.includes("face")
   ) {
     const pr = p.projects[2];
-    return `### 👤 ${pr.title}
+    return `### ${pr.title}
 ${pr.description}
 
 - **Tech Stack**: ${pr.techStack?.join(", ")}
@@ -226,7 +239,7 @@ ${pr.description}
     query.includes("smart india")
   ) {
     const pr = p.projects[3];
-    return `### 🛡️ ${pr.title}
+    return `### ${pr.title}
 ${pr.description}
 
 - **Tech Stack**: ${pr.techStack?.join(", ")}
@@ -241,7 +254,7 @@ ${pr.description}
     query.includes("recommendation")
   ) {
     const pr = p.projects[4];
-    return `### 🎬 ${pr.title}
+    return `### ${pr.title}
 ${pr.description}
 
 - **Tech Stack**: ${pr.techStack?.join(", ")}
@@ -252,7 +265,7 @@ ${pr.description}
 
   if (query.includes("nova") || query.includes("voice assistant")) {
     const pr = p.projects[5];
-    return `### 🎙️ ${pr.title}
+    return `### ${pr.title}
 ${pr.description}
 
 - **Tech Stack**: ${pr.techStack?.join(", ")}
@@ -268,16 +281,16 @@ ${pr.description}
     query.includes("portfolio") ||
     query.includes("work")
   ) {
-    return `### 🚀 Projects Built by Paras Rana
+    return `### Projects Built by Paras Rana
 
-1. 🎵 **Musor (Collaborative Music Platform)**: Real-time synced audio playback with WebSockets & Redis. ([Demo](${p.projects[0].demoUrl}) · [Code](${p.projects[0].githubUrl}))
-2. 📹 **Realtime Peer Chatapp (Omegle Clone)**: Anonymous P2P video & audio chat built with WebRTC & WebSockets. ([Demo](${p.projects[1].demoUrl}) · [Code](${p.projects[1].githubUrl}))
-3. 👤 **Celebrity Face Lookalike**: Deep learning face detection & celebrity matching engine. ([Demo](${p.projects[2].demoUrl}) · [Code](${p.projects[2].githubUrl}))
-4. 🛡️ **Defence Portal (SIH)**: National Smart India Hackathon situational dashboard. ([Demo](${p.projects[3].demoUrl}) · [Code](${p.projects[3].githubUrl}))
-5. 🎬 **Movie Recommendation Engine**: Typo-tolerant fuzzy search & recommendation system. ([Demo](${p.projects[4].demoUrl}) · [Code](${p.projects[4].githubUrl}))
-6. 🎙️ **NOVA Voice Assistant**: AI voice companion for desktop and web task automation. ([Demo](${p.projects[5].demoUrl}) · [Code](${p.projects[5].githubUrl}))
+1. **Musor (Collaborative Music Platform)**: Real-time synced audio playback with WebSockets & Redis. ([Demo](${p.projects[0].demoUrl}) · [Code](${p.projects[0].githubUrl}))
+2. **Realtime Peer Chatapp (Omegle Clone)**: Anonymous P2P video & audio chat built with WebRTC & WebSockets. ([Demo](${p.projects[1].demoUrl}) · [Code](${p.projects[1].githubUrl}))
+3. **Celebrity Face Lookalike**: Deep learning face detection & celebrity matching engine. ([Demo](${p.projects[2].demoUrl}) · [Code](${p.projects[2].githubUrl}))
+4. **Defence Portal (SIH)**: National Smart India Hackathon situational dashboard. ([Demo](${p.projects[3].demoUrl}) · [Code](${p.projects[3].githubUrl}))
+5. **Movie Recommendation Engine**: Typo-tolerant fuzzy search & recommendation system. ([Demo](${p.projects[4].demoUrl}) · [Code](${p.projects[4].githubUrl}))
+6. **NOVA Voice Assistant**: AI voice companion for desktop and web task automation. ([Demo](${p.projects[5].demoUrl}) · [Code](${p.projects[5].githubUrl}))
 
-Explore the complete source code on [Paras's GitHub](${p.contact.github})!`;
+Explore the complete source code on [Paras's GitHub](${p.contact.github}).`;
   }
 
   // 8. Skills & Tech Stack
@@ -293,14 +306,14 @@ Explore the complete source code on [Paras's GitHub](${p.contact.github})!`;
     query.includes("backend") ||
     query.includes("frontend")
   ) {
-    return `### ⚡ Technical Skills & Stack
+    return `### Technical Skills & Stack
 
-- 💻 **Languages**: ${p.skills.languages.join(", ")}
-- ⚙️ **Backend & Systems**: ${p.skills.backend.join(", ")}
-- 🌐 **Frontend**: ${p.skills.frontend.join(", ")}
-- 🗄️ **Databases & Caching**: ${p.skills.databases.join(", ")}
-- ☁️ **DevOps & Cloud**: ${p.skills.devopsAndCloud.join(", ")}
-- 🛠️ **Workflow & Tools**: ${p.skills.toolsAndWorkflow.join(", ")}`;
+- **Languages**: ${p.skills.languages.join(", ")}
+- **Backend & Systems**: ${p.skills.backend.join(", ")}
+- **Frontend**: ${p.skills.frontend.join(", ")}
+- **Databases & Caching**: ${p.skills.databases.join(", ")}
+- **DevOps & Cloud**: ${p.skills.devopsAndCloud.join(", ")}
+- **Workflow & Tools**: ${p.skills.toolsAndWorkflow.join(", ")}`;
   }
 
   // 9. Education & College
@@ -315,14 +328,14 @@ Explore the complete source code on [Paras's GitHub](${p.contact.github})!`;
     query.includes("study") ||
     query.includes("gpa")
   ) {
-    return `### 🎓 Academic Background
+    return `### Academic Background
 
-- 🎓 **B.Tech in Computer Science & Engineering** (2023 — 2027)
+- **B.Tech in Computer Science & Engineering** (2023 — 2027)
   **${p.education[0].institution}**
   - **CGPA**: 7.50 / 10
   - **Coursework**: Data Structures & Algorithms, Operating Systems, DBMS, Computer Networks, Machine Learning, OOPs.
-- 🏫 **Class 12 (CBSE)**: Yak Public School, Mumbai (2021 — 2023) — **89%**
-- 🏫 **Class 10 (CBSE)**: Atomic Energy Central School, Mumbai (2009 — 2021) — **92%**`;
+- **Class 12 (CBSE)**: Yak Public School, Mumbai (2021 — 2023) — **89%**
+- **Class 10 (CBSE)**: Atomic Energy Central School, Mumbai (2009 — 2021) — **92%**`;
   }
 
   // 10. Blogs / Articles / Medium / Writing
@@ -334,13 +347,13 @@ Explore the complete source code on [Paras's GitHub](${p.contact.github})!`;
     query.includes("medium") ||
     query.includes("post")
   ) {
-    return `### 📝 Technical Articles & Publications
+    return `### Technical Articles & Publications
 
-1. 📝 [**Redis, Pub Subs, and Message Queues**](${p.blogPosts[0].url}) (${p.blogPosts[0].date})
+1. [**Redis, Pub Subs, and Message Queues**](${p.blogPosts[0].url}) (${p.blogPosts[0].date})
    *Deep dive into distributed messaging patterns, pub/sub mechanics, and message brokers.*
-2. 📝 [**Rate Limiting System Design**](${p.blogPosts[1].url}) (${p.blogPosts[1].date})
+2. [**Rate Limiting System Design**](${p.blogPosts[1].url}) (${p.blogPosts[1].date})
    *Architecting resilient token bucket & sliding window rate limiters with Redis.*
-3. 📝 [**CSR vs SSR vs SSG**](${p.blogPosts[2].url}) (${p.blogPosts[2].date})
+3. [**CSR vs SSR vs SSG**](${p.blogPosts[2].url}) (${p.blogPosts[2].date})
    *Engineering trade-offs between Client-Side, Server-Side, and Static Generation.*`;
   }
 
@@ -354,43 +367,43 @@ Explore the complete source code on [Paras's GitHub](${p.contact.github})!`;
     query.includes("overview") ||
     (query.includes("paras") && (query.includes("know") || query.includes("intro") || query.includes("specializ")))
   ) {
-    return `### 👨‍💻 About Paras Rana
+    return `### About Paras Rana
 Paras Rana is a Computer Science undergraduate at **IIIT Nagpur** (Batch 2023–2027) with a **7.50 CGPA**, specializing in high-performance backend systems, distributed architectures, real-time networking, and competitive programming.
 
 ---
 
-### ⚡ Core Areas of Expertise
-- ⚙️ **Backend & Systems**: Node.js, Express.js, FastAPI, LangChain, WebSockets, gRPC, Protocol Buffers, Microservices & System Design.
-- 🗄️ **Databases & Caching**: PostgreSQL, Redis (Caching, Pub/Sub, Queues), MongoDB, MySQL, Vector Databases.
-- 🌐 **Frontend Development**: React.js, Next.js (App Router), Tailwind CSS, Framer Motion.
-- ☁️ **DevOps & Tools**: Docker, Linux, CI/CD with GitHub Actions, Git, VS Code.
+### Core Areas of Expertise
+- **Backend & Systems**: Node.js, Express.js, FastAPI, LangChain, WebSockets, gRPC, Protocol Buffers, Microservices & System Design.
+- **Databases & Caching**: PostgreSQL, Redis (Caching, Pub/Sub, Queues), MongoDB, MySQL, Vector Databases.
+- **Frontend Development**: React.js, Next.js (App Router), Tailwind CSS, Framer Motion.
+- **DevOps & Tools**: Docker, Linux, CI/CD with GitHub Actions, Git, VS Code.
 
 ---
 
-### 🚀 Featured Projects
-1. 🎵 [**Musor**](${p.projects[0].demoUrl}): Real-time collaborative music listening platform with synced playback via WebSockets & Redis. ([GitHub](${p.projects[0].githubUrl}))
-2. 📹 [**Peer Chatapp (Omegle Clone)**](${p.projects[1].demoUrl}): Anonymous P2P video & audio chat using WebRTC and WebSockets. ([GitHub](${p.projects[1].githubUrl}))
-3. 👤 [**Celebrity Face Lookalike**](${p.projects[2].demoUrl}): Deep learning facial landmark detection & celebrity matching engine. ([GitHub](${p.projects[2].githubUrl}))
-4. 🛡️ [**Defence Portal (SIH)**](${p.projects[3].demoUrl}): Situational awareness & tactical defense dashboard for Smart India Hackathon. ([GitHub](${p.projects[3].githubUrl}))
-5. 🎬 [**Movie Recommendation Engine**](${p.projects[4].demoUrl}): Typo-tolerant fuzzy search & recommendation system. ([GitHub](${p.projects[4].githubUrl}))
-6. 🎙️ [**NOVA Voice Assistant**](${p.projects[5].demoUrl}): AI voice companion for desktop and web task automation. ([GitHub](${p.projects[5].githubUrl}))
+### Featured Projects
+1. [**Musor**](${p.projects[0].demoUrl}): Real-time collaborative music listening platform with synced playback via WebSockets & Redis. ([GitHub](${p.projects[0].githubUrl}))
+2. [**Peer Chatapp (Omegle Clone)**](${p.projects[1].demoUrl}): Anonymous P2P video & audio chat using WebRTC and WebSockets. ([GitHub](${p.projects[1].githubUrl}))
+3. [**Celebrity Face Lookalike**](${p.projects[2].demoUrl}): Deep learning facial landmark detection & celebrity matching engine. ([GitHub](${p.projects[2].githubUrl}))
+4. [**Defence Portal (SIH)**](${p.projects[3].demoUrl}): Situational awareness & tactical defense dashboard for Smart India Hackathon. ([GitHub](${p.projects[3].githubUrl}))
+5. [**Movie Recommendation Engine**](${p.projects[4].demoUrl}): Typo-tolerant fuzzy search & recommendation system. ([GitHub](${p.projects[4].githubUrl}))
+6. [**NOVA Voice Assistant**](${p.projects[5].demoUrl}): AI voice companion for desktop and web task automation. ([GitHub](${p.projects[5].githubUrl}))
 
 ---
 
-### 🏆 Competitive Programming & Ratings
-- 🔴 **LeetCode Guardian** (Rating: **2210**, Global Rank #8510, 1200+ solved, AIR 67 in Biweekly Contest 180) → [LeetCode Profile](${p.contact.leetcode})
-- 🟡 **CodeChef 4-Star** (Rating: **1811**, Global Rank 125 in Starters 227, AIR #3586) → [CodeChef Profile](${p.contact.codechef})
-- 📊 **Total Solved**: 1500+ problems across platforms → [Codolio Unified Profile](${p.contact.codolio})
+### Competitive Programming & Ratings
+- **LeetCode Guardian** (Rating: **2210**, Global Rank #8510, 1200+ solved, AIR 67 in Biweekly Contest 180) -> [LeetCode Profile](${p.contact.leetcode})
+- **CodeChef 4-Star** (Rating: **1811**, Global Rank 125 in Starters 227, AIR #3586) -> [CodeChef Profile](${p.contact.codechef})
+- **Total Solved**: 1500+ problems across platforms -> [Codolio Unified Profile](${p.contact.codolio})
 
 ---
 
-### 📄 Resume, Contact & Hiring Info
-- 📄 [**View / Download Resume (Google Drive)**](${p.contact.resumeUrl})
-- ✉️ **Email**: [${p.contact.email}](mailto:${p.contact.email})
-- 💼 **LinkedIn**: [linkedin.com/in/paras-rana-696b7731b](${p.contact.linkedin})
-- 🐙 **GitHub**: [github.com/ParasRana123](${p.contact.github})
+### Resume, Contact & Hiring Info
+- [**View / Download Resume (Google Drive)**](${p.contact.resumeUrl})
+- **Email**: [${p.contact.email}](mailto:${p.contact.email})
+- **LinkedIn**: [linkedin.com/in/paras-rana-696b7731b](${p.contact.linkedin})
+- **GitHub**: [github.com/ParasRana123](${p.contact.github})
 
-*Paras is actively looking for Software Engineering (SWE) internships and full-stack/backend roles!*`;
+*Paras is actively looking for Software Engineering (SWE) internships and full-stack/backend roles.*`;
   }
 
   // 12. Simple Greeting
@@ -400,31 +413,31 @@ Paras Rana is a Computer Science undergraduate at **IIIT Nagpur** (Batch 2023–
     query.includes("hey") ||
     query === ""
   ) {
-    return `Hey there! 👋 I'm **Paras Rana's AI Assistant**.
+    return `Hello! I am **Paras Rana's AI Assistant**.
 
 Paras is a Computer Science undergrad at **IIIT Nagpur** (Class of 2027) and a **Full-Stack & Backend Engineer** specializing in distributed systems, real-time protocols (WebSockets & WebRTC), and competitive programming (**LeetCode Guardian 2210**).
 
 **Quick Links:**
-- 📄 [**View Resume**](${p.contact.resumeUrl})
-- ✉️ [**Email Paras**](mailto:${p.contact.email}) | 💼 [**LinkedIn**](${p.contact.linkedin})
-- 🎧 **Music & Spotify**: Loves Lo-Fi, Indie Rock & Hip-Hop (Live player on Homepage)
-- 🚀 **Top Projects**: Musor, Omegle Clone, Celeb Lookalike, SIH Defence Portal
+- [**View Resume**](${p.contact.resumeUrl})
+- [**Email Paras**](mailto:${p.contact.email}) | [**LinkedIn**](${p.contact.linkedin})
+- **Music & Spotify**: Loves Lo-Fi, Indie Rock & Hip-Hop (Live player on Homepage)
+- **Top Projects**: Musor, Omegle Clone, Celeb Lookalike, SIH Defence Portal
 
 How can I help you today?`;
   }
 
   // 13. Contextual Default
-  return `### 👨‍💻 Paras Rana
+  return `### Paras Rana
 Paras is a Computer Science undergrad at **IIIT Nagpur** (Batch 2023–2027) focused on backend systems, real-time networking, and competitive programming (LeetCode Guardian 2210).
 
 I can help answer questions specifically about:
-- 🎧 **Music & Spotify**: What kind of music Paras listens to while coding and his *Musor* project.
-- 🚀 **Projects**: *Musor*, *Omegle Clone*, *Celeb Lookalike*, *SIH Defence Portal*, *Movie Recommender*, *NOVA*.
-- ⚡ **Technical Skills**: Node.js, FastAPI, Next.js, Redis, PostgreSQL, Docker, WebSockets, WebRTC.
-- 🏆 **CP & Problem Solving**: LeetCode Guardian (**2210**), CodeChef 4-Star (**1811**), 1500+ solved.
-- 📄 **Resume & Contact**: [Google Drive Resume](${p.contact.resumeUrl}) · [${p.contact.email}](mailto:${p.contact.email}) · [LinkedIn](${p.contact.linkedin})
+- **Music & Spotify**: What kind of music Paras listens to while coding and his *Musor* project.
+- **Projects**: *Musor*, *Omegle Clone*, *Celeb Lookalike*, *SIH Defence Portal*, *Movie Recommender*, *NOVA*.
+- **Technical Skills**: Node.js, FastAPI, Next.js, Redis, PostgreSQL, Docker, WebSockets, WebRTC.
+- **CP & Problem Solving**: LeetCode Guardian (**2210**), CodeChef 4-Star (**1811**), 1500+ solved.
+- **Resume & Contact**: [Google Drive Resume](${p.contact.resumeUrl}) · [${p.contact.email}](mailto:${p.contact.email}) · [LinkedIn](${p.contact.linkedin})
 
-Feel free to ask a specific question on any of these!`;
+Feel free to ask a specific question on any of these topics.`;
 }
 
 /**
@@ -585,7 +598,7 @@ export async function generateChatResponse(
     try {
       const reply = await callGemini(geminiKey, messages, systemPrompt);
       return {
-        reply,
+        reply: cleanTextOutput(reply),
         provider: "gemini",
       };
     } catch (err) {
@@ -599,7 +612,7 @@ export async function generateChatResponse(
     try {
       const reply = await callOpenAI(openaiKey, messages, systemPrompt);
       return {
-        reply,
+        reply: cleanTextOutput(reply),
         provider: "openai",
       };
     } catch (err) {
@@ -613,7 +626,7 @@ export async function generateChatResponse(
     try {
       const reply = await callGroq(groqKey, messages, systemPrompt);
       return {
-        reply,
+        reply: cleanTextOutput(reply),
         provider: "groq",
       };
     } catch (err) {
@@ -624,7 +637,7 @@ export async function generateChatResponse(
   // 4. Intelligent Local Knowledge Fallback
   const reply = generateLocalKnowledgeReply(lastUserMessage, messages);
   return {
-    reply,
+    reply: cleanTextOutput(reply),
     provider: "local-knowledge-engine",
   };
 }

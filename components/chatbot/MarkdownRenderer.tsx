@@ -8,8 +8,11 @@ interface MarkdownRendererProps {
 }
 
 export function MarkdownRenderer({ content }: MarkdownRendererProps) {
-  // Parse simple markdown: headings, bold, bullet points, links, inline code, paragraphs
-  const lines = content.split("\n");
+  // Strip any accidental emojis or pictographs to ensure clean, professional presentation
+  const cleanContent = (content || "")
+    .replace(/[\p{Extended_Pictographic}\uFE0F\u200D]/gu, "")
+    .replace(/[ \t]{2,}/g, " ");
+  const lines = cleanContent.split("\n");
 
   const renderFormattedText = (text: string) => {
     // Process markdown links [text](url), bold **text**, and inline code `code`

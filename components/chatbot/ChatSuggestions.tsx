@@ -19,18 +19,21 @@ export function ChatSuggestions({
   return (
     <div className="dp-chat-suggestions">
       <div className="dp-chat-suggestions-track">
-        {suggestions.map((item) => (
-          <button
-            key={item.id}
-            type="button"
-            className="dp-chat-suggestion-chip"
-            onClick={() => onSelect(item.prompt)}
-            disabled={disabled}
-            title={item.prompt}
-          >
-            <span>{item.label}</span>
-          </button>
-        ))}
+        {suggestions.map((item) => {
+          const cleanLabel = (item.label || "").replace(/[\p{Extended_Pictographic}\uFE0F\u200D]/gu, "").trim();
+          return (
+            <button
+              key={item.id}
+              type="button"
+              className="dp-chat-suggestion-chip"
+              onClick={() => onSelect(item.prompt)}
+              disabled={disabled}
+              title={item.prompt}
+            >
+              <span>{cleanLabel}</span>
+            </button>
+          );
+        })}
       </div>
     </div>
   );

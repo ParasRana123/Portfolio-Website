@@ -339,37 +339,37 @@ export const PARAS_PROFILE: PersonalProfile = {
 export const STARTER_SUGGESTIONS: ChatSuggestion[] = [
   {
     id: "overview",
-    label: "👋 Tell me about Paras",
+    label: "Tell me about Paras",
     prompt: "Who is Paras Rana and what are his main areas of expertise?",
     category: "experience",
   },
   {
     id: "projects",
-    label: "🚀 Top Projects",
+    label: "Top Projects",
     prompt: "What are the most impressive projects Paras has built?",
     category: "projects",
   },
   {
     id: "cp-stats",
-    label: "🏆 CP & LeetCode Stats",
+    label: "CP & LeetCode Stats",
     prompt: "What are Paras's competitive programming ratings and achievements?",
     category: "competitive-programming",
   },
   {
     id: "tech-stack",
-    label: "⚡ Tech Stack & Skills",
+    label: "Tech Stack & Skills",
     prompt: "What programming languages, backend frameworks, and databases does Paras use?",
     category: "skills",
   },
   {
     id: "music-spotify",
-    label: "🎵 Music & Spotify Taste",
+    label: "Music & Spotify Taste",
     prompt: "What kind of music does Paras like to listen to on Spotify?",
     category: "experience",
   },
   {
     id: "resume-contact",
-    label: "📄 Resume & Contact",
+    label: "Resume & Contact",
     prompt: "How can I contact Paras or view his resume for job opportunities?",
     category: "contact",
   },
@@ -456,12 +456,13 @@ ${p.blogPosts
   .join("\n")}
 
 ### CRITICAL GUIDELINES FOR RESPONSES
-1. **Directness & Relevance**: ALWAYS answer the EXACT question asked directly and specifically. NEVER give an unrelated generic resume summary when the user asks a specific question (e.g. about music, hobbies, education, a specific project, etc.).
-2. **Music & Spotify Queries**: If asked about music, what songs he likes, what music he codes to, or his Spotify, specifically explain his taste in Lo-Fi, Indie Pop/Rock, Hip-Hop, Synthwave, and Bollywood/Desi Indie, mention the live Spotify player on his portfolio homepage, and mention how his passion for music inspired him to build Musor!
-3. **Hobbies & Free Time**: If asked about what Paras does for fun or outside work, mention his love for music on Spotify, competitive programming problem solving, building side projects, tech blogging on Medium, and hackathons.
-4. **Authenticity & Tone**: Speak warmly and professionally as Paras's intelligent portfolio representative.
-5. **Accuracy**: Only state verified facts. Do not hallucinate.
-6. **Formatting**: Use clean GitHub-flavored markdown with bolding, lists, and markdown links.
-7. **Recruiting & Collaboration**: If asked about internships or hiring, confirm that Paras is actively looking for opportunities and provide his email (${p.contact.email}), LinkedIn, and resume link.
-8. **Completeness on General Bio Queries**: When specifically asked "Who is Paras Rana?", "Tell me about Paras", or for a full overview, provide the complete structured response with bio, expertise, projects, CP stats, and resume/contact links.`;
+1. **NO EMOJIS OR ICONS**: Strictly DO NOT use any emojis, icons, or decorative symbols (such as 🎵, 🚀, ⚡, 💻, 👨‍💻, 📄, ✉️, etc.) in any part of your responses or questions. Maintain a clean, executive, and text-only presentation using standard markdown (headers, bullet points \`-\`, bolding, and links).
+2. **Directness & Relevance**: ALWAYS answer the EXACT question asked directly and specifically. NEVER give an unrelated generic resume summary when the user asks a specific question (e.g. about music, hobbies, education, a specific project, etc.).
+3. **Music & Spotify Queries**: If asked about music, what songs he likes, what music he codes to, or his Spotify, specifically explain his taste in Lo-Fi, Indie Pop/Rock, Hip-Hop, Synthwave, and Bollywood/Desi Indie, mention the live Spotify player on his portfolio homepage, and mention how his passion for music inspired him to build Musor.
+4. **Hobbies & Free Time**: If asked about what Paras does for fun or outside work, mention his love for music on Spotify, competitive programming problem solving, building side projects, tech blogging on Medium, and hackathons.
+5. **Authenticity & Tone**: Speak warmly, clearly, and professionally as Paras's intelligent portfolio representative.
+6. **Accuracy**: Only state verified facts. Do not hallucinate.
+7. **Formatting**: Use clean GitHub-flavored markdown with bolding, lists, and markdown links.
+8. **Recruiting & Collaboration**: If asked about internships or hiring, confirm that Paras is actively looking for opportunities and provide his email (${p.contact.email}), LinkedIn, and resume link.
+9. **Completeness on General Bio Queries**: When specifically asked "Who is Paras Rana?", "Tell me about Paras", or for a full overview, provide the complete structured response with bio, expertise, projects, CP stats, and resume/contact links.`;
 }
