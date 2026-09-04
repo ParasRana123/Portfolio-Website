@@ -268,7 +268,35 @@ export const PARAS_PROFILE: PersonalProfile = {
         "An engineering comparison of modern rendering strategies: Client-Side Rendering, Server-Side Rendering, and Static Site Generation in Next.js.",
     },
   ],
+  musicAndInterests: {
+    musicTaste:
+      "Paras has an avid, eclectic taste in music. He listens to a wide variety of tracks while coding and brainstorming, especially Lo-Fi beats, Indie Pop/Rock, Hip-Hop, Synthwave / Electronic, and Indian Indie / Bollywood tracks.",
+    favoriteGenres: [
+      "Lo-Fi & Chillhop (Coding & Deep Focus)",
+      "Indie Rock & Pop",
+      "Hip-Hop & Rap",
+      "Synthwave & Electronic",
+      "Desi Indie & Bollywood Melodies",
+    ],
+    spotifyIntegration:
+      "Paras has a live Spotify integration embedded right on his portfolio's homepage that displays the tracks he is currently or recently listening to in real time.",
+    musicProjects:
+      "His passion for music led him to build 'Musor' (https://musor-ten.vercel.app/), a full-stack real-time collaborative music listening application where friends can synchronize audio playback, share dynamic queues, and chat while listening together.",
+    hobbies: [
+      "Listening to music and exploring new genres on Spotify",
+      "Solving challenging data structure & algorithm problems on LeetCode (Guardian 2210) and CodeChef (4-Star)",
+      "Building full-stack real-time apps and experimenting with distributed backend architecture",
+      "Writing technical system design blogs on Medium",
+      "Participating in national collegiate hackathons",
+    ],
+  },
   faqs: [
+    {
+      question: "What kind of music does Paras like to listen to?",
+      answer:
+        "Paras loves listening to a mix of Lo-Fi chillhop, Indie Pop/Rock, Hip-Hop, Synthwave, and Bollywood/Desi Indie. Music is a big part of his daily routine—he listens while coding, and his live recently played tracks are displayed on his portfolio's homepage via Spotify. His love for music also inspired him to build 'Musor'—a real-time collaborative music platform!",
+      keywords: ["music", "spotify", "songs", "listen", "playlist", "genre", "artists", "track", "musor"],
+    },
     {
       question: "Are you open to internships or job opportunities?",
       answer:
@@ -334,6 +362,12 @@ export const STARTER_SUGGESTIONS: ChatSuggestion[] = [
     category: "skills",
   },
   {
+    id: "music-spotify",
+    label: "🎵 Music & Spotify Taste",
+    prompt: "What kind of music does Paras like to listen to on Spotify?",
+    category: "experience",
+  },
+  {
     id: "resume-contact",
     label: "📄 Resume & Contact",
     prompt: "How can I contact Paras or view his resume for job opportunities?",
@@ -344,7 +378,7 @@ export const STARTER_SUGGESTIONS: ChatSuggestion[] = [
 export function buildSystemPrompt(): string {
   const p = PARAS_PROFILE;
 
-  return `You are the AI Assistant for Paras Rana's portfolio website. You represent Paras Rana and assist recruiters, engineers, founders, and visitors who want to learn more about Paras's background, skills, projects, achievements, and work experience.
+  return `You are the AI Assistant for Paras Rana's portfolio website. You represent Paras Rana and assist recruiters, engineers, founders, and visitors who want to learn more about Paras's background, skills, projects, achievements, work experience, music taste, and hobbies.
 
 You must answer questions knowledgeably, concisely, accurately, and professionally based on the verified facts below.
 
@@ -397,6 +431,14 @@ ${p.projects
   )
   .join("\n\n")}
 
+### MUSIC TASTE & SPOTIFY CONTEXT
+- **Music Taste & Habits**: ${p.musicAndInterests.musicTaste}
+- **Favorite Genres**: ${p.musicAndInterests.favoriteGenres.join(", ")}
+- **Spotify Integration on Portfolio**: ${p.musicAndInterests.spotifyIntegration}
+- **Musor Project Connection**: ${p.musicAndInterests.musicProjects}
+- **Hobbies & Interests**:
+${p.musicAndInterests.hobbies.map((h) => `  * ${h}`).join("\n")}
+
 ### COMPETITIVE PROGRAMMING & RATINGS
 - Total Problems Solved: 1500+ problems across platforms (Codolio: ${p.contact.codolio})
 - **LeetCode**: Guardian rating 2210 (Global Rank #8510, AIR 67 in Biweekly Contest 180, 1200+ solved, 150+ day streak) - Profile: ${p.contact.leetcode}
@@ -413,12 +455,13 @@ ${p.blogPosts
   )
   .join("\n")}
 
-### GUIDELINES FOR RESPONSES
-1. **Authenticity**: Speak warmly and professionally as Paras's intelligent portfolio representative (or representing Paras in first/third person naturally).
-2. **Accuracy**: Only state facts that are true and present in this prompt. Do not hallucinate past companies, degrees, or contact numbers that aren't mentioned.
-3. **Formatting**: Use clean GitHub-flavored markdown with bolding, lists, and markdown links when referencing GitHub repositories, demos, articles, or contact info.
-4. **Brevity & Clarity**: Keep answers concise and direct. Avoid fluffy filler.
-5. **Recruiting & Collaboration**: If asked about internships or hiring, confirm that Paras is actively looking for opportunities and provide his email (${p.contact.email}), LinkedIn, and resume link.
-6. **Polite Tone**: Be enthusiastic about software engineering, distributed systems, problem solving, and building great products.
-7. **Completeness on Overview Queries**: When asked "Who is Paras Rana?", "Tell me about Paras", or about his expertise, provide a full, structured response covering his background, key technical strengths, top projects with links, CP achievements, and always include clickable links to his resume and contact info so the visitor gets a complete picture.`;
+### CRITICAL GUIDELINES FOR RESPONSES
+1. **Directness & Relevance**: ALWAYS answer the EXACT question asked directly and specifically. NEVER give an unrelated generic resume summary when the user asks a specific question (e.g. about music, hobbies, education, a specific project, etc.).
+2. **Music & Spotify Queries**: If asked about music, what songs he likes, what music he codes to, or his Spotify, specifically explain his taste in Lo-Fi, Indie Pop/Rock, Hip-Hop, Synthwave, and Bollywood/Desi Indie, mention the live Spotify player on his portfolio homepage, and mention how his passion for music inspired him to build Musor!
+3. **Hobbies & Free Time**: If asked about what Paras does for fun or outside work, mention his love for music on Spotify, competitive programming problem solving, building side projects, tech blogging on Medium, and hackathons.
+4. **Authenticity & Tone**: Speak warmly and professionally as Paras's intelligent portfolio representative.
+5. **Accuracy**: Only state verified facts. Do not hallucinate.
+6. **Formatting**: Use clean GitHub-flavored markdown with bolding, lists, and markdown links.
+7. **Recruiting & Collaboration**: If asked about internships or hiring, confirm that Paras is actively looking for opportunities and provide his email (${p.contact.email}), LinkedIn, and resume link.
+8. **Completeness on General Bio Queries**: When specifically asked "Who is Paras Rana?", "Tell me about Paras", or for a full overview, provide the complete structured response with bio, expertise, projects, CP stats, and resume/contact links.`;
 }

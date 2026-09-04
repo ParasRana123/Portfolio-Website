@@ -96,5 +96,12 @@ export interface PersonalProfile {
   ratings: RatingContext[];
   achievements: string[];
   blogPosts: BlogPostContext[];
+  musicAndInterests: {
+    musicTaste: string;
+    favoriteGenres: string[];
+    spotifyIntegration: string;
+    musicProjects: string;
+    hobbies: string[];
+  };
   faqs: { question: string; answer: string; keywords: string[] }[];
 }
