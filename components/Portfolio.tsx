@@ -9,6 +9,7 @@ import Projects from "./pages/Projects";
 import Tools from "./pages/Tools";
 import Ratings from "./pages/Ratings";
 import Education from "./pages/Education";
+import ChatbotWidget from "./chatbot/ChatbotWidget";
 
 export default function Portfolio() {
   const [dark, setDark] = useState(false);
@@ -149,6 +150,9 @@ export default function Portfolio() {
 
         <Footer active={active} setActive={setActive} />
       </div>
+
+      {/* Interactive AI Chatbot Widget */}
+      <ChatbotWidget />
     </div>
   );
 }

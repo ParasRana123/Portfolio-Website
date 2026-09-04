@@ -1,6 +1,21 @@
+"use client";
+
 import { PARAGRAPHS } from "@/data/paragraphs";
+import { Sparkles } from "lucide-react";
 
 export default function Introduction() {
+  const handleOpenChat = () => {
+    if (typeof window !== "undefined") {
+      window.dispatchEvent(
+        new CustomEvent("open-paras-chat", {
+          detail: {
+            prompt: "Who is Paras Rana and what are his main areas of expertise?",
+          },
+        })
+      );
+    }
+  };
+
   return (
     <div className="dp-intro">
       {PARAGRAPHS.map((p, i) => (
@@ -16,10 +31,21 @@ export default function Introduction() {
         >
           View resume
         </a>
+
+        <button
+          type="button"
+          onClick={handleOpenChat}
+          className="dp-intro-action dp-intro-action--ai"
+          title="Chat with Paras's AI assistant"
+        >
+          <Sparkles size={13} className="dp-sparkle-intro" />
+          <span>Ask AI</span>
+        </button>
+
         <a className="dp-intro-action" href="#contact">
           Get in touch
         </a>
       </div>
     </div>
   );
-}   
+}
