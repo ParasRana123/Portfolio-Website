@@ -9,6 +9,7 @@ import {
   Copy,
   Check,
   ChevronDown,
+  GripHorizontal,
 } from "lucide-react";
 import { ChatMessage, ChatSuggestion } from "@/lib/chatbot/types";
 import { STARTER_SUGGESTIONS } from "@/lib/chatbot/context";
@@ -28,6 +29,16 @@ export default function ChatbotWidget() {
   const [isLoading, setIsLoading] = useState(false);
   const [suggestions, setSuggestions] = useState<ChatSuggestion[]>(STARTER_SUGGESTIONS);
   const [copiedIndex, setCopiedIndex] = useState<number | null>(null);
+
+  // Dragging state
+  const [position, setPosition] = useState<{ x: number; y: number }>({ x: 0, y: 0 });
+  const [isDragging, setIsDragging] = useState(false);
+  const dragStartRef = useRef<{ startX: number; startY: number; initialX: number; initialY: number }>({
+    startX: 0,
+    startY: 0,
+    initialX: 0,
+    initialY: 0,
+  });
 
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
@@ -83,6 +94,55 @@ export default function ChatbotWidget() {
     navigator.clipboard.writeText(text);
     setCopiedIndex(index);
     setTimeout(() => setCopiedIndex(null), 2000);
+  };
+
+  // Drag Handlers
+  const handlePointerDown = (e: React.PointerEvent<HTMLDivElement>) => {
+    const target = e.target as HTMLElement;
+
+    // Ignore interactive elements so clicking them doesn't drag the modal
+    if (
+      target.closest("button") ||
+      target.closest("a") ||
+      target.closest("textarea") ||
+      target.closest("input") ||
+      target.closest(".dp-chat-suggestion-chip") ||
+      target.closest(".dp-chat-copy-btn") ||
+      target.closest(".dp-chat-body")
+    ) {
+      return;
+    }
+
+    setIsDragging(true);
+    dragStartRef.current = {
+      startX: e.clientX,
+      startY: e.clientY,
+      initialX: position.x,
+      initialY: position.y,
+    };
+
+    try {
+      (e.currentTarget as HTMLElement).setPointerCapture(e.pointerId);
+    } catch {}
+  };
+
+  const handlePointerMove = (e: React.PointerEvent<HTMLDivElement>) => {
+    if (!isDragging) return;
+    const deltaX = e.clientX - dragStartRef.current.startX;
+    const deltaY = e.clientY - dragStartRef.current.startY;
+    setPosition({
+      x: dragStartRef.current.initialX + deltaX,
+      y: dragStartRef.current.initialY + deltaY,
+    });
+  };
+
+  const handlePointerUp = (e: React.PointerEvent<HTMLDivElement>) => {
+    if (isDragging) {
+      setIsDragging(false);
+      try {
+        (e.currentTarget as HTMLElement).releasePointerCapture(e.pointerId);
+      } catch {}
+    }
   };
 
   const sendMessage = async (textToSend?: string) => {
@@ -249,10 +309,22 @@ export default function ChatbotWidget() {
         </button>
       </div>
 
-      {/* Chatbot Window */}
+      {/* Draggable Chatbot Window */}
       {isOpen && (
-        <div className="dp-chat-modal" role="dialog" aria-label="Paras AI Chatbot">
-          {/* Header */}
+        <div
+          className={`dp-chat-modal ${isDragging ? "is-dragging" : ""}`}
+          style={{
+            transform: `translate3d(${position.x}px, ${position.y}px, 0)`,
+            transition: isDragging ? "none" : undefined,
+          }}
+          onPointerDown={handlePointerDown}
+          onPointerMove={handlePointerMove}
+          onPointerUp={handlePointerUp}
+          onPointerCancel={handlePointerUp}
+          role="dialog"
+          aria-label="Paras AI Chatbot"
+        >
+          {/* Header & Drag Area */}
           <div className="dp-chat-header">
             <div className="dp-chat-header-info">
               <div className="dp-chat-header-avatar-wrap">
@@ -275,6 +347,9 @@ export default function ChatbotWidget() {
             </div>
 
             <div className="dp-chat-header-actions">
+              <span className="dp-chat-drag-hint" title="Drag to move chatbox anywhere">
+                <GripHorizontal size={15} />
+              </span>
               <button
                 type="button"
                 className="dp-chat-icon-btn"
