@@ -662,6 +662,7 @@ function ProjectCard({
 }
 
 export default function Projects() {
+  // Selected project state for interactive portal-mounted modal popup
   const [selectedProject, setSelectedProject] = useState<ProjectCardType | null>(
     null
   );
