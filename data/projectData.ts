@@ -29,7 +29,7 @@ export const PROJECTS_DATA: ProjectCard[] = [
         title: "Realtime Peer Chatapp",
         category: "WEBRTC / REAL-TIME",
         description: "An anonymous peer-to-peer video & audio chat application that mimics Omegle’s core functionality. Built using WebSockets for signaling and WebRTC for real-time media communication.",
-        video: "https://res.cloudinary.com/d3ukbssg/video/upload/v1787673475/omegle_record.mp4",
+        video: "https://res.cloudinary.com/d3ukbssg/video/upload/v1788110192/Screen_Recording_2026-08-30_222900_1.mp4",
         website: "https://omegle-beta.vercel.app/",
         code: "https://github.com/ParasRana123/omegle",
         long_desc: "An anonymous peer-to-peer video and audio chat platform that randomly connects users for real-time conversations. Built with WebRTC for direct media streaming and Socket.IO for signaling, matchmaking, live messaging, and connection management.",

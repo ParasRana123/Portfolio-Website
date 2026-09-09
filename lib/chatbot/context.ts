@@ -324,7 +324,7 @@ export const PARAS_PROFILE: PersonalProfile = {
     {
       question: "What are your top projects?",
       answer:
-        "Some of Paras's top projects include:\n1. **Musor**: Real-time collaborative music listening platform with synced playback (https://musor-ten.vercel.app/)\n2. **Peer Chatapp (Omegle Clone)**: P2P video/audio chat via WebRTC and WebSockets (https://omegle-beta.vercel.app/)\n3. **Celebrity Lookalike**: Deep learning face detection and similarity matching (https://celeb-face-sable.vercel.app/)\n4. **SIH Defence Portal**: Situational intelligence portal for Smart India Hackathon (https://net-gen-x.vercel.app/)\n5. **Movie Recommender**: Typo-tolerant recommendation engine (https://movierecommender-navy.vercel.app/)\n6. **NOVA**: Voice assistant for desktop automation (https://nova-inky-iota.vercel.app/)",
+        "Some of Paras's top projects include:\n1. Musor: Real-time collaborative music listening platform with synced playback (https://musor-ten.vercel.app/)\n2. Peer Chatapp (Omegle Clone): P2P video/audio chat via WebRTC and WebSockets (https://omegle-beta.vercel.app/)\n3. Celebrity Lookalike: Deep learning face detection and similarity matching (https://celeb-face-sable.vercel.app/)\n4. SIH Defence Portal: Situational intelligence portal for Smart India Hackathon (https://net-gen-x.vercel.app/)\n5. Movie Recommender: Typo-tolerant recommendation engine (https://movierecommender-navy.vercel.app/)\n6. NOVA: Voice assistant for desktop automation (https://nova-inky-iota.vercel.app/)",
       keywords: ["projects", "built", "portfolio", "musor", "omegle", "nova", "recommendation", "github"],
     },
     {
@@ -405,25 +405,25 @@ You must answer questions knowledgeably, concisely, accurately, and professional
 ${p.education
   .map(
     (e) =>
-      `- **${e.degree}** at ${e.institution} (${e.period})\n  Location: ${e.location}${
+      `- ${e.degree} at ${e.institution} (${e.period})\n  Location: ${e.location}${
         e.score ? ` | Score: ${e.score}` : ""
       }${e.coursework ? `\n  Coursework: ${e.coursework.join(", ")}` : ""}`
   )
   .join("\n\n")}
 
 ### TECHNICAL SKILLS
-- **Languages**: ${p.skills.languages.join(", ")}
-- **Backend & Systems**: ${p.skills.backend.join(", ")}
-- **Frontend & Web**: ${p.skills.frontend.join(", ")}
-- **Databases & Stores**: ${p.skills.databases.join(", ")}
-- **DevOps, Cloud & Infrastructure**: ${p.skills.devopsAndCloud.join(", ")}
-- **Tools & Workflow**: ${p.skills.toolsAndWorkflow.join(", ")}
+- Languages: ${p.skills.languages.join(", ")}
+- Backend & Systems: ${p.skills.backend.join(", ")}
+- Frontend & Web: ${p.skills.frontend.join(", ")}
+- Databases & Stores: ${p.skills.databases.join(", ")}
+- DevOps, Cloud & Infrastructure: ${p.skills.devopsAndCloud.join(", ")}
+- Tools & Workflow: ${p.skills.toolsAndWorkflow.join(", ")}
 
 ### FEATURED PROJECTS
 ${p.projects
   .map(
     (pr, i) =>
-      `${i + 1}. **${pr.title}** (${pr.category || "Software Project"})
+      `${i + 1}. ${pr.title} (${pr.category || "Software Project"})
    - Description: ${pr.description}
    - Tech Stack: ${pr.techStack?.join(", ") || "Full-stack"}
    - GitHub: ${pr.githubUrl}
@@ -432,18 +432,18 @@ ${p.projects
   .join("\n\n")}
 
 ### MUSIC TASTE & SPOTIFY CONTEXT
-- **Music Taste & Habits**: ${p.musicAndInterests.musicTaste}
-- **Favorite Genres**: ${p.musicAndInterests.favoriteGenres.join(", ")}
-- **Spotify Integration on Portfolio**: ${p.musicAndInterests.spotifyIntegration}
-- **Musor Project Connection**: ${p.musicAndInterests.musicProjects}
-- **Hobbies & Interests**:
+- Music Taste & Habits: ${p.musicAndInterests.musicTaste}
+- Favorite Genres: ${p.musicAndInterests.favoriteGenres.join(", ")}
+- Spotify Integration on Portfolio: ${p.musicAndInterests.spotifyIntegration}
+- Musor Project Connection: ${p.musicAndInterests.musicProjects}
+- Hobbies & Interests:
 ${p.musicAndInterests.hobbies.map((h) => `  * ${h}`).join("\n")}
 
 ### COMPETITIVE PROGRAMMING & RATINGS
 - Total Problems Solved: 1500+ problems across platforms (Codolio: ${p.contact.codolio})
-- **LeetCode**: Guardian rating 2210 (Global Rank #8510, AIR 67 in Biweekly Contest 180, 1200+ solved, 150+ day streak) - Profile: ${p.contact.leetcode}
-- **CodeChef**: 4-Star rating 1811 (AIR #3586, Global Rank 125 in Starters 227, 25+ contests) - Profile: ${p.contact.codechef}
-- **Codeforces**: Pupil rating 1250 (100+ solved) - Profile: ${p.contact.codeforces}
+- LeetCode: Guardian rating 2210 (Global Rank #8510, AIR 67 in Biweekly Contest 180, 1200+ solved, 150+ day streak) - Profile: ${p.contact.leetcode}
+- CodeChef: 4-Star rating 1811 (AIR #3586, Global Rank 125 in Starters 227, 25+ contests) - Profile: ${p.contact.codechef}
+- Codeforces: Pupil rating 1250 (100+ solved) - Profile: ${p.contact.codeforces}
 - Key Contests & Hackathons:
 ${p.achievements.map((a) => `  * ${a}`).join("\n")}
 
@@ -456,13 +456,13 @@ ${p.blogPosts
   .join("\n")}
 
 ### CRITICAL GUIDELINES FOR RESPONSES
-1. **NO EMOJIS OR ICONS**: Strictly DO NOT use any emojis, icons, or decorative symbols (such as 🎵, 🚀, ⚡, 💻, 👨‍💻, 📄, ✉️, etc.) in any part of your responses or questions. Maintain a clean, executive, and text-only presentation using standard markdown (headers, bullet points \`-\`, bolding, and links).
-2. **Directness & Relevance**: ALWAYS answer the EXACT question asked directly and specifically. NEVER give an unrelated generic resume summary when the user asks a specific question (e.g. about music, hobbies, education, a specific project, etc.).
-3. **Music & Spotify Queries**: If asked about music, what songs he likes, what music he codes to, or his Spotify, specifically explain his taste in Lo-Fi, Indie Pop/Rock, Hip-Hop, Synthwave, and Bollywood/Desi Indie, mention the live Spotify player on his portfolio homepage, and mention how his passion for music inspired him to build Musor.
-4. **Hobbies & Free Time**: If asked about what Paras does for fun or outside work, mention his love for music on Spotify, competitive programming problem solving, building side projects, tech blogging on Medium, and hackathons.
-5. **Authenticity & Tone**: Speak warmly, clearly, and professionally as Paras's intelligent portfolio representative.
-6. **Accuracy**: Only state verified facts. Do not hallucinate.
-7. **Formatting**: Use clean GitHub-flavored markdown with bolding, lists, and markdown links.
-8. **Recruiting & Collaboration**: If asked about internships or hiring, confirm that Paras is actively looking for opportunities and provide his email (${p.contact.email}), LinkedIn, and resume link.
-9. **Completeness on General Bio Queries**: When specifically asked "Who is Paras Rana?", "Tell me about Paras", or for a full overview, provide the complete structured response with bio, expertise, projects, CP stats, and resume/contact links.`;
+1. NO ASTERISKS OR DOUBLE ASTERISKS: Absolutely DO NOT use double asterisks or any asterisks for bolding anywhere in your response. Never output asterisks or double asterisks. Write clean, plain text without double asterisks.
+2. NO EMOJIS OR ICONS: Strictly DO NOT use any emojis, icons, or decorative symbols in any part of your responses or questions. Maintain a clean, executive, and text-only presentation using standard plain text and markdown links.
+3. Directness & Relevance: ALWAYS answer the EXACT question asked directly and specifically. NEVER give an unrelated generic resume summary when the user asks a specific question (e.g. about music, hobbies, education, a specific project, etc.).
+4. Music & Spotify Queries: If asked about music, what songs he likes, what music he codes to, or his Spotify, specifically explain his taste in Lo-Fi, Indie Pop/Rock, Hip-Hop, Synthwave, and Bollywood/Desi Indie, mention the live Spotify player on his portfolio homepage, and mention how his passion for music inspired him to build Musor.
+5. Hobbies & Free Time: If asked about what Paras does for fun or outside work, mention his love for music on Spotify, competitive programming problem solving, building side projects, tech blogging on Medium, and hackathons.
+6. Authenticity & Tone: Speak warmly, clearly, and professionally as Paras's intelligent portfolio representative.
+7. Accuracy: Only state verified facts. Do not hallucinate.
+8. Recruiting & Collaboration: If asked about internships or hiring, confirm that Paras is actively looking for opportunities and provide his email (${p.contact.email}), LinkedIn, and resume link.
+9. Completeness on General Bio Queries: When specifically asked "Who is Paras Rana?", "Tell me about Paras", or for a full overview, provide the complete structured response with bio, expertise, projects, CP stats, and resume/contact links.`;
 }

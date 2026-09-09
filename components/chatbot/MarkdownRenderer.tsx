@@ -8,20 +8,21 @@ interface MarkdownRendererProps {
 }
 
 export function MarkdownRenderer({ content }: MarkdownRendererProps) {
-  // Strip any accidental emojis or pictographs to ensure clean, professional presentation
+  // Strip double asterisks and any accidental emojis to ensure clean, professional presentation
   const cleanContent = (content || "")
+    .replace(/\*\*/g, "")
     .replace(/[\p{Extended_Pictographic}\uFE0F\u200D]/gu, "")
     .replace(/[ \t]{2,}/g, " ");
   const lines = cleanContent.split("\n");
 
   const renderFormattedText = (text: string) => {
-    // Process markdown links [text](url), bold **text**, and inline code `code`
+    // Process markdown links [text](url), inline code `code`, and raw URLs
     const elements: React.ReactNode[] = [];
     let currentIndex = 0;
 
-    // Regex matching [link](url), **bold**, `code`, or plain URLs
+    // Regex matching [link](url), `code`, or plain URLs
     const regex =
-      /\[(.*?)\]\((https?:\/\/[^\s)]+)\)|(\*\*(.*?)\*\*)|(`([^`]+)`)|(https?:\/\/[^\s]+)/g;
+      /\[(.*?)\]\((https?:\/\/[^\s)]+)\)|(`([^`]+)`)|(https?:\/\/[^\s]+)/g;
     let match: RegExpExecArray | null;
 
     let keyCounter = 0;
@@ -49,22 +50,15 @@ export function MarkdownRenderer({ content }: MarkdownRendererProps) {
           </a>
         );
       } else if (match[3] && match[4]) {
-        // **bold**
-        elements.push(
-          <strong key={`bold-${keyCounter++}`} className="dp-chat-bold">
-            {match[4]}
-          </strong>
-        );
-      } else if (match[5] && match[6]) {
         // `code`
         elements.push(
           <code key={`code-${keyCounter++}`} className="dp-chat-code">
-            {match[6]}
+            {match[4]}
           </code>
         );
-      } else if (match[7]) {
+      } else if (match[5]) {
         // Raw URL
-        const rawUrl = match[7];
+        const rawUrl = match[5];
         elements.push(
           <a
             key={`rawlink-${keyCounter++}`}
