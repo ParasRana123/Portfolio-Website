@@ -62,7 +62,7 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
   return (
     <AnimatePresence>
       <div
-        className="fixed inset-0 z-[100] flex items-center justify-center p-3 sm:p-5 md:p-6 lg:p-8"
+        className="fixed inset-0 z-[100] flex items-center justify-center p-2 sm:p-4 md:p-6 lg:p-8"
         role="dialog"
         aria-modal="true"
         aria-labelledby="modal-project-title"
@@ -72,9 +72,9 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          transition={{ duration: 0.22 }}
+          transition={{ duration: 0.2 }}
           onClick={onClose}
-          className="absolute inset-0 bg-black/80 backdrop-blur-md"
+          className="absolute inset-0 bg-black/85 backdrop-blur-md"
           aria-hidden="true"
         />
 
@@ -84,12 +84,12 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
           initial={{ opacity: 0, scale: 0.94, y: 15 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.94, y: 15 }}
-          transition={{ type: "spring", damping: 26, stiffness: 320 }}
+          transition={{ type: "spring", damping: 28, stiffness: 350 }}
           onClick={(e) => e.stopPropagation()}
-          className="relative w-full max-w-5xl xl:max-w-6xl max-h-[92vh] flex flex-col md:flex-row rounded-2xl sm:rounded-3xl border border-neutral-800/90 bg-[#0d0d0f] text-white shadow-2xl shadow-black/80 overflow-hidden z-10"
+          className="relative w-full max-w-5xl xl:max-w-6xl max-h-[92vh] flex flex-col md:flex-row rounded-2xl sm:rounded-3xl border border-neutral-800 bg-[#0c0c0e] text-white shadow-2xl shadow-black overflow-hidden z-10"
         >
           {/* Left Column: Video Player */}
-          <div className="w-full md:w-[50%] lg:w-[48%] bg-black flex items-center justify-center relative min-h-[260px] sm:min-h-[340px] md:min-h-[540px] border-b md:border-b-0 md:border-r border-neutral-800/80 flex-shrink-0">
+          <div className="w-full md:w-1/2 bg-black flex items-center justify-center relative min-h-[260px] sm:min-h-[340px] md:min-h-[520px] lg:min-h-[580px] border-b md:border-b-0 md:border-r border-neutral-800/90 flex-shrink-0">
             <video
               ref={videoRef}
               src={project.video}
@@ -99,23 +99,23 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
               autoPlay
               muted
               preload="auto"
-              className="w-full h-full max-h-[320px] sm:max-h-[420px] md:max-h-[640px] object-contain bg-black"
+              className="w-full h-full max-h-[300px] sm:max-h-[380px] md:max-h-[620px] object-contain bg-black"
             />
           </div>
 
           {/* Right Column: Scrollable Content */}
-          <div className="flex-1 flex flex-col min-w-0 max-h-[58vh] md:max-h-[88vh] overflow-y-auto modal-scrollbar p-5 sm:p-7 md:p-8 bg-[#0f0f12]">
+          <div className="flex-1 flex flex-col min-w-0 max-h-[55vh] md:max-h-[92vh] overflow-y-auto modal-scrollbar p-5 sm:p-7 md:p-8 bg-[#0e0e11]">
             {/* Header */}
             <div className="flex items-start justify-between gap-4 pb-4 border-b border-neutral-800/80">
               <div className="min-w-0 flex-1">
                 <h2
                   id="modal-project-title"
-                  className="text-2xl sm:text-3xl lg:text-4xl font-black tracking-tight text-white uppercase font-sans"
+                  className="text-2xl sm:text-3xl font-extrabold tracking-tight text-white uppercase font-sans"
                 >
                   {displayTitle}
                 </h2>
                 {project.category && (
-                  <p className="text-xs sm:text-sm font-semibold tracking-wider text-neutral-400 uppercase mt-1">
+                  <p className="text-xs sm:text-sm font-semibold tracking-wider text-neutral-400 uppercase mt-0.5">
                     {project.category}
                   </p>
                 )}
@@ -126,63 +126,65 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
                 type="button"
                 onClick={onClose}
                 aria-label="Close modal"
-                className="w-10 h-10 rounded-xl bg-neutral-900/90 hover:bg-neutral-800 border border-neutral-800 text-neutral-400 hover:text-white flex items-center justify-center transition-colors cursor-pointer flex-shrink-0"
+                className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-neutral-900/90 hover:bg-neutral-800 border border-neutral-800 text-neutral-400 hover:text-white flex items-center justify-center transition-all cursor-pointer flex-shrink-0"
               >
-                <FiX size={20} />
+                <FiX size={19} />
               </button>
             </div>
 
-            {/* Action Buttons Row */}
-            <div className="pt-5 pb-6 flex flex-wrap gap-2.5 sm:gap-3 items-center">
-              {/* GitHub Button */}
-              {project.code && (
+            {/* Action Buttons Grid / Row */}
+            <div className="pt-4 pb-5 space-y-2.5">
+              {/* Row 1: GitHub & LinkedIn */}
+              <div className="grid grid-cols-2 gap-2.5 sm:gap-3">
+                {project.code && (
+                  <a
+                    href={project.code}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-[#18181b] hover:bg-[#232328] border border-neutral-700/70 text-white font-bold text-xs tracking-wider uppercase transition-all hover:scale-[1.02] active:scale-[0.98]"
+                  >
+                    <AiOutlineGithub size={18} />
+                    <span>GITHUB</span>
+                  </a>
+                )}
+
                 <a
-                  href={project.code}
+                  href={linkedinUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-neutral-900/90 hover:bg-neutral-800 border border-neutral-700/80 text-white font-bold text-xs tracking-wider uppercase transition-transform hover:scale-[1.02] active:scale-[0.98] shadow-sm"
+                  className="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-[#18181b] hover:bg-[#232328] border border-neutral-700/70 text-white font-bold text-xs tracking-wider uppercase transition-all hover:scale-[1.02] active:scale-[0.98]"
                 >
-                  <AiOutlineGithub size={18} />
-                  <span>GITHUB</span>
+                  <FaLinkedin size={16} />
+                  <span>LINKEDIN</span>
                 </a>
-              )}
+              </div>
 
-              {/* LinkedIn Button */}
-              <a
-                href={linkedinUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-neutral-900/90 hover:bg-neutral-800 border border-neutral-700/80 text-white font-bold text-xs tracking-wider uppercase transition-transform hover:scale-[1.02] active:scale-[0.98] shadow-sm"
-              >
-                <FaLinkedin size={16} />
-                <span>LINKEDIN</span>
-              </a>
+              {/* Row 2: YouTube / Video Demo & Live Website */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 sm:gap-3">
+                {youtubeUrl && (
+                  <a
+                    href={youtubeUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-[#e50914] hover:bg-[#cc0812] text-white font-bold text-xs tracking-wider uppercase transition-all hover:scale-[1.02] active:scale-[0.98] shadow-md shadow-red-950/40"
+                  >
+                    <AiFillYoutube size={20} />
+                    <span>YOUTUBE</span>
+                  </a>
+                )}
 
-              {/* Live Website Button */}
-              {project.website && (
-                <a
-                  href={project.website}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-neutral-900/90 hover:bg-neutral-800 border border-neutral-700/80 text-white font-bold text-xs tracking-wider uppercase transition-transform hover:scale-[1.02] active:scale-[0.98] shadow-sm"
-                >
-                  <FiExternalLink size={16} />
-                  <span>LIVE WEBSITE</span>
-                </a>
-              )}
-
-              {/* YouTube / Video Demo Button */}
-              {youtubeUrl && (
-                <a
-                  href={youtubeUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[#ff0000] hover:bg-[#e60000] text-white font-bold text-xs tracking-wider uppercase transition-transform hover:scale-[1.02] active:scale-[0.98] shadow-md shadow-red-950/40"
-                >
-                  <AiFillYoutube size={20} />
-                  <span>YOUTUBE</span>
-                </a>
-              )}
+                {project.website && (
+                  <a
+                    href={project.website}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-[#18181b] hover:bg-[#232328] border border-neutral-700/70 text-white font-bold text-xs tracking-wider uppercase transition-all hover:scale-[1.02] active:scale-[0.98]"
+                  >
+                    <FiExternalLink size={16} />
+                    <span>LIVE WEBSITE</span>
+                  </a>
+                )}
+              </div>
             </div>
 
             {/* Project Details Sections */}
@@ -192,7 +194,7 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
                 <h3 className="text-xs font-bold tracking-widest text-neutral-400 uppercase mb-2">
                   PROJECT DESCRIPTION
                 </h3>
-                <p className="text-sm sm:text-[15px] leading-relaxed text-neutral-300 font-normal">
+                <p className="text-sm sm:text-[14.5px] leading-relaxed text-neutral-300 font-normal">
                   {project.long_desc || project.description}
                 </p>
               </div>
@@ -207,7 +209,7 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
                     {techList.map((tech, idx) => (
                       <span
                         key={idx}
-                        className="px-3 py-1.5 rounded-lg bg-neutral-900/95 border border-neutral-800 text-neutral-300 font-mono text-xs tracking-wide hover:border-neutral-700 transition-colors shadow-sm"
+                        className="px-3 py-1.5 rounded-lg bg-[#161619] border border-neutral-800 text-neutral-300 font-mono text-xs tracking-wide hover:border-neutral-700 transition-colors"
                       >
                         {tech}
                       </span>
@@ -243,14 +245,14 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
           width: 6px;
         }
         .modal-scrollbar::-webkit-scrollbar-track {
-          background: rgba(15, 15, 18, 0.6);
+          background: rgba(14, 14, 17, 0.6);
         }
         .modal-scrollbar::-webkit-scrollbar-thumb {
-          background: rgba(80, 80, 90, 0.5);
+          background: rgba(75, 75, 85, 0.5);
           border-radius: 4px;
         }
         .modal-scrollbar::-webkit-scrollbar-thumb:hover {
-          background: rgba(120, 120, 130, 0.8);
+          background: rgba(115, 115, 125, 0.8);
         }
       `}</style>
     </AnimatePresence>
