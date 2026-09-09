@@ -1,6 +1,5 @@
 export interface ProjectCard {
     title: string;
-    shortTitle?: string;
     category?: string;
     description: string;
     video: string;
@@ -16,7 +15,6 @@ export interface ProjectCard {
 export const PROJECTS_DATA: ProjectCard[] = [
     {
         title: "Collaborative Music Platform",
-        shortTitle: "MUSOR",
         category: "FULL-STACK / WEBSOCKETS",
         description: "Real-time collaborative music listening platform with synchronized playback, group chat, shared queues, and playlist recommendations. Discover friends' playlists, save favorite songs, and enjoy seamless multi-user listening sessions.",
         video: "https://res.cloudinary.com/d3ukbssg/video/upload/v1787560313/musor_record.mp4",
@@ -29,7 +27,6 @@ export const PROJECTS_DATA: ProjectCard[] = [
     },
     {
         title: "Realtime Peer Chatapp",
-        shortTitle: "OMEGLE CLONE",
         category: "WEBRTC / REAL-TIME",
         description: "An anonymous peer-to-peer video & audio chat application that mimics Omegle’s core functionality. Built using WebSockets for signaling and WebRTC for real-time media communication.",
         video: "https://res.cloudinary.com/d3ukbssg/video/upload/v1787673475/omegle_record.mp4",
@@ -42,7 +39,6 @@ export const PROJECTS_DATA: ProjectCard[] = [
     },
     {
         title: "Celebrity Face Lookalike",
-        shortTitle: "CELEB LOOKALIKE",
         category: "COMPUTER VISION / DEEP LEARNING",
         description: "A web application that detects faces from user-uploaded images and matches them with celebrity faces using deep learning techniques.",
         video: "https://res.cloudinary.com/d3ukbssg/video/upload/v1787560254/celeb_match_record.mp4",
@@ -55,7 +51,6 @@ export const PROJECTS_DATA: ProjectCard[] = [
     },
     {
         title: "Defence Portal (SIH)",
-        shortTitle: "NET-GEN-X",
         category: "CYBERSECURITY / DEFENCE",
         description: "This was build as a part of Smart India Hackathon where we tackled a defence based problem statement and made a Defence Portal for the same.",
         video: "https://res.cloudinary.com/d3ukbssg/video/upload/v1787560336/sih_comp_record.mp4",
@@ -68,7 +63,6 @@ export const PROJECTS_DATA: ProjectCard[] = [
     },
     {
         title: "Movie Recommendation Engine",
-        shortTitle: "FLIXRECOMMEND",
         category: "MACHINE LEARNING / NLP",
         description: "This system provides personalized movie recommendations, with smart search that corrects typos and suggests matches. It helps you explore top-rated films by genre and dive into detailed cast and crew information for any movie.",
         video: "https://res.cloudinary.com/d3ukbssg/video/upload/v1787560286/movie_recom_record.mp4",
@@ -81,7 +75,6 @@ export const PROJECTS_DATA: ProjectCard[] = [
     },
     {
         title: "Virtual Voice Assistant (NOVA)",
-        shortTitle: "NOVA",
         category: "AI / VOICE ASSISTANT",
         description: "NOVA is your all-in-one digital sidekick that takes control, handles your hustle, and gets things done your way.",
         video: "https://res.cloudinary.com/d3ukbssg/video/upload/v1787560321/nova_record.mp4",
