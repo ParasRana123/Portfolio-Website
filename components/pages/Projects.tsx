@@ -6,7 +6,7 @@ import {
   ProjectCard as ProjectCardType,
 } from "@/data/projectData";
 import { AiOutlineGithub } from "react-icons/ai";
-import { FiExternalLink, FiMaximize2 } from "react-icons/fi";
+import { FiExternalLink, FiMaximize2, FiEye } from "react-icons/fi";
 import ProjectModal from "@/components/ProjectModal";
 
 const GRADIENTS = [
@@ -196,8 +196,8 @@ function ProjectCard({
               className="dp-project-link"
               onClick={(e) => e.stopPropagation()}
             >
+              <FiEye size={14} aria-hidden="true" />
               <span>View Code</span>
-              <FiExternalLink size={14} aria-hidden="true" />
             </a>
           )}
           
@@ -599,23 +599,24 @@ function ProjectCard({
         .dp-project-footer-links {
           display: flex;
           align-items: center;
-          gap: 20px;
+          gap: 16px;
           flex-wrap: wrap;
         }
 
         .dp-project-link {
           display: inline-flex;
           align-items: center;
-          gap: 6px;
-          padding: 7px 0;
+          gap: 7px;
+          padding: 6px 14px;
+          border: 1px solid var(--accent);
+          border-radius: 4px;
+          background: transparent;
           font-family: "Inter", sans-serif;
-          font-size: 13.5px;
+          font-size: 13px;
           font-weight: 550;
           color: var(--accent);
           text-decoration: none;
-          transition:
-            color 0.2s ease,
-            gap 0.2s ease;
+          transition: all 0.2s ease;
           max-width: 100%;
         }
 
@@ -625,36 +626,30 @@ function ProjectCard({
         }
 
         .dp-project-link:hover {
-          color: var(--accent);
+          background: var(--accent);
+          color: #ffffff;
           text-decoration: none;
-          gap: 8px;
-        }
-
-        .dp-project-link:hover :global(svg) {
-          transform: translate(2px, -2px);
         }
 
         .dp-project-details-btn {
           display: inline-flex;
           align-items: center;
-          gap: 6px;
-          padding: 6px 12px;
-          border-radius: 20px;
-          border: 1px solid var(--hairline);
+          gap: 5px;
+          padding: 6px 2px;
+          border: none;
+          border-radius: 0;
           background: transparent;
           font-family: "Inter", sans-serif;
-          font-size: 12.5px;
+          font-size: 13px;
           font-weight: 550;
           color: var(--muted);
           cursor: pointer;
-          transition: all 0.2s ease;
+          transition: color 0.2s ease, gap 0.2s ease;
         }
 
         .dp-project-details-btn:hover {
-          color: var(--ink);
-          border-color: var(--accent);
-          background: rgba(226, 121, 79, 0.08);
-          gap: 8px;
+          color: var(--accent);
+          gap: 7px;
         }
       `}</style>
     </article>
