@@ -15,8 +15,9 @@ interface ProjectModalProps {
 export default function ProjectModal({ project, onClose }: ProjectModalProps) {
   const modalRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
+  const closeButtonRef = useRef<HTMLButtonElement>(null);
 
-  // Close on Escape key press and manage scroll locking
+  // Close on Escape key press, autofocus, and manage scroll locking
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
@@ -29,9 +30,26 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
       const originalOverflow = document.body.style.overflow;
       document.body.style.overflow = "hidden";
 
+      // Attempt safe video playback
+      if (videoRef.current) {
+        videoRef.current.currentTime = 0;
+        videoRef.current.play().catch(() => {
+          // Autoplay was prevented (e.g. browser policy), controls are available for user
+        });
+      }
+
+      // Focus close button or modal container for immediate keyboard support
+      const focusTimeout = setTimeout(() => {
+        closeButtonRef.current?.focus();
+      }, 50);
+
       return () => {
         window.removeEventListener("keydown", handleKeyDown);
         document.body.style.overflow = originalOverflow;
+        clearTimeout(focusTimeout);
+        if (videoRef.current) {
+          videoRef.current.pause();
+        }
       };
     }
   }, [project, onClose]);
@@ -123,10 +141,11 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
 
               {/* Close Button */}
               <button
+                ref={closeButtonRef}
                 type="button"
                 onClick={onClose}
                 aria-label="Close modal"
-                className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-neutral-900/90 hover:bg-neutral-800 border border-neutral-800 text-neutral-400 hover:text-white flex items-center justify-center transition-all cursor-pointer flex-shrink-0"
+                className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-neutral-900/90 hover:bg-neutral-800 border border-neutral-800 text-neutral-400 hover:text-white flex items-center justify-center transition-all cursor-pointer flex-shrink-0 focus:outline-none focus-visible:ring-2 focus-visible:ring-orange-500/60"
               >
                 <FiX size={19} />
               </button>
