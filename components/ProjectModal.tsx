@@ -1,6 +1,7 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import { ProjectCard } from "@/data/projectData";
 import { AiOutlineGithub, AiFillYoutube } from "react-icons/ai";
 import { FaLinkedin } from "react-icons/fa";
@@ -13,9 +14,14 @@ interface ProjectModalProps {
 }
 
 export default function ProjectModal({ project, onClose }: ProjectModalProps) {
+  const [mounted, setMounted] = useState(false);
   const modalRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   // Close on Escape key press, autofocus, and manage scroll locking
   useEffect(() => {
@@ -56,7 +62,7 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
     }
   }, [project, onClose]);
 
-  if (!project) return null;
+  if (!project || !mounted) return null;
 
   // Parse technologies into individual items
   const techList = project.technologies
@@ -79,10 +85,10 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
     project.linkedin || "https://www.linkedin.com/in/paras-rana-696b7731b/";
   const youtubeUrl = project.youtube || project.video;
 
-  return (
+  return createPortal(
     <AnimatePresence>
       <div
-        className="fixed inset-0 z-[100] flex items-center justify-center p-2 sm:p-4 md:p-6 lg:p-8"
+        className="fixed inset-0 z-[99999] flex items-center justify-center p-3 sm:p-5 md:p-6 lg:p-8"
         role="dialog"
         aria-modal="true"
         aria-labelledby="modal-project-title"
@@ -94,7 +100,7 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
           exit={{ opacity: 0 }}
           transition={{ duration: 0.2 }}
           onClick={onClose}
-          className="absolute inset-0 bg-black/85 backdrop-blur-md"
+          className="fixed inset-0 bg-black/85 backdrop-blur-md"
           aria-hidden="true"
         />
 
@@ -276,6 +282,7 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
           background: rgba(115, 115, 125, 0.8);
         }
       `}</style>
-    </AnimatePresence>
+    </AnimatePresence>,
+    document.body
   );
 }
