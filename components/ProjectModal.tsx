@@ -112,7 +112,8 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
           exit={{ opacity: 0, scale: 0.94, y: 15 }}
           transition={{ type: "spring", damping: 28, stiffness: 350 }}
           onClick={(e) => e.stopPropagation()}
-          className="relative w-full max-w-5xl xl:max-w-6xl max-h-[92vh] flex flex-col md:flex-row rounded-2xl sm:rounded-3xl border border-neutral-800 bg-[#0c0c0e] text-white shadow-2xl shadow-black overflow-hidden z-10"
+          style={{ fontFamily: '"Inter", sans-serif' }}
+          className="relative w-full max-w-5xl xl:max-w-6xl max-h-[90vh] flex flex-col md:flex-row rounded-2xl sm:rounded-3xl border border-neutral-800 bg-[#0c0c0e] text-white shadow-2xl shadow-black overflow-hidden z-10 font-sans"
         >
           {/* Left Column: Video Player */}
           <div className="w-full md:w-1/2 bg-black flex items-center justify-center relative min-h-[260px] sm:min-h-[340px] md:min-h-[520px] lg:min-h-[580px] border-b md:border-b-0 md:border-r border-neutral-800/90 flex-shrink-0">
@@ -130,18 +131,22 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
           </div>
 
           {/* Right Column: Scrollable Content */}
-          <div className="flex-1 flex flex-col min-w-0 max-h-[55vh] md:max-h-[92vh] overflow-y-auto modal-scrollbar p-5 sm:p-7 md:p-8 bg-[#0e0e11]">
+          <div className="flex-1 flex flex-col min-w-0 max-h-[55vh] md:max-h-[90vh] overflow-y-auto modal-scrollbar p-5 sm:p-7 md:p-8 bg-[#0e0e11]">
             {/* Header */}
             <div className="flex items-start justify-between gap-4 pb-4 border-b border-neutral-800/80">
               <div className="min-w-0 flex-1">
                 <h2
                   id="modal-project-title"
-                  className="text-2xl sm:text-3xl font-extrabold tracking-tight text-white uppercase font-sans"
+                  className="text-2xl sm:text-3xl font-extrabold tracking-tight text-white uppercase"
+                  style={{ fontFamily: '"Inter", sans-serif' }}
                 >
                   {displayTitle}
                 </h2>
                 {project.category && (
-                  <p className="text-xs sm:text-sm font-semibold tracking-wider text-neutral-400 uppercase mt-0.5">
+                  <p
+                    className="text-xs sm:text-sm font-semibold tracking-wider text-neutral-400 uppercase mt-0.5"
+                    style={{ fontFamily: '"Inter", sans-serif' }}
+                  >
                     {project.category}
                   </p>
                 )}
@@ -168,6 +173,7 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
                     href={project.code}
                     target="_blank"
                     rel="noopener noreferrer"
+                    style={{ fontFamily: '"Inter", sans-serif' }}
                     className="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-[#18181b] hover:bg-[#232328] border border-neutral-700/70 text-white font-bold text-xs tracking-wider uppercase transition-all hover:scale-[1.02] active:scale-[0.98]"
                   >
                     <AiOutlineGithub size={18} />
@@ -179,6 +185,7 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
                   href={linkedinUrl}
                   target="_blank"
                   rel="noopener noreferrer"
+                  style={{ fontFamily: '"Inter", sans-serif' }}
                   className="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-[#18181b] hover:bg-[#232328] border border-neutral-700/70 text-white font-bold text-xs tracking-wider uppercase transition-all hover:scale-[1.02] active:scale-[0.98]"
                 >
                   <FaLinkedin size={16} />
@@ -193,6 +200,7 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
                     href={youtubeUrl}
                     target="_blank"
                     rel="noopener noreferrer"
+                    style={{ fontFamily: '"Inter", sans-serif' }}
                     className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-[#e50914] hover:bg-[#cc0812] text-white font-bold text-xs tracking-wider uppercase transition-all hover:scale-[1.02] active:scale-[0.98] shadow-md shadow-red-950/40"
                   >
                     <AiFillYoutube size={20} />
@@ -205,6 +213,7 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
                     href={project.website}
                     target="_blank"
                     rel="noopener noreferrer"
+                    style={{ fontFamily: '"Inter", sans-serif' }}
                     className="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-[#18181b] hover:bg-[#232328] border border-neutral-700/70 text-white font-bold text-xs tracking-wider uppercase transition-all hover:scale-[1.02] active:scale-[0.98]"
                   >
                     <FiExternalLink size={16} />
@@ -218,10 +227,16 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
             <div className="space-y-6 text-left">
               {/* Project Description */}
               <div>
-                <h3 className="text-xs font-bold tracking-widest text-neutral-400 uppercase mb-2">
+                <h3
+                  className="text-xs font-bold tracking-widest text-neutral-400 uppercase mb-2"
+                  style={{ fontFamily: '"Inter", sans-serif' }}
+                >
                   PROJECT DESCRIPTION
                 </h3>
-                <p className="text-sm sm:text-[14.5px] leading-relaxed text-neutral-300 font-normal">
+                <p
+                  className="text-sm sm:text-[14.5px] leading-relaxed text-neutral-300 font-normal"
+                  style={{ fontFamily: '"Inter", sans-serif' }}
+                >
                   {project.long_desc || project.description}
                 </p>
               </div>
@@ -229,14 +244,18 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
               {/* Technologies */}
               {techList.length > 0 && (
                 <div>
-                  <h3 className="text-xs font-bold tracking-widest text-neutral-400 uppercase mb-2.5">
+                  <h3
+                    className="text-xs font-bold tracking-widest text-neutral-400 uppercase mb-2.5"
+                    style={{ fontFamily: '"Inter", sans-serif' }}
+                  >
                     TECHNOLOGIES
                   </h3>
                   <div className="flex flex-wrap gap-2">
                     {techList.map((tech, idx) => (
                       <span
                         key={idx}
-                        className="px-3 py-1.5 rounded-lg bg-[#161619] border border-neutral-800 text-neutral-300 font-mono text-xs tracking-wide hover:border-neutral-700 transition-colors"
+                        className="px-3 py-1.5 rounded-lg bg-[#161619] border border-neutral-800 text-neutral-300 text-xs font-medium tracking-wide hover:border-neutral-700 transition-colors"
+                        style={{ fontFamily: '"Inter", sans-serif' }}
                       >
                         {tech}
                       </span>
@@ -248,10 +267,16 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
               {/* Key Features */}
               {featureList.length > 0 && (
                 <div>
-                  <h3 className="text-xs font-bold tracking-widest text-neutral-400 uppercase mb-2.5">
+                  <h3
+                    className="text-xs font-bold tracking-widest text-neutral-400 uppercase mb-2.5"
+                    style={{ fontFamily: '"Inter", sans-serif' }}
+                  >
                     KEY FEATURES
                   </h3>
-                  <ul className="space-y-2.5 text-sm leading-relaxed text-neutral-300">
+                  <ul
+                    className="space-y-2.5 text-sm leading-relaxed text-neutral-300 font-normal"
+                    style={{ fontFamily: '"Inter", sans-serif' }}
+                  >
                     {featureList.map((feature, idx) => (
                       <li key={idx} className="flex items-start gap-2.5">
                         <span className="w-1.5 h-1.5 rounded-full bg-neutral-400 mt-2 flex-shrink-0" />
