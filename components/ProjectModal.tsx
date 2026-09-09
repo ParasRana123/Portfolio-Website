@@ -80,7 +80,7 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
         .filter(Boolean)
     : [];
 
-  const displayTitle = project.shortTitle || project.title;
+  const displayTitle = project.title;
   const linkedinUrl =
     project.linkedin || "https://www.linkedin.com/in/paras-rana-696b7731b/";
   const youtubeUrl = project.youtube || project.video;
