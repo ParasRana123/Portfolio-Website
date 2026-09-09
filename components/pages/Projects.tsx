@@ -6,7 +6,8 @@ import {
   ProjectCard as ProjectCardType,
 } from "@/data/projectData";
 import { AiOutlineGithub } from "react-icons/ai";
-import { FiExternalLink } from "react-icons/fi";
+import { FiExternalLink, FiMaximize2 } from "react-icons/fi";
+import ProjectModal from "@/components/ProjectModal";
 
 const GRADIENTS = [
   "linear-gradient(135deg, #f6b93b 0%, #e1650f 45%, #6c5ce7 100%)",
@@ -42,16 +43,19 @@ function PlayIcon() {
 function ProjectCard({
   project,
   index,
+  onOpenModal,
 }: {
   project: ProjectCardType;
   index: number;
+  onOpenModal: (project: ProjectCardType) => void;
 }) {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [isPlaying, setIsPlaying] = useState(false);
 
   const gradient = GRADIENTS[index % GRADIENTS.length];
 
-  const togglePlay = async () => {
+  const togglePlay = async (e?: React.MouseEvent | React.KeyboardEvent) => {
+    if (e) e.stopPropagation();
     const video = videoRef.current;
 
     if (!video) return;
@@ -70,7 +74,21 @@ function ProjectCard({
   };
 
   return (
-    <article className="dp-project-card">
+    <article
+      className="dp-project-card"
+      onClick={() => onOpenModal(project)}
+      role="button"
+      tabIndex={0}
+      aria-label={`View details for ${project.title}`}
+      onKeyDown={(e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          if (e.target === e.currentTarget) {
+            e.preventDefault();
+            onOpenModal(project);
+          }
+        }
+      }}
+    >
       {/* Header */}
       <div className="dp-project-header">
         <div
@@ -94,6 +112,7 @@ function ProjectCard({
             target="_blank"
             rel="noopener noreferrer"
             className="dp-project-github"
+            onClick={(e) => e.stopPropagation()}
           >
             @ParasRana123
           </a>
@@ -107,6 +126,7 @@ function ProjectCard({
             className="dp-project-live-link"
             title="Visit Live Website"
             aria-label={`Visit ${project.title} live website`}
+            onClick={(e) => e.stopPropagation()}
           >
             <FiExternalLink size={15} aria-hidden="true" />
           </a>
@@ -134,6 +154,7 @@ function ProjectCard({
             muted
             preload="metadata"
             controls
+            onClick={(e) => e.stopPropagation()}
             onPlay={() => setIsPlaying(true)}
             onPause={() => setIsPlaying(false)}
             onEnded={() => setIsPlaying(false)}
@@ -142,7 +163,7 @@ function ProjectCard({
           {!isPlaying && (
             <div
               className="dp-project-play-overlay"
-              onClick={togglePlay}
+              onClick={(e) => togglePlay(e)}
               role="button"
               tabIndex={0}
               aria-label={`Play ${project.title} video`}
@@ -152,7 +173,7 @@ function ProjectCard({
                   event.key === " "
                 ) {
                   event.preventDefault();
-                  togglePlay();
+                  togglePlay(event);
                 }
               }}
             >
@@ -173,11 +194,24 @@ function ProjectCard({
               target="_blank"
               rel="noopener noreferrer"
               className="dp-project-link"
+              onClick={(e) => e.stopPropagation()}
             >
               <span>View Code</span>
               <FiExternalLink size={14} aria-hidden="true" />
             </a>
           )}
+          
+          <button
+            type="button"
+            className="dp-project-details-btn"
+            onClick={(e) => {
+              e.stopPropagation();
+              onOpenModal(project);
+            }}
+          >
+            <span>Details</span>
+            <FiMaximize2 size={13} aria-hidden="true" />
+          </button>
         </div>
       </div>
 
@@ -214,6 +248,7 @@ function ProjectCard({
             border-color 0.25s ease;
 
           overflow: hidden;
+          cursor: pointer;
         }
 
         .dp-project-card:hover {
@@ -598,12 +633,39 @@ function ProjectCard({
         .dp-project-link:hover :global(svg) {
           transform: translate(2px, -2px);
         }
+
+        .dp-project-details-btn {
+          display: inline-flex;
+          align-items: center;
+          gap: 6px;
+          padding: 6px 12px;
+          border-radius: 20px;
+          border: 1px solid var(--hairline);
+          background: transparent;
+          font-family: "Inter", sans-serif;
+          font-size: 12.5px;
+          font-weight: 550;
+          color: var(--muted);
+          cursor: pointer;
+          transition: all 0.2s ease;
+        }
+
+        .dp-project-details-btn:hover {
+          color: var(--ink);
+          border-color: var(--accent);
+          background: rgba(226, 121, 79, 0.08);
+          gap: 8px;
+        }
       `}</style>
     </article>
   );
 }
 
 export default function Projects() {
+  const [selectedProject, setSelectedProject] = useState<ProjectCardType | null>(
+    null
+  );
+
   return (
     <section className="dp-projects-section">
       <div className="dp-projects-container">
@@ -620,6 +682,7 @@ export default function Projects() {
               key={project.title}
               project={project}
               index={index}
+              onOpenModal={setSelectedProject}
             />
           ))}
         </div>
@@ -637,6 +700,14 @@ export default function Projects() {
           </a>
         </div>
       </div>
+
+      {/* Project Details Popup Modal */}
+      {selectedProject && (
+        <ProjectModal
+          project={selectedProject}
+          onClose={() => setSelectedProject(null)}
+        />
+      )}
 
       <style jsx>{`
         /* ========================================
