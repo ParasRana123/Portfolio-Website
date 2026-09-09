@@ -30,10 +30,12 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
       const originalOverflow = document.body.style.overflow;
       document.body.style.overflow = "hidden";
 
+      const videoEl = videoRef.current;
+
       // Attempt safe video playback
-      if (videoRef.current) {
-        videoRef.current.currentTime = 0;
-        videoRef.current.play().catch(() => {
+      if (videoEl) {
+        videoEl.currentTime = 0;
+        videoEl.play().catch(() => {
           // Autoplay was prevented (e.g. browser policy), controls are available for user
         });
       }
@@ -47,8 +49,8 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
         window.removeEventListener("keydown", handleKeyDown);
         document.body.style.overflow = originalOverflow;
         clearTimeout(focusTimeout);
-        if (videoRef.current) {
-          videoRef.current.pause();
+        if (videoEl) {
+          videoEl.pause();
         }
       };
     }
