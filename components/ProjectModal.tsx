@@ -137,14 +137,14 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
               <div className="min-w-0 flex-1">
                 <h2
                   id="modal-project-title"
-                  className="text-2xl sm:text-3xl font-extrabold tracking-tight text-white uppercase"
+                  className="text-base sm:text-lg font-bold tracking-tight text-white leading-snug"
                   style={{ fontFamily: '"Inter", sans-serif' }}
                 >
                   {displayTitle}
                 </h2>
                 {project.category && (
                   <p
-                    className="text-xs sm:text-sm font-semibold tracking-wider text-neutral-400 uppercase mt-0.5"
+                    className="text-[11px] sm:text-xs font-medium tracking-wider text-neutral-400 uppercase mt-0.5"
                     style={{ fontFamily: '"Inter", sans-serif' }}
                   >
                     {project.category}
