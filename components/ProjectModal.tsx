@@ -88,7 +88,7 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
   return createPortal(
     <AnimatePresence>
       <div
-        className="fixed inset-0 z-[99999] flex items-center justify-center p-3 sm:p-5 md:p-6 lg:p-8"
+        className="fixed inset-0 z-[99999] flex items-center justify-center p-3 sm:p-5 md:p-6 lg:p-8 overflow-y-auto"
         role="dialog"
         aria-modal="true"
         aria-labelledby="modal-project-title"
@@ -98,25 +98,25 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          transition={{ duration: 0.2 }}
+          transition={{ duration: 0.18 }}
           onClick={onClose}
-          className="fixed inset-0 bg-black/85 backdrop-blur-md"
+          className="fixed inset-0 bg-black/85 backdrop-blur-md cursor-pointer"
           aria-hidden="true"
         />
 
         {/* Modal Window */}
         <motion.div
           ref={modalRef}
-          initial={{ opacity: 0, scale: 0.94, y: 15 }}
-          animate={{ opacity: 1, scale: 1, y: 0 }}
-          exit={{ opacity: 0, scale: 0.94, y: 15 }}
-          transition={{ type: "spring", damping: 28, stiffness: 350 }}
+          initial={{ opacity: 0, scale: 0.96 }}
+          animate={{ opacity: 1, scale: 1 }}
+          exit={{ opacity: 0, scale: 0.96 }}
+          transition={{ duration: 0.2, ease: "easeOut" }}
           onClick={(e) => e.stopPropagation()}
           style={{ fontFamily: '"Inter", sans-serif' }}
-          className="relative w-full max-w-5xl xl:max-w-6xl max-h-[90vh] flex flex-col md:flex-row rounded-2xl sm:rounded-3xl border border-neutral-800 bg-[#0c0c0e] text-white shadow-2xl shadow-black overflow-hidden z-10 font-sans"
+          className="relative m-auto my-auto w-full max-w-5xl xl:max-w-6xl max-h-[88vh] flex flex-col md:flex-row rounded-2xl sm:rounded-3xl border border-neutral-800 bg-[#0c0c0e] text-white shadow-2xl shadow-black overflow-hidden z-10 font-sans"
         >
           {/* Left Column: Video Player */}
-          <div className="w-full md:w-1/2 bg-black flex items-center justify-center relative min-h-[260px] sm:min-h-[340px] md:min-h-[520px] lg:min-h-[580px] border-b md:border-b-0 md:border-r border-neutral-800/90 flex-shrink-0">
+          <div className="w-full md:w-1/2 bg-black flex items-center justify-center relative min-h-[240px] sm:min-h-[320px] md:min-h-[500px] border-b md:border-b-0 md:border-r border-neutral-800/90 flex-shrink-0 self-stretch">
             <video
               ref={videoRef}
               src={project.video}
@@ -126,12 +126,12 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
               autoPlay
               muted
               preload="auto"
-              className="w-full h-full max-h-[300px] sm:max-h-[380px] md:max-h-[620px] object-contain bg-black"
+              className="w-full h-full max-h-[280px] sm:max-h-[360px] md:max-h-[580px] object-contain bg-black"
             />
           </div>
 
           {/* Right Column: Scrollable Content */}
-          <div className="flex-1 flex flex-col min-w-0 max-h-[55vh] md:max-h-[90vh] overflow-y-auto modal-scrollbar p-5 sm:p-7 md:p-8 bg-[#0e0e11]">
+          <div className="flex-1 flex flex-col min-w-0 max-h-[48vh] md:max-h-[88vh] overflow-y-auto modal-scrollbar p-5 sm:p-7 md:p-8 bg-[#0e0e11]">
             {/* Header */}
             <div className="flex items-start justify-between gap-4 pb-4 border-b border-neutral-800/80">
               <div className="min-w-0 flex-1">
