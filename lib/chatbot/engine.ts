@@ -120,10 +120,11 @@ When he is not architecting backend systems or studying at IIIT Nagpur, here is 
     query.includes("curriculum vitae") ||
     query.includes("pdf")
   ) {
-    return `### Paras Rana's Resume
-You can view and download Paras's official up-to-date resume directly via Google Drive:
+    return `### Paras Rana's Resumes
+You can view and download Paras's official up-to-date resumes directly via Google Drive:
 
-- [View / Download Resume (Google Drive)](${p.contact.resumeUrl})
+- [📄 View / Download SDE Resume (Google Drive)](${p.contact.sdeResumeUrl || p.contact.resumeUrl})
+- [🤖 View / Download AI/ML Resume (Google Drive)](${p.contact.aimlResumeUrl || "https://drive.google.com/file/d/1PWYSdLrPIxbm9y_nHmuVRUWfwyJx_IVh/view"})
 
 Quick Highlights from Resume:
 - Education: B.Tech in CSE at IIIT Nagpur (2023 — 2027) · CGPA: 7.50 / 10
@@ -154,7 +155,7 @@ Here is how you can connect with Paras directly:
 - Email: [${p.contact.email}](mailto:${p.contact.email})
 - LinkedIn: [${p.contact.linkedin}](${p.contact.linkedin})
 - GitHub: [${p.contact.github}](${p.contact.github})
-- Resume: [View on Google Drive](${p.contact.resumeUrl})
+- Resumes: [SDE Resume](${p.contact.sdeResumeUrl || p.contact.resumeUrl}) · [AI/ML Resume](${p.contact.aimlResumeUrl || "https://drive.google.com/file/d/1PWYSdLrPIxbm9y_nHmuVRUWfwyJx_IVh/view"})
 - Codolio CP Profile: [Codolio Profile](${p.contact.codolio})
 - Location: Nagpur (College Campus) / Mumbai (Hometown), India`;
   }
@@ -399,7 +400,8 @@ Paras Rana is a Computer Science undergraduate at IIIT Nagpur (Batch 2023–2027
 ---
 
 ### Resume, Contact & Hiring Info
-- [View / Download Resume (Google Drive)](${p.contact.resumeUrl})
+- [View SDE Resume (Google Drive)](${p.contact.sdeResumeUrl || p.contact.resumeUrl})
+- [View AI/ML Resume (Google Drive)](${p.contact.aimlResumeUrl || "https://drive.google.com/file/d/1PWYSdLrPIxbm9y_nHmuVRUWfwyJx_IVh/view"})
 - Email: [${p.contact.email}](mailto:${p.contact.email})
 - LinkedIn: [linkedin.com/in/paras-rana-696b7731b](${p.contact.linkedin})
 - GitHub: [github.com/ParasRana123](${p.contact.github})
@@ -436,7 +438,7 @@ I can help answer questions specifically about:
 - Projects: Musor, Omegle Clone, Celeb Lookalike, SIH Defence Portal, Movie Recommender, NOVA.
 - Technical Skills: Node.js, FastAPI, Next.js, Redis, PostgreSQL, Docker, WebSockets, WebRTC.
 - CP & Problem Solving: LeetCode Guardian (2210), CodeChef 4-Star (1811), 1500+ solved.
-- Resume & Contact: [Google Drive Resume](${p.contact.resumeUrl}) · [${p.contact.email}](mailto:${p.contact.email}) · [LinkedIn](${p.contact.linkedin})
+- Resumes & Contact: [SDE Resume](${p.contact.sdeResumeUrl || p.contact.resumeUrl}) · [AI/ML Resume](${p.contact.aimlResumeUrl || "https://drive.google.com/file/d/1PWYSdLrPIxbm9y_nHmuVRUWfwyJx_IVh/view"}) · [${p.contact.email}](mailto:${p.contact.email}) · [LinkedIn](${p.contact.linkedin})
 
 Feel free to ask a specific question on any of these topics.`;
 }

@@ -82,6 +82,8 @@ export interface PersonalProfile {
     codechef: string;
     codeforces: string;
     resumeUrl: string;
+    sdeResumeUrl?: string;
+    aimlResumeUrl?: string;
   };
   skills: {
     languages: string[];

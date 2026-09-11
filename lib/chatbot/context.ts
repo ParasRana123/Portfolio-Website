@@ -22,7 +22,11 @@ export const PARAS_PROFILE: PersonalProfile = {
     codechef: "https://www.codechef.com/users/paras579",
     codeforces: "https://codeforces.com/profile/Par08",
     resumeUrl:
-      "https://drive.google.com/file/d/1oHGxltfftvUB5vEWj_l3zU3wF3q9byDR/view?usp=sharing",
+      "https://drive.google.com/file/d/1oHGxltfftvUB5vEWj_l3zU3wF3q9byDR/view",
+    sdeResumeUrl:
+      "https://drive.google.com/file/d/1oHGxltfftvUB5vEWj_l3zU3wF3q9byDR/view",
+    aimlResumeUrl:
+      "https://drive.google.com/file/d/1PWYSdLrPIxbm9y_nHmuVRUWfwyJx_IVh/view",
   },
   skills: {
     languages: [
@@ -312,8 +316,8 @@ export const PARAS_PROFILE: PersonalProfile = {
     {
       question: "Where can I find your resume?",
       answer:
-        "You can view and download Paras's latest resume directly here: https://drive.google.com/file/d/1oHGxltfftvUB5vEWj_l3zU3wF3q9byDR/view?usp=sharing",
-      keywords: ["resume", "cv", "pdf", "profile", "document"],
+        "You can view and download Paras's resumes directly on Google Drive:\n- SDE Resume: https://drive.google.com/file/d/1oHGxltfftvUB5vEWj_l3zU3wF3q9byDR/view\n- AI/ML Resume: https://drive.google.com/file/d/1PWYSdLrPIxbm9y_nHmuVRUWfwyJx_IVh/view",
+      keywords: ["resume", "cv", "pdf", "profile", "document", "sde", "ai", "ml"],
     },
     {
       question: "How can I get in touch with you?",
@@ -395,7 +399,8 @@ You must answer questions knowledgeably, concisely, accurately, and professional
 - Email: ${p.contact.email}
 - LinkedIn: ${p.contact.linkedin}
 - GitHub: ${p.contact.github}
-- Resume: ${p.contact.resumeUrl}
+- SDE Resume: ${p.contact.sdeResumeUrl || p.contact.resumeUrl}
+- AI/ML Resume: ${p.contact.aimlResumeUrl || "https://drive.google.com/file/d/1PWYSdLrPIxbm9y_nHmuVRUWfwyJx_IVh/view"}
 - Codolio: ${p.contact.codolio}
 - LeetCode: ${p.contact.leetcode}
 - CodeChef: ${p.contact.codechef}
