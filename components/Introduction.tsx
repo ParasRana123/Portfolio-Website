@@ -140,7 +140,10 @@ export default function Introduction() {
           <span>Ask AI</span>
         </button>
 
-        <a className="dp-intro-action" href="#contact">
+        <a
+          className="dp-intro-action dp-intro-action--contact"
+          href="#contact"
+        >
           Get in touch
         </a>
       </div>
