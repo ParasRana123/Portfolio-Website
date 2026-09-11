@@ -427,27 +427,35 @@
 
 @media (max-width: 560px) {
   .dp-intro-actions {
-    gap: 6px;
+    gap: 8px;
     width: 100%;
+    justify-content: flex-start;
   }
 
   .dp-resume-dropdown-wrapper {
-    flex: 1 1 0;
-    min-width: 0;
+    flex: 0 0 auto;
   }
 
-  .dp-resume-dropdown-wrapper .dp-intro-action {
-    width: 100%;
+  .dp-resume-trigger {
+    padding: 0 13px;
+    font-size: 12px;
+    min-height: 34px;
+    gap: 5px;
   }
 
-  .dp-intro-action {
-    flex: 1 1 0;
-    min-width: 0;
-    padding: 0 8px;
+  .dp-intro-action--ai {
+    flex: 0 0 auto;
+    padding: 0 7px;
     font-size: 11.5px;
-    min-height: 33px;
+    min-height: 34px;
     gap: 4px;
-    text-align: center;
+  }
+
+  .dp-intro-action--contact {
+    flex: 0 0 auto;
+    padding: 0 10px;
+    font-size: 11.5px;
+    min-height: 34px;
   }
 
   .dp-resume-dropdown {
@@ -458,12 +466,25 @@
 
 @media (max-width: 380px) {
   .dp-intro-actions {
+    gap: 5px;
+  }
+
+  .dp-resume-trigger {
+    padding: 0 10px;
+    font-size: 11px;
+    min-height: 32px;
     gap: 4px;
   }
 
-  .dp-intro-action {
-    padding: 0 5px;
-    font-size: 10.5px;
+  .dp-intro-action--ai {
+    padding: 0 6px;
+    font-size: 11px;
+    min-height: 32px;
+  }
+
+  .dp-intro-action--contact {
+    padding: 0 8px;
+    font-size: 11px;
     min-height: 32px;
   }
 }
