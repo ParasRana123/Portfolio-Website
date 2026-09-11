@@ -396,9 +396,11 @@
 
 .dp-intro-actions {
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
+  align-items: center;
   gap: 10px;
   padding-top: 4px;
+  width: 100%;
 }
 
 .dp-intro-action {
@@ -415,11 +417,55 @@
   font-size: 12px;
   font-weight: 500;
   text-decoration: none;
+  white-space: nowrap;
   transition:
     border-color 0.2s ease,
     background-color 0.2s ease,
     color 0.2s ease,
     transform 0.2s ease;
+}
+
+@media (max-width: 560px) {
+  .dp-intro-actions {
+    gap: 6px;
+    width: 100%;
+  }
+
+  .dp-resume-dropdown-wrapper {
+    flex: 1 1 0;
+    min-width: 0;
+  }
+
+  .dp-resume-dropdown-wrapper .dp-intro-action {
+    width: 100%;
+  }
+
+  .dp-intro-action {
+    flex: 1 1 0;
+    min-width: 0;
+    padding: 0 8px;
+    font-size: 11.5px;
+    min-height: 33px;
+    gap: 4px;
+    text-align: center;
+  }
+
+  .dp-resume-dropdown {
+    width: min(275px, calc(100vw - 32px));
+    left: 0;
+  }
+}
+
+@media (max-width: 380px) {
+  .dp-intro-actions {
+    gap: 4px;
+  }
+
+  .dp-intro-action {
+    padding: 0 5px;
+    font-size: 10.5px;
+    min-height: 32px;
+  }
 }
 
 .dp-intro-action:hover {
