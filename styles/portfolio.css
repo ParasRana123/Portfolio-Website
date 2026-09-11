@@ -458,6 +458,160 @@
   color: var(--accent);
 }
 
+/* Resume Dropdown */
+.dp-resume-dropdown-wrapper {
+  position: relative;
+  display: inline-flex;
+}
+
+.dp-resume-trigger {
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  user-select: none;
+}
+
+.dp-resume-chevron {
+  transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.dp-resume-chevron.is-open {
+  transform: rotate(180deg);
+}
+
+.dp-resume-dropdown {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  z-index: 45;
+  width: 275px;
+  padding: 6px;
+  background: var(--surface);
+  border: 1px solid var(--hairline);
+  border-radius: 12px;
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.18), 0 4px 12px rgba(0, 0, 0, 0.08);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  animation: dpResumeMenuFade 0.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+@keyframes dpResumeMenuFade {
+  from {
+    opacity: 0;
+    transform: translateY(-5px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.dp-resume-dropdown-header {
+  padding: 4px 8px 5px;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  color: var(--muted);
+  border-bottom: 1px solid var(--hairline);
+  margin-bottom: 3px;
+}
+
+.dp-resume-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 10px;
+  border-radius: 9px;
+  text-decoration: none;
+  color: var(--ink);
+  background: transparent;
+  border: 1px solid transparent;
+  transition:
+    background-color 0.18s ease,
+    border-color 0.18s ease,
+    transform 0.18s ease;
+}
+
+.dp-resume-item:hover {
+  background: var(--surface-elevated, rgba(255, 255, 255, 0.05));
+  border-color: var(--hairline);
+  transform: translateX(2px);
+}
+
+.dp-resume-item-icon-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  flex-shrink: 0;
+  transition: transform 0.2s ease;
+}
+
+.dp-resume-item:hover .dp-resume-item-icon-box {
+  transform: scale(1.08);
+}
+
+.dp-resume-item-icon-box--sde {
+  background: rgba(226, 121, 79, 0.12);
+  color: var(--accent);
+  border: 1px solid rgba(226, 121, 79, 0.25);
+}
+
+.dp-resume-item-icon-box--aiml {
+  background: rgba(56, 189, 248, 0.12);
+  color: #38bdf8;
+  border: 1px solid rgba(56, 189, 248, 0.25);
+}
+
+.dp-resume-item-content {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-width: 0;
+}
+
+.dp-resume-item-title-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+}
+
+.dp-resume-item-title {
+  font-family: "Inter", sans-serif;
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.dp-resume-item-ext {
+  color: var(--muted);
+  opacity: 0.6;
+  transition: opacity 0.18s ease, transform 0.18s ease;
+}
+
+.dp-resume-item:hover .dp-resume-item-ext {
+  opacity: 1;
+  color: var(--accent);
+  transform: translate(1px, -1px);
+}
+
+.dp-resume-item-desc {
+  font-family: "Inter", sans-serif;
+  font-size: 11px;
+  color: var(--muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-top: 1px;
+}
+
 .dp-spotify {
   padding: 0 0 28px;
 }
