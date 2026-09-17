@@ -589,7 +589,7 @@
   position: absolute;
   top: calc(100% + 8px);
   left: 0;
-  z-index: 45;
+  z-index: 99;
   width: 275px;
   padding: 6px;
   background: var(--surface);
