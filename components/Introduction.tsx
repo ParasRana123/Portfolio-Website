@@ -2,7 +2,7 @@
 
 import { useState, useRef, useEffect } from "react";
 import { PARAGRAPHS } from "@/data/paragraphs";
-import { Sparkles, ChevronDown, Code2, Brain, ExternalLink } from "lucide-react";
+import { Sparkles, ChevronDown, Code2, Brain, ExternalLink, Crosshair } from "lucide-react";
 
 const SDE_RESUME_URL =
   "https://drive.google.com/file/d/1oHGxltfftvUB5vEWj_l3zU3wF3q9byDR/view";
@@ -48,6 +48,12 @@ export default function Introduction() {
           },
         })
       );
+    }
+  };
+
+  const handleOpenGame = () => {
+    if (typeof window !== "undefined") {
+      window.dispatchEvent(new CustomEvent("open-shoot-game"));
     }
   };
 
@@ -138,6 +144,16 @@ export default function Introduction() {
         >
           <Sparkles size={13} className="dp-sparkle-intro" />
           <span>Ask AI</span>
+        </button>
+
+        <button
+          type="button"
+          onClick={handleOpenGame}
+          className="dp-intro-action dp-intro-action--game"
+          title="Play Shoot to Discover game to unlock portfolio intel"
+        >
+          <Crosshair size={13} className="dp-crosshair-intro" />
+          <span>Launch Game</span>
         </button>
 
         <a

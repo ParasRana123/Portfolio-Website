@@ -10,6 +10,7 @@ import Tools from "./pages/Tools";
 import Ratings from "./pages/Ratings";
 import Education from "./pages/Education";
 import ChatbotWidget from "./chatbot/ChatbotWidget";
+import ShootingGameModal from "./game/ShootingGameModal";
 
 export default function Portfolio() {
   const [dark, setDark] = useState(false);
@@ -153,6 +154,9 @@ export default function Portfolio() {
 
       {/* Interactive AI Chatbot Widget */}
       <ChatbotWidget />
+
+      {/* Shoot to Discover Combat Arena Game Modal */}
+      <ShootingGameModal />
     </div>
   );
 }
