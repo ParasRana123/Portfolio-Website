@@ -216,7 +216,7 @@ export default function GameCodexDrawer({
             >
               <div className="dp-game-codex-item-modal-head">
                 <span className="dp-game-intel-badge" style={{ color: activeItem.color, borderColor: activeItem.color }}>
-                  {activeItem.badge} // {activeItem.rarity.toUpperCase()}
+                  {`${activeItem.badge} // ${activeItem.rarity.toUpperCase()}`}
                 </span>
                 <button
                   type="button"

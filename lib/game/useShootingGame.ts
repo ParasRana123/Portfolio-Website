@@ -33,6 +33,12 @@ export function useShootingGame() {
     totalIntelCount: INTEL_ITEMS.length,
   });
 
+  const isCodexOpenRef = useRef(isCodexOpen);
+  isCodexOpenRef.current = isCodexOpen;
+
+  const isVictoryOpenRef = useRef(isVictoryOpen);
+  isVictoryOpenRef.current = isVictoryOpen;
+
   // Load previously unlocked intel from localStorage
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -82,6 +88,28 @@ export function useShootingGame() {
 
   const handleScreenShake = useCallback((_intensity: number) => {
     // Optional CSS shake trigger
+  }, []);
+
+  const switchWeapon = useCallback((weapon: Weapon) => {
+    setCurrentWeapon(weapon);
+    if (engineRef.current) {
+      engineRef.current.setWeapon(weapon);
+    }
+  }, []);
+
+  const togglePause = useCallback(() => {
+    setIsPaused((prev) => {
+      const next = !prev;
+      if (engineRef.current) {
+        engineRef.current.pause(next);
+      }
+      return next;
+    });
+  }, []);
+
+  const toggleMute = useCallback(() => {
+    const muted = gameAudio.toggleMute();
+    setIsMuted(muted);
   }, []);
 
   // Initialize Game Canvas Engine when modal opens
@@ -175,8 +203,8 @@ export function useShootingGame() {
       else if (e.key === "m" || e.key === "M") toggleMute();
       else if (e.key === "c" || e.key === "C") setIsCodexOpen((v) => !v);
       else if (e.key === "Escape") {
-        if (isCodexOpen) setIsCodexOpen(false);
-        else if (isVictoryOpen) setIsVictoryOpen(false);
+        if (isCodexOpenRef.current) setIsCodexOpen(false);
+        else if (isVictoryOpenRef.current) setIsVictoryOpen(false);
         else togglePause();
       }
     };
@@ -207,30 +235,11 @@ export function useShootingGame() {
     handleStatsUpdate,
     handleVictory,
     handleScreenShake,
+    switchWeapon,
+    toggleMute,
+    togglePause,
     unlockedIds,
   ]);
-
-  const switchWeapon = useCallback((weapon: Weapon) => {
-    setCurrentWeapon(weapon);
-    if (engineRef.current) {
-      engineRef.current.setWeapon(weapon);
-    }
-  }, []);
-
-  const togglePause = useCallback(() => {
-    setIsPaused((prev) => {
-      const next = !prev;
-      if (engineRef.current) {
-        engineRef.current.pause(next);
-      }
-      return next;
-    });
-  }, []);
-
-  const toggleMute = useCallback(() => {
-    const muted = gameAudio.toggleMute();
-    setIsMuted(muted);
-  }, []);
 
   const restartGame = useCallback(() => {
     setIsVictoryOpen(false);
