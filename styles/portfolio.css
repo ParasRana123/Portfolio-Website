@@ -396,7 +396,7 @@
 
 .dp-intro-actions {
   display: flex;
-  flex-wrap: nowrap;
+  flex-wrap: wrap;
   align-items: center;
   gap: 10px;
   padding-top: 4px;
@@ -427,6 +427,9 @@
 
 @media (max-width: 560px) {
   .dp-intro-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
     gap: 8px;
     width: 100%;
     justify-content: flex-start;
@@ -437,15 +440,15 @@
   }
 
   .dp-resume-trigger {
-    padding: 0 13px;
-    font-size: 12px;
+    padding: 0 12px;
+    font-size: 11.5px;
     min-height: 34px;
     gap: 5px;
   }
 
   .dp-intro-action--ai {
     flex: 0 0 auto;
-    padding: 0 7px;
+    padding: 0 9px;
     font-size: 11.5px;
     min-height: 34px;
     gap: 4px;
@@ -453,7 +456,7 @@
 
   .dp-intro-action--game {
     flex: 0 0 auto;
-    padding: 0 8px;
+    padding: 0 10px;
     font-size: 11.5px;
     min-height: 34px;
     gap: 4px;
@@ -461,7 +464,7 @@
 
   .dp-intro-action--contact {
     flex: 0 0 auto;
-    padding: 0 10px;
+    padding: 0 11px;
     font-size: 11.5px;
     min-height: 34px;
   }
@@ -474,7 +477,7 @@
 
 @media (max-width: 380px) {
   .dp-intro-actions {
-    gap: 5px;
+    gap: 6px;
   }
 
   .dp-resume-trigger {
@@ -485,19 +488,19 @@
   }
 
   .dp-intro-action--ai {
-    padding: 0 6px;
+    padding: 0 8px;
     font-size: 11px;
     min-height: 32px;
   }
 
   .dp-intro-action--game {
-    padding: 0 6px;
+    padding: 0 8px;
     font-size: 11px;
     min-height: 32px;
   }
 
   .dp-intro-action--contact {
-    padding: 0 8px;
+    padding: 0 9px;
     font-size: 11px;
     min-height: 32px;
   }
