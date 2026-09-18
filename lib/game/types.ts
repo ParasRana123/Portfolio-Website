@@ -90,3 +90,11 @@ export interface GameStats {
   intelUnlockedCount: number;
   totalIntelCount: number;
 }
+
+export interface FullscreenIntelState {
+  intel: IntelItem | null;
+  queue: IntelItem[];
+  autoResumeSeconds: number;
+  isStasisActive: boolean;
+}
+
