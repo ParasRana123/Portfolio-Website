@@ -3,7 +3,7 @@
 import { useEffect } from "react";
 import { useShootingGame } from "@/lib/game/useShootingGame";
 import GameHUD from "./GameHUD";
-import IntelNotificationBanner from "./IntelNotificationBanner";
+import IntelFullscreenModal from "./IntelFullscreenModal";
 import GameCodexDrawer from "./GameCodexDrawer";
 import GameVictoryModal from "./GameVictoryModal";
 import { Play, BookOpen, Volume2, VolumeX, X, Crosshair } from "lucide-react";
@@ -16,10 +16,11 @@ export default function ShootingGameModal() {
     isMuted,
     isCodexOpen,
     isVictoryOpen,
+    activeFullscreenIntel,
+    intelQueueCount,
     currentWeapon,
     currentWave,
     waveName,
-    recentUnlock,
     unlockedIds,
     stats,
     openGame,
@@ -27,8 +28,8 @@ export default function ShootingGameModal() {
     togglePause,
     toggleMute,
     switchWeapon,
+    handleResumeFromIntel,
     setIsCodexOpen,
-    setRecentUnlock,
     restartGame,
     startEndlessMode,
   } = useShootingGame();
@@ -70,10 +71,11 @@ export default function ShootingGameModal() {
         onCloseGame={closeGame}
       />
 
-      {/* Live Animated Intel Unlocked Banner */}
-      <IntelNotificationBanner
-        intel={recentUnlock}
-        onClose={() => setRecentUnlock(null)}
+      {/* Fullscreen Decrypted Intel Overlay */}
+      <IntelFullscreenModal
+        intel={activeFullscreenIntel}
+        queueCount={intelQueueCount}
+        onResume={handleResumeFromIntel}
         onOpenCodex={() => setIsCodexOpen(true)}
       />
 
