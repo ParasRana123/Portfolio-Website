@@ -16,6 +16,12 @@ export function useShootingGame() {
   const [isCodexOpen, setIsCodexOpen] = useState(false);
   const [isVictoryOpen, setIsVictoryOpen] = useState(false);
 
+  const [activeFullscreenIntel, setActiveFullscreenIntel] = useState<IntelItem | null>(null);
+  const [intelQueue, setIntelQueue] = useState<IntelItem[]>([]);
+  const intelQueueRef = useRef<IntelItem[]>([]);
+  const activeFullscreenIntelRef = useRef<IntelItem | null>(null);
+  activeFullscreenIntelRef.current = activeFullscreenIntel;
+
   const [currentWeapon, setCurrentWeapon] = useState<Weapon>(GAME_WEAPONS[0]);
   const [currentWave, setCurrentWave] = useState(1);
   const [waveName, setWaveName] = useState("WAVE 1: RECONNAISSANCE");
@@ -39,6 +45,9 @@ export function useShootingGame() {
   const isVictoryOpenRef = useRef(isVictoryOpen);
   isVictoryOpenRef.current = isVictoryOpen;
 
+  const isPausedRef = useRef(isPaused);
+  isPausedRef.current = isPaused;
+
   // Load previously unlocked intel from localStorage
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -57,9 +66,9 @@ export function useShootingGame() {
     }
   }, []);
 
-  // Save unlocked intel to localStorage
+  // Handle Intel Unlocked with Fullscreen Modal + Stasis Pause
   const handleIntelUnlocked = useCallback((intel: IntelItem, isNew: boolean) => {
-    setRecentUnlock(intel);
+    // Track ID in unlocked set
     setUnlockedIds((prev) => {
       if (!prev.includes(intel.id)) {
         const next = [...prev, intel.id];
@@ -70,6 +79,36 @@ export function useShootingGame() {
       }
       return prev;
     });
+
+    // If already showing a fullscreen intel modal, queue this up
+    if (activeFullscreenIntelRef.current) {
+      intelQueueRef.current.push(intel);
+      setIntelQueue([...intelQueueRef.current]);
+    } else {
+      // Put game into tactical stasis (pause) and show fullscreen dossier
+      if (engineRef.current) {
+        engineRef.current.pause(true);
+      }
+      setActiveFullscreenIntel(intel);
+      setRecentUnlock(intel);
+    }
+  }, []);
+
+  // Resume from Fullscreen Intel (processes queue or resumes live combat)
+  const handleResumeFromIntel = useCallback(() => {
+    if (intelQueueRef.current.length > 0) {
+      const nextIntel = intelQueueRef.current.shift()!;
+      setIntelQueue([...intelQueueRef.current]);
+      setActiveFullscreenIntel(nextIntel);
+      setRecentUnlock(nextIntel);
+    } else {
+      setActiveFullscreenIntel(null);
+      setRecentUnlock(null);
+      // Unpause game engine if arena is not paused by user
+      if (!isPausedRef.current && engineRef.current) {
+        engineRef.current.pause(false);
+      }
+    }
   }, []);
 
   const handleWaveChange = useCallback((wave: number, title: string) => {
@@ -100,7 +139,7 @@ export function useShootingGame() {
   const togglePause = useCallback(() => {
     setIsPaused((prev) => {
       const next = !prev;
-      if (engineRef.current) {
+      if (engineRef.current && !activeFullscreenIntelRef.current) {
         engineRef.current.pause(next);
       }
       return next;
@@ -194,8 +233,23 @@ export function useShootingGame() {
       engine.isMouseDown = false;
     };
 
-    // Keyboard controls (1-4 weapon select, M mute, C codex, Space shoot, Esc pause/close)
+    // Keyboard controls (1-4 weapon select, M mute, C codex, Space/Enter resume from intel, Esc pause/close)
     const handleKeyDown = (e: KeyboardEvent) => {
+      // If fullscreen intel dossier is open, Space/Enter/Escape resumes combat
+      if (activeFullscreenIntelRef.current) {
+        if (e.key === " " || e.key === "Enter" || e.key === "Escape") {
+          e.preventDefault();
+          handleResumeFromIntel();
+          return;
+        }
+        if (e.key === "c" || e.key === "C") {
+          e.preventDefault();
+          handleResumeFromIntel();
+          setIsCodexOpen(true);
+          return;
+        }
+      }
+
       if (e.key === "1") switchWeapon(GAME_WEAPONS[0]);
       else if (e.key === "2") switchWeapon(GAME_WEAPONS[1]);
       else if (e.key === "3") switchWeapon(GAME_WEAPONS[2]);
@@ -231,6 +285,7 @@ export function useShootingGame() {
   }, [
     isOpen,
     handleIntelUnlocked,
+    handleResumeFromIntel,
     handleWaveChange,
     handleStatsUpdate,
     handleVictory,
@@ -243,6 +298,9 @@ export function useShootingGame() {
 
   const restartGame = useCallback(() => {
     setIsVictoryOpen(false);
+    setActiveFullscreenIntel(null);
+    intelQueueRef.current = [];
+    setIntelQueue([]);
     if (engineRef.current) {
       engineRef.current.startWave(1);
     }
@@ -250,6 +308,9 @@ export function useShootingGame() {
 
   const startEndlessMode = useCallback(() => {
     setIsVictoryOpen(false);
+    setActiveFullscreenIntel(null);
+    intelQueueRef.current = [];
+    setIntelQueue([]);
     if (engineRef.current) {
       engineRef.current.startWave(4);
     }
@@ -259,12 +320,18 @@ export function useShootingGame() {
     setIsOpen(true);
     setIsPaused(false);
     setIsVictoryOpen(false);
+    setActiveFullscreenIntel(null);
+    intelQueueRef.current = [];
+    setIntelQueue([]);
   }, []);
 
   const closeGame = useCallback(() => {
     setIsOpen(false);
     setIsPaused(false);
     setIsVictoryOpen(false);
+    setActiveFullscreenIntel(null);
+    intelQueueRef.current = [];
+    setIntelQueue([]);
   }, []);
 
   return {
@@ -274,6 +341,8 @@ export function useShootingGame() {
     isMuted,
     isCodexOpen,
     isVictoryOpen,
+    activeFullscreenIntel,
+    intelQueueCount: intelQueue.length,
     currentWeapon,
     currentWave,
     waveName,
@@ -285,6 +354,7 @@ export function useShootingGame() {
     togglePause,
     toggleMute,
     switchWeapon,
+    handleResumeFromIntel,
     setIsCodexOpen,
     setIsVictoryOpen,
     setRecentUnlock,
