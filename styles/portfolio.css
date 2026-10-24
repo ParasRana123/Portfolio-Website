@@ -1078,26 +1078,42 @@
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  padding: 5px 8px;
+  padding: 5px 9px;
   border: 1px solid var(--hairline);
   border-radius: 999px;
   background: color-mix(in srgb, var(--bg) 55%, transparent);
   font-family: "IBM Plex Mono", monospace;
-  font-size: 10.5px;
+  font-size: 11px;
   line-height: 1.2;
   color: var(--muted);
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+  outline: none;
+  user-select: none;
   transition:
     border-color 0.2s ease,
     color 0.2s ease,
-    transform 0.2s ease,
-    background-color 0.2s ease;
+    transform 0.15s ease,
+    background-color 0.2s ease,
+    box-shadow 0.2s ease;
 }
 
 .dp-skill-tag:hover {
   border-color: var(--accent);
   background: var(--surface);
   color: var(--ink);
-  transform: translateY(-1px);
+  transform: translateY(-1.5px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.dp-skill-tag:active {
+  transform: scale(0.96) translateY(0);
+}
+
+.dp-skill-tag:focus-visible {
+  ring: 2px solid var(--accent);
+  border-color: var(--accent);
 }
 
 .dp-skill-logo {
@@ -1112,6 +1128,13 @@
   padding: 1px;
   border-radius: 3px;
   background: #f8f6ef;
+}
+
+/* Ensure dark monochrome icons stay crisp and legible in dark mode */
+[style*="--bg: #16150F"] .dp-skill-tag[data-skill="Next.js"] .dp-skill-logo,
+[style*="--bg: #16150F"] .dp-skill-tag[data-skill="WebSockets"] .dp-skill-logo,
+[style*="--bg: #16150F"] .dp-skill-tag[data-skill="Express.js"] .dp-skill-logo {
+  filter: brightness(0) invert(0.92);
 }
 
 @media (max-width: 560px) {
