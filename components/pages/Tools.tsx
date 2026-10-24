@@ -9,6 +9,7 @@ import {
   SkillItem,
 } from "@/data/tools";
 import SkillDetailModal from "@/components/skills/SkillDetailModal";
+import ArchitectureStackView from "@/components/skills/ArchitectureStackView";
 import {
   playSkillClickSound,
   playTabSwitchSound,
@@ -25,6 +26,8 @@ import {
   FiAward,
   FiCode,
   FiZap,
+  FiGrid,
+  FiGitMerge,
 } from "react-icons/fi";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -33,6 +36,7 @@ export default function Tools() {
   const [searchQuery, setSearchQuery] = useState("");
   const [activeCategory, setActiveCategory] = useState<string>("All");
   const [isMuted, setIsMuted] = useState(false);
+  const [viewMode, setViewMode] = useState<"grid" | "pipeline">("grid");
 
   const categories = useMemo(() => {
     return ["All", ...SKILL_GROUPS.map((g) => g.name)];
@@ -195,54 +199,104 @@ export default function Tools() {
         </div>
       </div>
 
-      {/* Controls Strip: Search & Filter Tabs */}
+      {/* View Mode & Controls Strip */}
       <div className="space-y-3 mb-6">
-        {/* Search Bar */}
-        <div className="relative">
-          <FiSearch className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-[var(--muted)]" />
-          <input
-            type="text"
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            placeholder="Search skills, projects, or concepts (e.g., C++, Raft, FastAPI, SIMD, Redis)..."
-            className="w-full pl-10 pr-10 py-2.5 rounded-xl border border-[var(--hairline)] bg-[var(--surface)] text-sm text-[var(--ink)] placeholder-[var(--muted)] focus:outline-none focus:border-[var(--accent)] focus:ring-1 focus:ring-[var(--accent)] transition-all font-sans"
-          />
-          {searchQuery && (
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+          {/* View Mode Toggle */}
+          <div className="inline-flex p-1 rounded-xl border border-[var(--hairline)] bg-[var(--surface)] self-start sm:self-auto shadow-sm">
             <button
-              onClick={() => setSearchQuery("")}
-              className="absolute right-3.5 top-1/2 -translate-y-1/2 p-1 rounded-md text-[var(--muted)] hover:text-[var(--ink)]"
+              onClick={() => {
+                setViewMode("grid");
+                playTabSwitchSound();
+              }}
+              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-mono transition-all ${
+                viewMode === "grid"
+                  ? "bg-[var(--accent)] text-white font-semibold shadow-xs"
+                  : "text-[var(--muted)] hover:text-[var(--ink)]"
+              }`}
             >
-              <FiX className="w-4 h-4" />
+              <FiGrid className="w-3.5 h-3.5" />
+              <span>Matrix Grid</span>
             </button>
-          )}
+
+            <button
+              onClick={() => {
+                setViewMode("pipeline");
+                playTabSwitchSound();
+              }}
+              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-mono transition-all ${
+                viewMode === "pipeline"
+                  ? "bg-[var(--accent)] text-white font-semibold shadow-xs"
+                  : "text-[var(--muted)] hover:text-[var(--ink)]"
+              }`}
+            >
+              <FiGitMerge className="w-3.5 h-3.5" />
+              <span>System Topology</span>
+            </button>
+          </div>
+
+          <span className="text-[11px] font-mono text-[var(--muted)] hidden sm:inline-block">
+            {viewMode === "grid" ? "Categorized skill nodes" : "End-to-end architecture pipeline"}
+          </span>
         </div>
 
-        {/* Category Pills */}
-        <div className="flex items-center gap-1.5 overflow-x-auto pb-1 scrollbar-none">
-          {categories.map((cat) => {
-            const isSelected = activeCategory === cat;
-            return (
-              <button
-                key={cat}
-                onClick={() => {
-                  setActiveCategory(cat);
-                  playTabSwitchSound();
-                }}
-                className={`px-3 py-1.5 rounded-full text-xs font-mono whitespace-nowrap transition-all border ${
-                  isSelected
-                    ? "bg-[var(--accent)] text-white border-[var(--accent)] font-semibold shadow-sm"
-                    : "bg-[var(--surface)] border-[var(--hairline)] text-[var(--muted)] hover:text-[var(--ink)] hover:border-[var(--muted)]"
-                }`}
-              >
-                {cat}
-              </button>
-            );
-          })}
-        </div>
+        {viewMode === "grid" && (
+          <>
+            {/* Search Bar */}
+            <div className="relative">
+              <FiSearch className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-[var(--muted)]" />
+              <input
+                type="text"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                placeholder="Search skills, projects, or concepts (e.g., C++, Raft, FastAPI, SIMD, Redis)..."
+                className="w-full pl-10 pr-10 py-2.5 rounded-xl border border-[var(--hairline)] bg-[var(--surface)] text-sm text-[var(--ink)] placeholder-[var(--muted)] focus:outline-none focus:border-[var(--accent)] focus:ring-1 focus:ring-[var(--accent)] transition-all font-sans"
+              />
+              {searchQuery && (
+                <button
+                  onClick={() => setSearchQuery("")}
+                  className="absolute right-3.5 top-1/2 -translate-y-1/2 p-1 rounded-md text-[var(--muted)] hover:text-[var(--ink)]"
+                >
+                  <FiX className="w-4 h-4" />
+                </button>
+              )}
+            </div>
+
+            {/* Category Pills */}
+            <div className="flex items-center gap-1.5 overflow-x-auto pb-1 scrollbar-none">
+              {categories.map((cat) => {
+                const isSelected = activeCategory === cat;
+                return (
+                  <button
+                    key={cat}
+                    onClick={() => {
+                      setActiveCategory(cat);
+                      playTabSwitchSound();
+                    }}
+                    className={`px-3 py-1.5 rounded-full text-xs font-mono whitespace-nowrap transition-all border ${
+                      isSelected
+                        ? "bg-[var(--accent)] text-white border-[var(--accent)] font-semibold shadow-sm"
+                        : "bg-[var(--surface)] border-[var(--hairline)] text-[var(--muted)] hover:text-[var(--ink)] hover:border-[var(--muted)]"
+                    }`}
+                  >
+                    {cat}
+                  </button>
+                );
+              })}
+            </div>
+          </>
+        )}
       </div>
 
-      {/* Skills Grid */}
-      {filteredGroups.length === 0 ? (
+      {/* Main Content Area */}
+      {viewMode === "pipeline" ? (
+        <ArchitectureStackView
+          onSelectSkill={(skill) => {
+            playSkillClickSound(1);
+            setSelectedSkill(skill);
+          }}
+        />
+      ) : filteredGroups.length === 0 ? (
         <div className="p-12 text-center border border-dashed border-[var(--hairline)] rounded-2xl bg-[var(--surface)]/50">
           <p className="text-sm font-mono text-[var(--muted)] mb-3">
             No technologies found matching &ldquo;{searchQuery}&rdquo;.
