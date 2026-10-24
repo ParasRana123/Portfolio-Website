@@ -1,8 +1,8 @@
 const HOME_ACHIEVEMENTS = [
-  "Global Rank 125 — CodeChef Starters 227",
-  "All India Rank 67 — LeetCode Biweekly Contest 180",
-  "National Hackathon Finalist — IIT Guwahati",
-  "National Hackathon Final Round — IIITM Gwalior",
+  "Flipkart Grid 8.0 — Selected as a Semi-Finalist among 150,000+ participants",
+  "Amazon ML Challenge 2025 — Ranked 214 among 15,000+ teams",
+  "GrabHack 2025 — Selected as a Semi-Finalist in Grab’s nationwide hackathon",
+  "Hacksagon 2025 — Ranked 5th among 600+ teams (ABV-IIITM Gwalior)",
 ];
 
 export default function WhereSection() {

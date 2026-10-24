@@ -240,14 +240,13 @@ export const PARAS_PROFILE: PersonalProfile = {
     },
   ],
   achievements: [
-    "LeetCode Guardian with max rating 2210 (Top 1% globally)",
-    "All India Rank (AIR) 67 — LeetCode Biweekly Contest 180",
-    "Global Rank 125 — CodeChef Starters 227",
-    "CodeChef 4-Star coder with max rating 1811",
-    "Solved 1500+ algorithmic problems across all competitive platforms",
-    "National Hackathon Finalist — IIT Guwahati Hackathon",
-    "National Hackathon Final Round — IIITM Gwalior Hackathon",
-    "Smart India Hackathon (SIH) Defense Portal solution builder",
+    "Flipkart Grid 8.0: Selected as a Semi-Finalist among 150,000+ participants",
+    "Amazon ML Challenge 2025: Ranked 214 among 15,000+ teams",
+    "GrabHack 2025: Selected as a Semi-Finalist in Grab’s nationwide hackathon",
+    "Hacksagon 2025: Ranked 5th among 600+ teams (ABV-IIITM Gwalior)",
+    "LeetCode Guardian with rating 2202 (Top 1% globally, 1300+ solved)",
+    "All India Rank (AIR) 67 — LeetCode Biweekly Contest 180 (Global Rank 283)",
+    "CodeChef 4-Star coder with rating 1811 (AIR 3500)",
   ],
   blogPosts: [
     {
