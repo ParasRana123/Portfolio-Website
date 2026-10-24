@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useCallback } from "react";
 import { createPortal } from "react-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import {
@@ -65,6 +65,19 @@ export default function SkillDetailModal({
     }
   }, [skill]);
 
+  const navigateSkill = useCallback(
+    (direction: number) => {
+      if (!skill) return;
+      const currentIndex = allSkillsList.findIndex((s) => s.id === skill.id);
+      if (currentIndex === -1) return;
+      const nextIndex =
+        (currentIndex + direction + allSkillsList.length) % allSkillsList.length;
+      playSkillClickSound(direction > 0 ? 1.05 : 0.95);
+      onSelectSkill(allSkillsList[nextIndex]);
+    },
+    [skill, allSkillsList, onSelectSkill]
+  );
+
   // Handle keyboard navigation (Escape, ArrowLeft, ArrowRight)
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -88,17 +101,7 @@ export default function SkillDetailModal({
         document.body.style.overflow = originalOverflow;
       };
     }
-  }, [skill, onClose]);
-
-  const navigateSkill = (direction: number) => {
-    if (!skill) return;
-    const currentIndex = allSkillsList.findIndex((s) => s.id === skill.id);
-    if (currentIndex === -1) return;
-    const nextIndex =
-      (currentIndex + direction + allSkillsList.length) % allSkillsList.length;
-    playSkillClickSound(direction > 0 ? 1.05 : 0.95);
-    onSelectSkill(allSkillsList[nextIndex]);
-  };
+  }, [skill, onClose, navigateSkill]);
 
   const handleCopyCode = () => {
     if (!skill) return;
