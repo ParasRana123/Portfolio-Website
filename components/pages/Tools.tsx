@@ -93,110 +93,15 @@ export default function Tools() {
   };
 
   return (
-    <div className="dp-inspiration-page pb-12">
-      {/* Intro Header */}
-      <div className="dp-inspiration-intro mb-6">
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-2">
-          <div className="flex items-center gap-2">
-            <span className="flex items-center justify-center w-6 h-6 rounded-md bg-[var(--accent)]/15 text-[var(--accent)] text-xs font-mono font-bold">
-              λ
-            </span>
-            <h1 className="text-xl sm:text-2xl font-bold font-['Space_Grotesk',sans-serif] text-[var(--ink)] tracking-tight">
-              Technical Stack & Intelligence Matrix
-            </h1>
-          </div>
-
-          {/* Sound Toggle Pill */}
-          <button
-            onClick={handleAudioToggle}
-            className="self-start sm:self-auto inline-flex items-center gap-1.5 px-3 py-1 rounded-full border border-[var(--hairline)] hover:border-[var(--accent)] bg-[var(--surface)] text-[11px] font-mono text-[var(--muted)] hover:text-[var(--ink)] transition-colors shadow-sm"
-            title={isMuted ? "Unmute audio feedback" : "Mute audio feedback"}
-          >
-            {isMuted ? (
-              <>
-                <FiVolumeX className="w-3.5 h-3.5 text-red-400" />
-                <span>Audio Muted</span>
-              </>
-            ) : (
-              <>
-                <FiVolume2 className="w-3.5 h-3.5 text-[var(--accent)]" />
-                <span>SFX Active</span>
-              </>
-            )}
-          </button>
-        </div>
-
-        <p className="dp-inspiration text-sm sm:text-base text-[var(--muted)] leading-relaxed">
-          From low-level C++ SIMD vector search to distributed Go Raft consensus,
-          AI multi-agent orchestration, and high-concurrency WebSockets — these
-          are the battle-tested technologies I design, build, and deploy with.
+    <div className="dp-inspiration-page">
+      <div className="dp-inspiration-intro">
+        <p className="dp-inspiration">
+          A glimpse into the tools, technologies, and platforms that turn my
+          ideas into things people can actually use.
+          <br />
+          From the first line of code to the final deployment, these are the
+          tools I keep within reach.
         </p>
-
-        {/* Interactive Guidance Banner */}
-        <div className="mt-4 p-3 rounded-xl border border-[var(--accent)]/30 bg-[var(--accent)]/5 flex items-center justify-between gap-3 flex-wrap">
-          <div className="flex items-center gap-2.5 text-xs text-[var(--ink)] font-mono">
-            <span className="relative flex h-2 w-2">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[var(--accent)] opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-[var(--accent)]"></span>
-            </span>
-            <span>
-              Click any skill below to inspect architecture code blueprints,
-              diagnostics, and real resume impact.
-            </span>
-          </div>
-
-          <div className="flex items-center gap-2 text-[11px] font-mono text-[var(--muted)]">
-            <span className="px-2 py-0.5 rounded bg-[var(--surface)] border border-[var(--hairline)]">
-              ⌨ Esc to close
-            </span>
-            <span className="px-2 py-0.5 rounded bg-[var(--surface)] border border-[var(--hairline)] hidden sm:inline-block">
-              ← → to cycle
-            </span>
-          </div>
-        </div>
-      </div>
-
-      {/* Systems Radar / Metric Strip */}
-      <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 mb-6">
-        <div className="p-3 rounded-xl border border-[var(--hairline)] bg-[var(--surface)] shadow-sm">
-          <div className="flex items-center justify-between text-xs font-mono text-[var(--muted)] mb-1">
-            <span>TOTAL SKILLS</span>
-            <FiLayers className="w-3.5 h-3.5 text-[var(--accent)]" />
-          </div>
-          <p className="text-xl font-bold font-['Space_Grotesk',sans-serif] text-[var(--ink)]">
-            {totalSkillsCount}+ Tech
-          </p>
-        </div>
-
-        <div className="p-3 rounded-xl border border-[var(--hairline)] bg-[var(--surface)] shadow-sm">
-          <div className="flex items-center justify-between text-xs font-mono text-[var(--muted)] mb-1">
-            <span>LOW-LEVEL SYSTEMS</span>
-            <FiCpu className="w-3.5 h-3.5 text-[var(--accent)]" />
-          </div>
-          <p className="text-xl font-bold font-['Space_Grotesk',sans-serif] text-[var(--ink)]">
-            C++, SIMD, Raft
-          </p>
-        </div>
-
-        <div className="p-3 rounded-xl border border-[var(--hairline)] bg-[var(--surface)] shadow-sm">
-          <div className="flex items-center justify-between text-xs font-mono text-[var(--muted)] mb-1">
-            <span>AI & REALTIME</span>
-            <FiZap className="w-3.5 h-3.5 text-[var(--accent)]" />
-          </div>
-          <p className="text-xl font-bold font-['Space_Grotesk',sans-serif] text-[var(--ink)]">
-            Veqiro 6-Agent
-          </p>
-        </div>
-
-        <div className="p-3 rounded-xl border border-[var(--hairline)] bg-[var(--surface)] shadow-sm">
-          <div className="flex items-center justify-between text-xs font-mono text-[var(--muted)] mb-1">
-            <span>ALGORITHMS</span>
-            <FiAward className="w-3.5 h-3.5 text-[var(--accent)]" />
-          </div>
-          <p className="text-xl font-bold font-['Space_Grotesk',sans-serif] text-[var(--ink)]">
-            Guardian 2202
-          </p>
-        </div>
       </div>
 
       {/* View Mode & Controls Strip */}
