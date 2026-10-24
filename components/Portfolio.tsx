@@ -1,6 +1,6 @@
 "use client";
 
-import { CSSProperties, useEffect, useRef, useState } from "react";
+import { CSSProperties, useEffect, useMemo, useRef, useState } from "react";
 import Header from "./Header";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
@@ -99,25 +99,29 @@ export default function Portfolio() {
     setDark(value);
   };
 
-  const vars: CSSProperties & Record<`--${string}`, string> = dark
-    ? {
-        "--bg": "#16150F",
-        "--surface": "#1F1D16",
-        "--ink": "#ECE8DC",
-        "--muted": "#948F7C",
-        "--accent": "#E2794F",
-        "--hairline": "#2B2820",
-        "--cardbottom": "#0F0E0A",
-      }
-    : {
-        "--bg": "#EEEBE1",
-        "--surface": "#F8F6EF",
-        "--ink": "#1A1913",
-        "--muted": "#8B8779",
-        "--accent": "#B6432A",
-        "--hairline": "#D9D4C4",
-        "--cardbottom": "#1A1913",
-      };
+  const vars: CSSProperties & Record<`--${string}`, string> = useMemo(
+    () =>
+      dark
+        ? {
+            "--bg": "#16150F",
+            "--surface": "#1F1D16",
+            "--ink": "#ECE8DC",
+            "--muted": "#948F7C",
+            "--accent": "#E2794F",
+            "--hairline": "#2B2820",
+            "--cardbottom": "#0F0E0A",
+          }
+        : {
+            "--bg": "#EEEBE1",
+            "--surface": "#F8F6EF",
+            "--ink": "#1A1913",
+            "--muted": "#8B8779",
+            "--accent": "#B6432A",
+            "--hairline": "#D9D4C4",
+            "--cardbottom": "#1A1913",
+          },
+    [dark]
+  );
 
   useEffect(() => {
     document.documentElement.style.colorScheme = dark ? "dark" : "light";

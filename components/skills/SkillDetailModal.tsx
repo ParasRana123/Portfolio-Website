@@ -142,6 +142,27 @@ export default function SkillDetailModal({
 
   const currentSkillIndex = allSkillsList.findIndex((s) => s.id === skill.id);
 
+  // Fallback explicit theme CSS variables mapped directly to the modal
+  const modalVars: React.CSSProperties & Record<`--${string}`, string> = dark
+    ? {
+        "--bg": "#16150F",
+        "--surface": "#1F1D16",
+        "--ink": "#ECE8DC",
+        "--muted": "#948F7C",
+        "--accent": "#E2794F",
+        "--hairline": "#2B2820",
+        "--cardbottom": "#0F0E0A",
+      }
+    : {
+        "--bg": "#EEEBE1",
+        "--surface": "#F8F6EF",
+        "--ink": "#1A1913",
+        "--muted": "#767265",
+        "--accent": "#B6432A",
+        "--hairline": "#D9D4C4",
+        "--cardbottom": "#1A1913",
+      };
+
   return createPortal(
     <AnimatePresence>
       <div
@@ -149,6 +170,7 @@ export default function SkillDetailModal({
         role="dialog"
         aria-modal="true"
         aria-labelledby="skill-modal-title"
+        style={modalVars}
       >
         {/* Backdrop */}
         <motion.div
@@ -156,7 +178,9 @@ export default function SkillDetailModal({
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.2 }}
-          className="fixed inset-0 bg-black/60 backdrop-blur-md"
+          className={`fixed inset-0 backdrop-blur-md transition-colors ${
+            dark ? "bg-black/75" : "bg-black/35"
+          }`}
           onClick={() => {
             playCloseSound();
             onClose();
@@ -166,13 +190,20 @@ export default function SkillDetailModal({
         {/* Modal Window */}
         <motion.div
           ref={modalRef}
-          initial={{ opacity: 0, scale: 0.94, y: 16 }}
+          initial={{ opacity: 0, scale: 0.95, y: 14 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
-          exit={{ opacity: 0, scale: 0.95, y: 12 }}
-          transition={{ type: "spring", damping: 26, stiffness: 320 }}
-          className="relative w-full max-w-2xl bg-[var(--surface)] border border-[var(--hairline)] rounded-2xl shadow-2xl overflow-hidden my-auto max-h-[90vh] flex flex-col z-10"
+          exit={{ opacity: 0, scale: 0.96, y: 10 }}
+          transition={{ type: "spring", damping: 28, stiffness: 340 }}
+          className={`relative w-full max-w-2xl border rounded-2xl shadow-2xl overflow-hidden my-auto max-h-[90vh] flex flex-col z-10 font-sans transition-colors duration-200 ${
+            dark
+              ? "bg-[#1F1D16] border-[#2B2820] text-[#ECE8DC]"
+              : "bg-[#F8F6EF] border-[#D9D4C4] text-[#1A1913]"
+          }`}
           style={{
-            boxShadow: `0 24px 60px -15px rgba(0,0,0,0.4), 0 0 30px ${skill.accentGlow}`,
+            ...modalVars,
+            boxShadow: dark
+              ? `0 24px 60px -15px rgba(0,0,0,0.7), 0 0 35px ${skill.accentGlow}`
+              : `0 24px 50px -12px rgba(0,0,0,0.18), 0 0 25px ${skill.accentGlow}`,
           }}
           onClick={(e) => e.stopPropagation()}
         >
@@ -185,11 +216,21 @@ export default function SkillDetailModal({
           />
 
           {/* Header */}
-          <div className="p-5 sm:p-6 border-b border-[var(--hairline)] bg-[var(--surface)]/95 flex items-start justify-between gap-4">
+          <div
+            className={`p-5 sm:p-6 border-b flex items-start justify-between gap-4 transition-colors ${
+              dark
+                ? "bg-[#1F1D16] border-[#2B2820]"
+                : "bg-[#F8F6EF] border-[#D9D4C4]"
+            }`}
+          >
             <div className="flex items-center gap-4 min-w-0">
-              {/* Animated Glow Logo Container */}
+              {/* Glow Logo Container */}
               <div
-                className="relative flex items-center justify-center w-14 h-14 rounded-xl border border-[var(--hairline)] bg-[var(--bg)] shadow-inner flex-shrink-0 group"
+                className={`relative flex items-center justify-center w-14 h-14 rounded-xl border flex-shrink-0 group transition-colors ${
+                  dark
+                    ? "bg-[#16150F] border-[#2B2820] shadow-inner"
+                    : "bg-[#EEEBE1] border-[#D9D4C4] shadow-sm"
+                }`}
                 style={{
                   boxShadow: `0 0 20px ${skill.accentGlow}`,
                 }}
@@ -200,7 +241,9 @@ export default function SkillDetailModal({
                   className="w-8 h-8 object-contain transition-transform duration-300 group-hover:scale-110"
                 />
                 <span
-                  className="absolute -bottom-1 -right-1 w-3.5 h-3.5 rounded-full border-2 border-[var(--surface)] animate-pulse"
+                  className={`absolute -bottom-1 -right-1 w-3.5 h-3.5 rounded-full border-2 animate-pulse ${
+                    dark ? "border-[#1F1D16]" : "border-[#F8F6EF]"
+                  }`}
                   style={{ backgroundColor: skill.brandColor }}
                 />
               </div>
@@ -209,28 +252,48 @@ export default function SkillDetailModal({
                 <div className="flex flex-wrap items-center gap-2 mb-1">
                   <h2
                     id="skill-modal-title"
-                    className="text-xl sm:text-2xl font-bold tracking-tight text-[var(--ink)] font-['Space_Grotesk',sans-serif]"
+                    className={`text-xl sm:text-2xl font-bold tracking-tight font-['Space_Grotesk',sans-serif] ${
+                      dark ? "text-[#ECE8DC]" : "text-[#1A1913]"
+                    }`}
                   >
                     {skill.name}
                   </h2>
 
-                  <span className="px-2.5 py-0.5 text-[11px] font-mono rounded-full border border-[var(--hairline)] bg-[var(--bg)] text-[var(--muted)]">
+                  <span
+                    className={`px-2.5 py-0.5 text-[11px] font-mono rounded-full border ${
+                      dark
+                        ? "bg-[#16150F] border-[#2B2820] text-[#948F7C]"
+                        : "bg-[#EEEBE1] border-[#D9D4C4] text-[#767265]"
+                    }`}
+                  >
                     {skill.category}
                   </span>
 
                   <span
-                    className="px-2.5 py-0.5 text-[10.5px] font-mono font-medium rounded-full"
+                    className="px-2.5 py-0.5 text-[10.5px] font-mono font-semibold rounded-full"
                     style={{
-                      backgroundColor: `color-mix(in srgb, ${skill.brandColor} 18%, transparent)`,
-                      color: skill.brandColor,
-                      border: `1px solid color-mix(in srgb, ${skill.brandColor} 40%, transparent)`,
+                      backgroundColor: dark
+                        ? `color-mix(in srgb, ${skill.brandColor} 20%, transparent)`
+                        : `color-mix(in srgb, ${skill.brandColor} 14%, #EEEBE1)`,
+                      color: dark
+                        ? skill.brandColor
+                        : skill.brandColor === "#F7DF1E" || skill.brandColor === "#FCC624"
+                        ? "#9E7800"
+                        : skill.brandColor,
+                      border: `1px solid color-mix(in srgb, ${skill.brandColor} ${
+                        dark ? "40%" : "35%"
+                      }, transparent)`,
                     }}
                   >
                     {skill.proficiencyTier}
                   </span>
                 </div>
 
-                <p className="text-xs text-[var(--muted)] font-mono truncate">
+                <p
+                  className={`text-xs font-mono truncate ${
+                    dark ? "text-[#948F7C]" : "text-[#767265]"
+                  }`}
+                >
                   ⚡ {skill.experienceContext}
                 </p>
               </div>
@@ -240,7 +303,11 @@ export default function SkillDetailModal({
             <div className="flex items-center gap-1.5 flex-shrink-0">
               <button
                 onClick={() => navigateSkill(-1)}
-                className="p-1.5 rounded-lg border border-[var(--hairline)] hover:border-[var(--accent)] text-[var(--muted)] hover:text-[var(--ink)] bg-[var(--bg)] transition-colors"
+                className={`p-1.5 rounded-lg border text-[var(--muted)] hover:text-[var(--ink)] transition-colors ${
+                  dark
+                    ? "bg-[#16150F] border-[#2B2820] hover:border-[var(--accent)] hover:bg-[#1F1D16]"
+                    : "bg-[#EEEBE1] border-[#D9D4C4] hover:border-[var(--accent)] hover:bg-[#F8F6EF]"
+                }`}
                 title="Previous skill (Left Arrow)"
               >
                 <FiChevronLeft className="w-4 h-4" />
@@ -248,7 +315,11 @@ export default function SkillDetailModal({
 
               <button
                 onClick={() => navigateSkill(1)}
-                className="p-1.5 rounded-lg border border-[var(--hairline)] hover:border-[var(--accent)] text-[var(--muted)] hover:text-[var(--ink)] bg-[var(--bg)] transition-colors"
+                className={`p-1.5 rounded-lg border text-[var(--muted)] hover:text-[var(--ink)] transition-colors ${
+                  dark
+                    ? "bg-[#16150F] border-[#2B2820] hover:border-[var(--accent)] hover:bg-[#1F1D16]"
+                    : "bg-[#EEEBE1] border-[#D9D4C4] hover:border-[var(--accent)] hover:bg-[#F8F6EF]"
+                }`}
                 title="Next skill (Right Arrow)"
               >
                 <FiChevronRight className="w-4 h-4" />
@@ -259,7 +330,11 @@ export default function SkillDetailModal({
                   playCloseSound();
                   onClose();
                 }}
-                className="p-1.5 rounded-lg border border-[var(--hairline)] hover:border-[var(--accent)] text-[var(--muted)] hover:text-[var(--ink)] bg-[var(--bg)] transition-colors ml-1"
+                className={`p-1.5 rounded-lg border text-[var(--muted)] hover:text-[var(--ink)] transition-colors ml-1 ${
+                  dark
+                    ? "bg-[#16150F] border-[#2B2820] hover:border-[var(--accent)] hover:bg-[#1F1D16]"
+                    : "bg-[#EEEBE1] border-[#D9D4C4] hover:border-[var(--accent)] hover:bg-[#F8F6EF]"
+                }`}
                 aria-label="Close skill modal"
               >
                 <FiX className="w-4 h-4" />
@@ -268,15 +343,31 @@ export default function SkillDetailModal({
           </div>
 
           {/* Tagline Strip */}
-          <div className="px-5 py-2.5 bg-[var(--bg)]/60 border-b border-[var(--hairline)] text-xs text-[var(--ink)]/90 font-sans flex items-center justify-between">
-            <span>{skill.tagline}</span>
-            <span className="text-[10px] font-mono text-[var(--muted)] hidden sm:inline-block">
+          <div
+            className={`px-5 py-2.5 border-b text-xs font-sans flex items-center justify-between transition-colors ${
+              dark
+                ? "bg-[#16150F] border-[#2B2820] text-[#ECE8DC]/90"
+                : "bg-[#EEEBE1] border-[#D9D4C4] text-[#1A1913]/90"
+            }`}
+          >
+            <span className="font-medium">{skill.tagline}</span>
+            <span
+              className={`text-[10px] font-mono hidden sm:inline-block ${
+                dark ? "text-[#948F7C]" : "text-[#767265]"
+              }`}
+            >
               {currentSkillIndex + 1} of {allSkillsList.length}
             </span>
           </div>
 
           {/* Navigation Tabs */}
-          <div className="flex items-center px-5 border-b border-[var(--hairline)] bg-[var(--surface)] gap-2 pt-2">
+          <div
+            className={`flex items-center px-5 border-b gap-2 pt-2 transition-colors ${
+              dark
+                ? "bg-[#1F1D16] border-[#2B2820]"
+                : "bg-[#F8F6EF] border-[#D9D4C4]"
+            }`}
+          >
             <button
               onClick={() => {
                 setActiveTab("resume");
@@ -323,8 +414,8 @@ export default function SkillDetailModal({
             </button>
           </div>
 
-          {/* Scrollable Content Body */}
-          <div className="p-5 sm:p-6 overflow-y-auto space-y-5 flex-1">
+          {/* Scrollable Content Body with Custom Sleek Scrollbar */}
+          <div className="p-5 sm:p-6 overflow-y-auto space-y-5 flex-1 modal-custom-scrollbar">
             {/* Tab 1: Resume Highlights */}
             {activeTab === "resume" && (
               <motion.div
@@ -334,7 +425,11 @@ export default function SkillDetailModal({
                 className="space-y-4"
               >
                 <div>
-                  <h3 className="text-xs font-mono font-semibold uppercase tracking-wider text-[var(--muted)] mb-2.5 flex items-center gap-2">
+                  <h3
+                    className={`text-xs font-mono font-semibold uppercase tracking-wider mb-2.5 flex items-center gap-2 ${
+                      dark ? "text-[#948F7C]" : "text-[#767265]"
+                    }`}
+                  >
                     <FiLayers className="w-3.5 h-3.5 text-[var(--accent)]" />
                     How Paras Leverages {skill.name} in Real Systems
                   </h3>
@@ -342,9 +437,15 @@ export default function SkillDetailModal({
                     {skill.resumeHighlights.map((highlight, idx) => (
                       <li
                         key={idx}
-                        className="flex items-start gap-2.5 text-xs sm:text-sm text-[var(--ink)]/90 leading-relaxed p-2.5 rounded-lg bg-[var(--bg)]/50 border border-[var(--hairline)]"
+                        className={`flex items-start gap-2.5 text-xs sm:text-sm leading-relaxed p-3 rounded-xl border transition-colors ${
+                          dark
+                            ? "bg-[#16150F]/75 border-[#2B2820] text-[#ECE8DC]/95"
+                            : "bg-[#EEEBE1]/85 border-[#D9D4C4] text-[#1A1913]"
+                        }`}
                       >
-                        <span className="text-[var(--accent)] font-bold mt-0.5">▹</span>
+                        <span className="text-[var(--accent)] font-bold mt-0.5">
+                          ▹
+                        </span>
                         <span>{highlight}</span>
                       </li>
                     ))}
@@ -354,7 +455,11 @@ export default function SkillDetailModal({
                 {/* Related Projects */}
                 {skill.relatedProjects && skill.relatedProjects.length > 0 && (
                   <div>
-                    <h3 className="text-xs font-mono font-semibold uppercase tracking-wider text-[var(--muted)] mb-2 flex items-center gap-2">
+                    <h3
+                      className={`text-xs font-mono font-semibold uppercase tracking-wider mb-2 flex items-center gap-2 ${
+                        dark ? "text-[#948F7C]" : "text-[#767265]"
+                      }`}
+                    >
                       <FiExternalLink className="w-3.5 h-3.5 text-[var(--accent)]" />
                       Related Projects & Deployments
                     </h3>
@@ -362,13 +467,25 @@ export default function SkillDetailModal({
                       {skill.relatedProjects.map((proj, idx) => (
                         <div
                           key={idx}
-                          className="flex items-center justify-between p-2.5 rounded-lg border border-[var(--hairline)] bg-[var(--bg)]"
+                          className={`flex items-center justify-between p-3 rounded-xl border transition-colors ${
+                            dark
+                              ? "bg-[#16150F]/75 border-[#2B2820] text-[#ECE8DC]"
+                              : "bg-[#EEEBE1]/85 border-[#D9D4C4] text-[#1A1913]"
+                          }`}
                         >
                           <div>
-                            <p className="text-xs font-semibold text-[var(--ink)]">
+                            <p
+                              className={`text-xs font-semibold ${
+                                dark ? "text-[#ECE8DC]" : "text-[#1A1913]"
+                              }`}
+                            >
                               {proj.title}
                             </p>
-                            <p className="text-[11px] font-mono text-[var(--muted)]">
+                            <p
+                              className={`text-[11px] font-mono ${
+                                dark ? "text-[#948F7C]" : "text-[#767265]"
+                              }`}
+                            >
                               {proj.role}
                             </p>
                           </div>
@@ -403,19 +520,29 @@ export default function SkillDetailModal({
                     <span className="w-2.5 h-2.5 rounded-full bg-red-500/80 inline-block" />
                     <span className="w-2.5 h-2.5 rounded-full bg-yellow-500/80 inline-block" />
                     <span className="w-2.5 h-2.5 rounded-full bg-green-500/80 inline-block" />
-                    <span className="text-xs font-mono font-medium text-[var(--muted)] ml-1">
+                    <span
+                      className={`text-xs font-mono font-medium ml-1 ${
+                        dark ? "text-[#948F7C]" : "text-[#767265]"
+                      }`}
+                    >
                       {skill.architectureSnippet.filename}
                     </span>
                   </div>
 
                   <button
                     onClick={handleCopyCode}
-                    className="flex items-center gap-1.5 px-2.5 py-1 text-xs font-mono rounded border border-[var(--hairline)] hover:border-[var(--accent)] text-[var(--muted)] hover:text-[var(--ink)] bg-[var(--bg)] transition-colors"
+                    className={`flex items-center gap-1.5 px-2.5 py-1 text-xs font-mono rounded border transition-colors ${
+                      dark
+                        ? "bg-[#16150F] border-[#2B2820] text-[#948F7C] hover:text-[#ECE8DC] hover:border-[var(--accent)]"
+                        : "bg-[#EEEBE1] border-[#D9D4C4] text-[#767265] hover:text-[#1A1913] hover:border-[var(--accent)]"
+                    }`}
                   >
                     {isCopied ? (
                       <>
                         <FiCheck className="w-3.5 h-3.5 text-emerald-500" />
-                        <span className="text-emerald-500">Copied!</span>
+                        <span className="text-emerald-500 font-semibold">
+                          Copied!
+                        </span>
                       </>
                     ) : (
                       <>
@@ -426,14 +553,24 @@ export default function SkillDetailModal({
                   </button>
                 </div>
 
-                <div className="relative rounded-xl border border-[var(--hairline)] bg-[#0d1117] p-4 overflow-x-auto shadow-inner text-emerald-400 font-mono text-xs leading-relaxed max-h-80">
+                <div className="relative rounded-xl border border-slate-800 bg-[#0d1117] p-4 overflow-x-auto shadow-inner text-emerald-400 font-mono text-xs leading-relaxed max-h-80 modal-custom-scrollbar">
                   <pre className="text-slate-200">
                     <code>{skill.architectureSnippet.code}</code>
                   </pre>
                 </div>
 
-                <div className="p-3 rounded-lg border border-[var(--hairline)] bg-[var(--bg)]/60 text-xs text-[var(--muted)]">
-                  <strong className="text-[var(--ink)]">Engineering Rationale: </strong>
+                <div
+                  className={`p-3 rounded-lg border text-xs leading-relaxed transition-colors ${
+                    dark
+                      ? "bg-[#16150F]/70 border-[#2B2820] text-[#948F7C]"
+                      : "bg-[#EEEBE1]/80 border-[#D9D4C4] text-[#767265]"
+                  }`}
+                >
+                  <strong
+                    className={dark ? "text-[#ECE8DC]" : "text-[#1A1913]"}
+                  >
+                    Engineering Rationale:{" "}
+                  </strong>
                   {skill.architectureSnippet.explanation}
                 </div>
               </motion.div>
@@ -448,9 +585,19 @@ export default function SkillDetailModal({
                 className="space-y-4"
               >
                 {/* Metric Summary Card */}
-                <div className="grid grid-cols-2 gap-3 p-3.5 rounded-xl border border-[var(--hairline)] bg-[var(--bg)]">
+                <div
+                  className={`grid grid-cols-2 gap-3 p-3.5 rounded-xl border transition-colors ${
+                    dark
+                      ? "bg-[#16150F]/75 border-[#2B2820]"
+                      : "bg-[#EEEBE1]/85 border-[#D9D4C4]"
+                  }`}
+                >
                   <div>
-                    <span className="text-[11px] font-mono uppercase text-[var(--muted)] block">
+                    <span
+                      className={`text-[11px] font-mono uppercase block ${
+                        dark ? "text-[#948F7C]" : "text-[#767265]"
+                      }`}
+                    >
                       Target Metric
                     </span>
                     <span className="text-lg sm:text-xl font-bold font-['Space_Grotesk',sans-serif] text-[var(--accent)]">
@@ -459,17 +606,25 @@ export default function SkillDetailModal({
                   </div>
 
                   <div>
-                    <span className="text-[11px] font-mono uppercase text-[var(--muted)] block">
+                    <span
+                      className={`text-[11px] font-mono uppercase block ${
+                        dark ? "text-[#948F7C]" : "text-[#767265]"
+                      }`}
+                    >
                       Benchmark Profile
                     </span>
-                    <span className="text-xs sm:text-sm font-semibold text-[var(--ink)]">
+                    <span
+                      className={`text-xs sm:text-sm font-semibold ${
+                        dark ? "text-[#ECE8DC]" : "text-[#1A1913]"
+                      }`}
+                    >
                       {skill.benchmark.label}
                     </span>
                   </div>
                 </div>
 
                 {/* Interactive Terminal */}
-                <div className="rounded-xl border border-emerald-950/60 bg-[#070b10] p-4 font-mono text-xs shadow-xl space-y-3">
+                <div className="rounded-xl border border-emerald-950/70 bg-[#070b10] p-4 font-mono text-xs shadow-xl space-y-3">
                   <div className="flex items-center justify-between border-b border-emerald-900/40 pb-2">
                     <div className="flex items-center gap-2 text-emerald-400 text-[11px]">
                       <FiCpu className="w-3.5 h-3.5 animate-pulse" />
@@ -489,7 +644,11 @@ export default function SkillDetailModal({
                       ) : (
                         <>
                           <FiPlay className="w-3.5 h-3.5" />
-                          <span>{hasRunBenchmark ? "Re-Run Diagnostic" : "Run Live Diagnostic"}</span>
+                          <span>
+                            {hasRunBenchmark
+                              ? "Re-Run Diagnostic"
+                              : "Run Live Diagnostic"}
+                          </span>
                         </>
                       )}
                     </button>
@@ -498,7 +657,9 @@ export default function SkillDetailModal({
                   {/* Command input prompt */}
                   <div className="text-slate-400 text-xs flex items-center gap-2">
                     <span className="text-emerald-400 font-bold">$</span>
-                    <span className="text-slate-300">{skill.benchmark.command}</span>
+                    <span className="text-slate-300">
+                      {skill.benchmark.command}
+                    </span>
                   </div>
 
                   {/* Progress Bar */}
@@ -525,7 +686,10 @@ export default function SkillDetailModal({
                     {!isSimulating && hasRunBenchmark && (
                       <div className="pt-2 text-emerald-400 font-bold flex items-center gap-2">
                         <FiCheck className="w-4 h-4" />
-                        <span>VERIFIED: Diagnostic finished successfully (Exit Code 0).</span>
+                        <span>
+                          VERIFIED: Diagnostic finished successfully (Exit Code
+                          0).
+                        </span>
                       </div>
                     )}
                   </div>
@@ -536,8 +700,18 @@ export default function SkillDetailModal({
 
           {/* Footer: Connected Skills Quick Explorer */}
           {skill.relatedSkills && skill.relatedSkills.length > 0 && (
-            <div className="p-4 bg-[var(--surface)] border-t border-[var(--hairline)] flex flex-wrap items-center justify-between gap-2 text-xs">
-              <span className="font-mono text-[var(--muted)] text-[11px]">
+            <div
+              className={`p-4 border-t flex flex-wrap items-center justify-between gap-2 text-xs transition-colors ${
+                dark
+                  ? "bg-[#1F1D16] border-[#2B2820]"
+                  : "bg-[#F8F6EF] border-[#D9D4C4]"
+              }`}
+            >
+              <span
+                className={`font-mono text-[11px] ${
+                  dark ? "text-[#948F7C]" : "text-[#767265]"
+                }`}
+              >
                 Connected in Stack:
               </span>
 
@@ -552,12 +726,16 @@ export default function SkillDetailModal({
                         playSkillClickSound(1.1);
                         onSelectSkill(relSkill);
                       }}
-                      className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full border border-[var(--hairline)] hover:border-[var(--accent)] bg-[var(--bg)] text-[11px] font-mono text-[var(--muted)] hover:text-[var(--ink)] transition-colors"
+                      className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full border text-[11px] font-mono transition-all ${
+                        dark
+                          ? "bg-[#16150F] border-[#2B2820] text-[#948F7C] hover:text-[#ECE8DC] hover:border-[var(--accent)]"
+                          : "bg-[#EEEBE1] border-[#D9D4C4] text-[#767265] hover:text-[#1A1913] hover:border-[var(--accent)]"
+                      }`}
                     >
                       <img
                         src={relSkill.logo}
                         alt=""
-                        className="w-3 h-3 object-contain"
+                        className="w-3.5 h-3.5 object-contain"
                       />
                       <span>{relSkill.name}</span>
                     </button>
