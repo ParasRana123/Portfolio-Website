@@ -19,12 +19,6 @@ export default function Portfolio() {
 
   const audioCtxRef = useRef<AudioContext | null>(null);
 
-  useEffect(() => {
-    document.documentElement.style.colorScheme = dark
-      ? "dark"
-      : "light";
-  }, [dark]);
-
   // Plays a soft, refined toggle click sound.
   const playToggleSound = () => {
     try {
@@ -125,6 +119,14 @@ export default function Portfolio() {
         "--cardbottom": "#1A1913",
       };
 
+  useEffect(() => {
+    document.documentElement.style.colorScheme = dark ? "dark" : "light";
+    document.documentElement.classList.toggle("dark", dark);
+    Object.entries(vars).forEach(([prop, val]) => {
+      document.documentElement.style.setProperty(prop, val);
+    });
+  }, [dark, vars]);
+
   return (
     <div className="dp-root" style={vars}>
       <div className="dp-shell">
@@ -141,7 +143,7 @@ export default function Portfolio() {
 
         {active === "Projects" && <Projects />}
 
-        {active === "Skills" && <Tools />}
+        {active === "Skills" && <Tools dark={dark} />}
 
         {active === "Education" && <Education />}
 

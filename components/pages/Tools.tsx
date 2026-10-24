@@ -10,7 +10,7 @@ import {
 import SkillDetailModal from "@/components/skills/SkillDetailModal";
 import { playSkillClickSound } from "@/lib/soundEffects";
 
-export default function Tools() {
+export default function Tools({ dark = false }: { dark?: boolean }) {
   const [selectedSkill, setSelectedSkill] = useState<SkillDetail | null>(null);
 
   const handleSkillClick = (skillItem: SkillItem) => {
@@ -79,6 +79,7 @@ export default function Tools() {
 
       {/* Interactive Modal Inspector */}
       <SkillDetailModal
+        dark={dark}
         skill={selectedSkill}
         onClose={() => setSelectedSkill(null)}
         onSelectSkill={(nextSkill) => setSelectedSkill(nextSkill)}

@@ -31,12 +31,14 @@ interface SkillDetailModalProps {
   skill: SkillDetail | null;
   onClose: () => void;
   onSelectSkill: (skill: SkillDetail) => void;
+  dark?: boolean;
 }
 
 export default function SkillDetailModal({
   skill,
   onClose,
   onSelectSkill,
+  dark = false,
 }: SkillDetailModalProps) {
   const [mounted, setMounted] = useState(false);
   const [activeTab, setActiveTab] = useState<"resume" | "code" | "benchmark">("resume");
